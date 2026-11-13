@@ -32,11 +32,30 @@ All listed years: 233 cases, 64.2% on board.
 1Click `POST /v0/quote` with `dry: true`: 200 USDC on NEAR to USDC on Base quoted at
 199.973007 USDC out, about 22 s.
 
-## Testnet deployment
+## Testnet deployment (13 Nov 2026)
 
-Pending funding of `berthright.testnet` (created via the faucet service, 10 NEAR; the House of
-Stake wallet's global publish alone costs about 43 NEAR). When it runs, this section lists every
-contract, code hash, the seal transactions and the break campaign from `data/runs.json`.
+Built in the pinned image `sourcescan/cargo-near:0.22.0-rust-1.97.1` from commit `488b3f4`
+(`fleet/repro-build.sh`, hashes in `fleet/ours-wasm.sha256`), deployed with `fleet/deploy-testnet.ts`.
+
+| Contract | Account | Code hash on chain = build | Access keys |
+|---|---|---|---|
+| wage chest | `portage.berthright.testnet` | `EZSM5HryeooELqmfM5syH8PnFL1WdWfVWP6FaQHTK22t` | 0 |
+| allotment | `allotment.berthright.testnet` | `CXbC5AL5HMpapndvV2bXwTYwjt9sk9JFJZ8XFao9CsZv` | 0 |
+| test dollars | `tusd.berthright.testnet` | `J3BmCLJwdCfgd2mmk8f5g4uvpJgDV1Gz9bvb94FZt3cu` | 0 |
+
+| Step | Transaction |
+|---|---|
+| portage init | https://testnet.nearblocks.io/txns/5yjvvA9MzygVbJnC9kaaQG7ybdhS4tJSFegiaeSoWwGf |
+| allotment init | https://testnet.nearblocks.io/txns/82KTcfMwQPi1A522LWxpWZ3GuDMNxor4xJWoL2Q7iuuH |
+| portage key deleted | https://testnet.nearblocks.io/txns/2h5Q8kQArD5UHepXUjLyiigftEV8GLKxVxMJVu7ZMfsz |
+| allotment key deleted | https://testnet.nearblocks.io/txns/6vnawR7pcp8e6MdEDRxeHvcibQFmuTpsDzM71bZyYJm6 |
+| tusd key deleted | https://testnet.nearblocks.io/txns/2ckccBWPqkGYTXWRsxMr8bTK6iom6iLZUVYKrxTfrxCb |
+
+House of Stake fleet (their code, unmodified, commit `d85860a`): registry `registry.berthright.testnet`, crew
+namespace registrar `crew.berthright.testnet` (Open, active, creation deposit 0.1 NEAR), extension
+`ext.berthright.testnet`, welfare trust `trust.berthright.testnet` bound as the namespace's payment authority.
+The wallet's global publish (about 43.5 NEAR) is the last step and waits for testnet funding;
+until it lands, berths cannot be issued.
 
 ## Unattended crank run
 

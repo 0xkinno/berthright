@@ -60,7 +60,7 @@ async function main() {
 
   log("\n== accounts ==");
   // Lean balances: each covers its contract's storage plus a small float.
-  const tusd = await ensure("tusd", 1.9);
+  const tusd = await ensure("tusd", 2.4);
   const portage = await ensure("portage", 3.2);
   const allotment = await ensure("allotment", 2.3);
   const id = (l: string) => `${l}.${ROOT}`;
@@ -78,7 +78,10 @@ async function main() {
     log("\n== wallet code, published once as a global contract (by account id, as the registrar expects) ==");
     const walletWasm = HOS("hos_wallet");
     const prev = existsSync("deployments/testnet.json") ? JSON.parse(readFileSync("deployments/testnet.json", "utf8")) : {};
-    if (prev.wallet_global_hash !== walletHash) {
+    if (process.env.SKIP_WALLET === "1") {
+      log("  skipped for now (SKIP_WALLET=1): berths cannot be issued until the wallet code is published");
+      walletHash = prev.wallet_global_hash ?? "";
+    } else if (prev.wallet_global_hash !== walletHash) {
       const cost = BigInt(walletWasm.length) * 100_000_000_000_000_000_000n + milli(0.3);
       const held = await balance(impl.accountId);
       if (held < cost) await root.transfer({ token: (await import("near-api-js/tokens")).NEAR, amount: cost - held, receiverId: impl.accountId } as never);
@@ -153,7 +156,7 @@ async function main() {
     wallet_impl: id("impl"),
     hos_extension: id("ext"),
     recovery: id("rec"),
-    wallet_global_hash: DO_HOS ? walletHash : undefined,
+    wallet_global_hash: DO_HOS && walletHash ? walletHash : undefined,
     hos_deployed: DO_HOS || undefined,
     tusd: tusd.accountId,
     portage: portage.accountId,

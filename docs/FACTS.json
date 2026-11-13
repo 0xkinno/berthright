@@ -41,6 +41,39 @@
     "max_berths": 40,
     "history_entries": 64
   },
-  "deployment": null,
+  "deployment": {
+    "network": "testnet",
+    "portage": "portage.berthright.testnet",
+    "allotment": "allotment.berthright.testnet",
+    "tusd": "tusd.berthright.testnet",
+    "registry": "registry.berthright.testnet",
+    "registrar": "crew.berthright.testnet",
+    "hos_commit": "d85860a8cc2bfcb8b617b28cab558da5d39333fc",
+    "code_hashes": {
+      "portage": {
+        "wasm_sha256_b58": "EZSM5HryeooELqmfM5syH8PnFL1WdWfVWP6FaQHTK22t",
+        "wasm_sha256_hex": "c9772cc3d3c613651d59c0d8f47b7df73cf10daafa23a0604e2c86e6e3548c41",
+        "on_chain": "EZSM5HryeooELqmfM5syH8PnFL1WdWfVWP6FaQHTK22t"
+      },
+      "allotment": {
+        "wasm_sha256_b58": "CXbC5AL5HMpapndvV2bXwTYwjt9sk9JFJZ8XFao9CsZv",
+        "wasm_sha256_hex": "ab46a3e5eae2e25e732aafec41283fc347e008296a1c377e40a695ffff3b00b5",
+        "on_chain": "CXbC5AL5HMpapndvV2bXwTYwjt9sk9JFJZ8XFao9CsZv"
+      },
+      "tusd": {
+        "wasm_sha256_b58": "J3BmCLJwdCfgd2mmk8f5g4uvpJgDV1Gz9bvb94FZt3cu",
+        "on_chain": "J3BmCLJwdCfgd2mmk8f5g4uvpJgDV1Gz9bvb94FZt3cu"
+      },
+      "tla_registry": {
+        "wasm_sha256_b58": "C7tKjNs7gxT8oyH7kNRkA4xhmAXq6geaTVcxb7C7wne1",
+        "on_chain": "C7tKjNs7gxT8oyH7kNRkA4xhmAXq6geaTVcxb7C7wne1"
+      }
+    },
+    "access_keys": {
+      "portage": 0,
+      "allotment": 0
+    },
+    "file": "deployments/testnet.json"
+  },
   "runs": null
 }

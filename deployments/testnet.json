@@ -1,0 +1,48 @@
+{
+  "network": "testnet",
+  "root": "berthright.testnet",
+  "hos_commit": "d85860a8cc2bfcb8b617b28cab558da5d39333fc",
+  "registry": "registry.berthright.testnet",
+  "registrar": "crew.berthright.testnet",
+  "council": "council.berthright.testnet",
+  "trust": "trust.berthright.testnet",
+  "wallet_impl": "impl.berthright.testnet",
+  "hos_extension": "ext.berthright.testnet",
+  "recovery": "rec.berthright.testnet",
+  "tusd": "tusd.berthright.testnet",
+  "portage": "portage.berthright.testnet",
+  "allotment": "allotment.berthright.testnet",
+  "code_hashes": {
+    "portage": {
+      "wasm_sha256_b58": "EZSM5HryeooELqmfM5syH8PnFL1WdWfVWP6FaQHTK22t",
+      "wasm_sha256_hex": "c9772cc3d3c613651d59c0d8f47b7df73cf10daafa23a0604e2c86e6e3548c41",
+      "on_chain": "EZSM5HryeooELqmfM5syH8PnFL1WdWfVWP6FaQHTK22t"
+    },
+    "allotment": {
+      "wasm_sha256_b58": "CXbC5AL5HMpapndvV2bXwTYwjt9sk9JFJZ8XFao9CsZv",
+      "wasm_sha256_hex": "ab46a3e5eae2e25e732aafec41283fc347e008296a1c377e40a695ffff3b00b5",
+      "on_chain": "CXbC5AL5HMpapndvV2bXwTYwjt9sk9JFJZ8XFao9CsZv"
+    },
+    "tusd": {
+      "wasm_sha256_b58": "J3BmCLJwdCfgd2mmk8f5g4uvpJgDV1Gz9bvb94FZt3cu",
+      "on_chain": "J3BmCLJwdCfgd2mmk8f5g4uvpJgDV1Gz9bvb94FZt3cu"
+    },
+    "tla_registry": {
+      "wasm_sha256_b58": "C7tKjNs7gxT8oyH7kNRkA4xhmAXq6geaTVcxb7C7wne1",
+      "on_chain": "C7tKjNs7gxT8oyH7kNRkA4xhmAXq6geaTVcxb7C7wne1"
+    }
+  },
+  "access_keys": {
+    "portage": 0,
+    "allotment": 0
+  },
+  "txs": {
+    "portage_new": "5yjvvA9MzygVbJnC9kaaQG7ybdhS4tJSFegiaeSoWwGf",
+    "allotment_new": "82KTcfMwQPi1A522LWxpWZ3GuDMNxor4xJWoL2Q7iuuH",
+    "seal_portage": "2h5Q8kQArD5UHepXUjLyiigftEV8GLKxVxMJVu7ZMfsz",
+    "seal_allotment": "6vnawR7pcp8e6MdEDRxeHvcibQFmuTpsDzM71bZyYJm6",
+    "seal_tusd": "2ckccBWPqkGYTXWRsxMr8bTK6iom6iLZUVYKrxTfrxCb"
+  },
+  "deployed_at": "2026-11-13T07:46:31.953Z",
+  "hos_deployed": true
+}
