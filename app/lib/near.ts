@@ -226,3 +226,32 @@ export async function walletSigner(): Promise<Signer | null> {
     return null;
   }
 }
+
+// ---------- NEP-413 ----------
+
+export const NOTICE_RECIPIENT = "berthright-crew-notices";
+
+export interface Signed413 { accountId: string; publicKey: string; signature: string; message: string; nonce: string }
+
+function b64(bytes: Uint8Array): string {
+  let s = "";
+  bytes.forEach((b) => (s += String.fromCharCode(b)));
+  return btoa(s);
+}
+
+/** Signs a NEP-413 message with the browser key, or asks the connected wallet to. */
+export async function sign413(message: string, who: { kind: "browser"; accountId: string; secretKey: string } | { kind: "wallet" }): Promise<Signed413> {
+  const nonce = crypto.getRandomValues(new Uint8Array(32));
+  if (who.kind === "browser") {
+    const { Account, JsonRpcProvider } = await import("near-api-js");
+    const { signMessage } = await import("near-api-js/nep413");
+    const acc = new Account(who.accountId, new JsonRpcProvider({ url: RPC_URLS[0] }) as never, who.secretKey as never);
+    const s: any = await signMessage({ signerAccount: acc, payload: { message, recipient: NOTICE_RECIPIENT, nonce } as never });
+    return { accountId: who.accountId, publicKey: s.publicKey.toString(), signature: b64(s.signature), message, nonce: b64(nonce) };
+  }
+  const c = await getConnector();
+  const wallet = await c.wallet();
+  const s: any = await wallet.signMessage({ message, recipient: NOTICE_RECIPIENT, nonce } as never);
+  const sig = typeof s.signature === "string" ? s.signature : b64(s.signature);
+  return { accountId: s.accountId, publicKey: s.publicKey, signature: sig, message, nonce: b64(nonce) };
+}

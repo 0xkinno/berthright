@@ -86,7 +86,7 @@ function main() {
   writeFileSync("docs/FACTS.json", text);
   mkdirSync("app/lib/generated", { recursive: true });
   writeFileSync("app/lib/generated/facts.json", text);
-  for (const [from, to] of [["deployments/testnet.json", "app/lib/generated/deployment.json"], ["data/replay.json", "app/lib/generated/replay.json"]]) {
+  for (const [from, to] of [["deployments/testnet.json", "app/lib/generated/deployment.json"], ["data/replay.json", "app/lib/generated/replay.json"], ["data/runs.json", "app/lib/generated/runs.json"]]) {
     if (existsSync(from)) copyFileSync(from, to);
     else if (!existsSync(to)) writeFileSync(to, "null\n");
   }
