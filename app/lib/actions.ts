@@ -3,7 +3,7 @@ import { IDS } from "./config";
 import type { TxSpec } from "./near";
 
 const YOCTO = "1";
-const milli = (n: number) => ((BigInt(Math.round(n * 1000)) * 10n ** 24n) / 1000n).toString();
+const milli = (n: number) => ((BigInt(Math.round(n * 1_000_000)) * 10n ** 24n) / 1_000_000n).toString();
 const STORAGE = milli(0.00125);
 
 export const SAMPLE_SEA_TEXT = "Seafarer Employment Agreement (sample, fictional). Rank: Able Seaman. Basic wage: 300 tUSD per month (10 tUSD per day). Contract: 9 months. Vessel: MV Kestrel (fictional).";

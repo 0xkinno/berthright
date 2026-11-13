@@ -103,8 +103,14 @@ async fn add_key_on_a_berth_is_impossible_and_house_of_stake_cannot_move_it_alon
     let bad = w.wallet_exec(&w.arjun, &berth, json!({ "internal": [{ "op": "add_key", "payload": { "public_key": "ed25519:DcA2MzgpJbrUATQLLceocVckhhAqrkingax4oJ9kZ847" } }] })).await?;
     assert!(bad.is_failure(), "AddKey must be refused");
     // The registry's own extension cannot rotate a live lease without the holder asking.
-    let forced = call(&w.root, w.extension.id(), "force_transfer", json!({ "sub_account": berth, "to": w.relief.id(), "cause": "Transfer", "asked_by": null }), ONE_YOCTO).await?;
-    assert!(forced.is_failure(), "a third party cannot move a live berth");
+    // A stranger cannot reach the extension at all.
+    let forced = call(&w.root, w.extension.id(), "force_transfer", json!({ "wallet": berth, "new_owner": w.relief.id(), "cause": "Transfer", "asked_by": w.relief.id() }), NearToken::from_yoctonear(0)).await?;
+    assert!(forced.is_failure() && failure_text(&forced).contains("only_registry"), "a third party cannot move a live berth: {}", failure_text(&forced));
+    // Even the registry account, which may call the extension, cannot move a live berth unless its holder asked.
+    let by_registry = w.registry.as_account().call(w.extension.id(), "force_transfer").args_json(json!({ "wallet": berth, "new_owner": w.relief.id(), "cause": "Transfer", "asked_by": w.relief.id() })).max_gas().transact().await?;
+    let text = format!("{:?}", by_registry.failures());
+    println!("registry without the holder: {text}");
+    assert_eq!(w.item(&berth).await?["owner_id"], w.arjun.id().as_str(), "the berth did not move: {text}");
     assert_eq!(w.item(&berth).await?["owner_id"], w.arjun.id().as_str());
     Ok(())
 }

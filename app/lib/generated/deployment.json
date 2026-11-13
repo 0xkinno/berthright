@@ -41,8 +41,24 @@
     "allotment_new": "82KTcfMwQPi1A522LWxpWZ3GuDMNxor4xJWoL2Q7iuuH",
     "seal_portage": "2h5Q8kQArD5UHepXUjLyiigftEV8GLKxVxMJVu7ZMfsz",
     "seal_allotment": "6vnawR7pcp8e6MdEDRxeHvcibQFmuTpsDzM71bZyYJm6",
-    "seal_tusd": "2ckccBWPqkGYTXWRsxMr8bTK6iom6iLZUVYKrxTfrxCb"
+    "seal_tusd": "2ckccBWPqkGYTXWRsxMr8bTK6iom6iLZUVYKrxTfrxCb",
+    "publish_wallet": "7JgyBX9WuQYofK26hfXyR48MHGGLTZ5hASv31woNxuLY"
   },
-  "deployed_at": "2026-11-13T07:46:31.953Z",
-  "hos_deployed": true
+  "deployed_at": "2026-11-13T11:34:38.995Z",
+  "hos_deployed": true,
+  "wallet_global_hash": "31ZkdRSWGEhk57s1aidT3eMPnySvfaprWAw7gJt4eMFW",
+  "demo": {
+    "ship_id": "0",
+    "berths": [
+      "ab2-kestrel.crew.berthright.testnet",
+      "bosun-kestrel.crew.berthright.testnet",
+      "oiler-kestrel.crew.berthright.testnet",
+      "cook-kestrel.crew.berthright.testnet",
+      "ab3-kestrel.crew.berthright.testnet",
+      "cadet-kestrel.crew.berthright.testnet"
+    ],
+    "owner": "kestrel-bulk.berthright.testnet",
+    "crew": "arjun.berthright.testnet",
+    "family": "arjun-family.berthright.testnet"
+  }
 }

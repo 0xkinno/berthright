@@ -13,7 +13,7 @@ export const RPC_URLS = (process.env.NEAR_RPC_URLS ??
 export const TGAS = 1_000_000_000_000n;
 export const ONE_YOCTO = 1n;
 export const NEAR = 10n ** 24n;
-export const milli = (n: number) => (BigInt(Math.round(n * 1000)) * NEAR) / 1000n;
+export const milli = (n: number) => (BigInt(Math.round(n * 1_000_000)) * NEAR) / 1_000_000n;
 
 let current = 0;
 export function provider(): JsonRpcProvider {
@@ -108,7 +108,7 @@ export interface CallOut {
 
 /** Calls a method and returns the outcome without throwing on a contract refusal. */
 export async function call(signer: Account, contractId: string, methodName: string, args: object, opts: { gasT?: number; deposit?: bigint } = {}): Promise<CallOut> {
-  const gas = BigInt(opts.gasT ?? 300) * TGAS;
+  const gas = BigInt(opts.gasT ?? 100) * TGAS;
   let res: any;
   try {
     res = await signer.signAndSendTransaction({
@@ -117,7 +117,11 @@ export async function call(signer: Account, contractId: string, methodName: stri
       waitUntil: "FINAL",
     } as never);
   } catch (e: any) {
-    // near-api-js throws on a failed transaction; keep the hash and the reason.
+    // near-api-js throws on a failed transaction; the outcome rides along, so keep its hash and reason.
+    if (e?.transactionResult) {
+      const out = parseOutcome(e.transactionResult);
+      return { ...out, ok: false, failure: e.panicMessage ?? out.failure ?? String(e?.message ?? e) };
+    }
     const hash = e?.context?.transactionHash ?? e?.transaction_outcome?.id ?? e?.txHash ?? "";
     return { hash, ok: false, value: null, logs: [], failure: String(e?.message ?? e), gasBurnt: 0n };
   }
@@ -144,7 +148,9 @@ export function parseOutcome(res: any): CallOut {
     }
   }
   if (st.Failure) failure = JSON.stringify(st.Failure);
-  return { hash: res?.transaction?.hash ?? res?.transaction_outcome?.id ?? "", ok: !st.Failure, value, logs, failure, gasBurnt };
+  const refused = logs.find((l) => l.startsWith("REFUSED:"));
+  if (refused && !failure) failure = refused.slice(8);
+  return { hash: res?.transaction?.hash ?? res?.transaction_outcome?.id ?? "", ok: !st.Failure && !refused && value !== false, value, logs, failure, gasBurnt };
 }
 
 export function explorerTx(hash: string): string {

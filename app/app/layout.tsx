@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { fraunces, instrument, plexMono } from "./fonts";
 import { SessionProvider } from "@/components/Session";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -11,11 +12,11 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.svg" },
 };
 
-export const viewport: Viewport = { themeColor: "#ECEBE4", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#F5EFE3", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${fraunces.variable} ${instrument.variable} ${plexMono.variable}`}>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-[color:var(--ink)] focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
         <SessionProvider>

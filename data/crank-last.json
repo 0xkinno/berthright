@@ -1,0 +1,42 @@
+{
+  "at": "2026-11-13T12:07:30.164Z",
+  "signer": "crank.berthright.testnet",
+  "run_url": null,
+  "actions": [
+    {
+      "action": "settle",
+      "target": "ab2-kestrel.crew.berthright.testnet",
+      "hash": "Ah3BB5pAwH7CaU97cnkfn5jRkBjwQo31z64vNt1Rctis",
+      "ok": true,
+      "note": "true"
+    },
+    {
+      "action": "settle",
+      "target": "bosun-kestrel.crew.berthright.testnet",
+      "hash": "7Wawt1C8cbEV2n38Y4oAWbaXp2QKoAEWpGbrNEdeQN1Q",
+      "ok": true,
+      "note": "true"
+    },
+    {
+      "action": "settle",
+      "target": "oiler-kestrel.crew.berthright.testnet",
+      "hash": "EAR7fTHiUUarFjhYbatPWXxCgriXL4GQjy9UpuV9rrVx",
+      "ok": true,
+      "note": "true"
+    },
+    {
+      "action": "settle",
+      "target": "cook-kestrel.crew.berthright.testnet",
+      "hash": "Ah8zswjFWqawhXsRbULtvynvW1qX5izNwhLHSpp978B2",
+      "ok": true,
+      "note": "true"
+    },
+    {
+      "action": "settle",
+      "target": "ab3-kestrel.crew.berthright.testnet",
+      "hash": "EXMdJoKz88M12kia1kkcSYX4usUMfGSoQBKPJKBgczWv",
+      "ok": true,
+      "note": "true"
+    }
+  ]
+}

@@ -54,12 +54,46 @@ Built in the pinned image `sourcescan/cargo-near:0.22.0-rust-1.97.1` from commit
 House of Stake fleet (their code, unmodified, commit `d85860a`): registry `registry.berthright.testnet`, crew
 namespace registrar `crew.berthright.testnet` (Open, active, creation deposit 0.1 NEAR), extension
 `ext.berthright.testnet`, welfare trust `trust.berthright.testnet` bound as the namespace's payment authority.
-The wallet's global publish (about 43.5 NEAR) is the last step and waits for testnet funding;
-until it lands, berths cannot be issued.
+The wallet's global publish: https://testnet.nearblocks.io/txns/7JgyBX9WuQYofK26hfXyR48MHGGLTZ5hASv31woNxuLY (432,315 bytes, code hash `31ZkdRSWGEhk57s1aidT3eMPnySvfaprWAw7gJt4eMFW`). The recovery contract was deployed and wired afterwards (see FRICTION #11).
 
-## Unattended crank run
+## Demo ship: MV Kestrel (fictional), ship #0
 
-Pending the testnet deployment and the `CRANK_*` GitHub secrets.
+Fast clock (one ship day = 60 s), six berths issued by the crew welfare trust, 3,320 tUSD funded,
+2,830 tUSD locked as reserves for five signed-on crew. Accounts and berths: `deployments/testnet.json` (`demo`).
+
+## Break campaign (each a real testnet transaction, refused)
+
+| Attempt | Decoded refusal | Transaction |
+|---|---|---|
+| The old holder's allotment after hand-over | `E_BERTH_CHANGED_HANDS` | https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD |
+| Sign-on before four months are on board | `E_RESERVE_NOT_ON_BOARD` | https://testnet.nearblocks.io/txns/DCJK5bxUZqqNsh2HFJYAxnHUqz56PyEwYK9gsXuaVpUa |
+| Sign-on at a lower wage than the contract | `E_WAGE_DIFFERS_FROM_YOUR_CONTRACT` | https://testnet.nearblocks.io/txns/85NEKMGxH7qz6PBCtSX9eCtRzWmW7nbjMiTjXacnBTLv |
+| A stranger signs on | `E_NOT_BERTH_HOLDER` | https://testnet.nearblocks.io/txns/6nNs72JiGeVzPMBhQ3BH3u7kZPF9yHiz4bwTUaKbd5JQ |
+| The owner withdraws the reserve | `E_RESERVE_LOCKED` | https://testnet.nearblocks.io/txns/F9BbzXiqb3gKP8UBhbfP3Akn9CLmWJKDtbFUoJaVMtxk |
+| Abandonment declared early | `E_NOT_YET_ABANDONED` | https://testnet.nearblocks.io/txns/C2C5YKsJVdVctmYWZzPT48a6inQMfCGh18EzaEDCn8vQ |
+| Allotment to a receiver nobody granted | `RECEIVER_NOT_GRANTED: receiver is not in the spend grant (HoS wallet); allotment stopped E_WALLET_REFUSED` | https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL |
+| Allotment over the budget | `TOKEN_CAP_EXCEEDED: spend exceeds the granted cap for this token (HoS wallet); allotment stopped E_WALLET_REFUSED` | https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m |
+| AddKey on a berth | `the wallet has no key operation: unknown variant `add_key` (only set_signature_mode, add_extension, remove_extension)` | https://testnet.nearblocks.io/txns/8S2S3ZHPJ4SSer6NGAA2GCdXXJzryFek9v3tzsKgqWFL |
+| House of Stake moves a live berth without the holder | `{"code":"only_registry"}` | https://testnet.nearblocks.io/txns/2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi |
+
+Hand-over used for the last row: sign-off https://testnet.nearblocks.io/txns/26UYsPhnAJz5cEm55RFeMTvmkLPSYtwVYd9ngYZEkA87, `nft_transfer` https://testnet.nearblocks.io/txns/89yQDUpGHQX5g7JcXRW5xfARxRaSnMmB5tM67u3K5Rh4; the berth moved to `relief.berthright.testnet` and `rotation_seq` went from 0 to 1.
+
+## Cost per wage day
+
+`settle` burnt 14.26 Tgas (https://testnet.nearblocks.io/txns/B5mJjd7tZJhpquAV6yUD9wM2BVDYDFYXWRteNzvKXhz9); at the testnet gas price of 0.1 Gyocto per gas that is 0.001426 NEAR, or US$0.005061 at NEAR = US$3.55 (2026-11-13T12:00:01.063Z, 1Click token list). One settle a day pays one crew member one day of wages. An allotment run burnt 16.39 Tgas.
+
+## Verify (13 Nov 2026, no keys)
+
+`npx tsx scripts/verify.ts`: **12 of 12 checks pass, from 141 transactions** (zero keys and matching
+code hashes on both contracts, every ship rebuilt from events equals the contract, books balance).
+`npx tsx scripts/verify.ts --tamper`: adds 1 base unit to one `funded` event, the rebuild of ship 0
+fails, **11 of 12, exit code 1**.
+
+## Crank
+
+`scripts/crank.ts` settled all five signed berths with no human action (13 Nov 2026). The scheduled
+run (`.github/workflows/crank.yml`, twice an hour) starts once the `CRANK_*` secrets are set; its first
+unattended run will be linked here.
 
 ## Contract reader under attack (13 Nov 2026, NEAR AI Cloud, model Qwen/Qwen3-VL-30B-A3B-Instruct)
 

@@ -1,0 +1,170 @@
+{
+  "crank_key": {
+    "account": "crank.berthright.testnet",
+    "portage_methods": [
+      "settle",
+      "declare_abandonment",
+      "release_guarantee"
+    ],
+    "allotment_methods": [
+      "run"
+    ]
+  },
+  "hand_over": {
+    "sign_off": "26UYsPhnAJz5cEm55RFeMTvmkLPSYtwVYd9ngYZEkA87",
+    "nft_transfer": "89yQDUpGHQX5g7JcXRW5xfARxRaSnMmB5tM67u3K5Rh4",
+    "ok": false,
+    "new_owner": "relief.berthright.testnet",
+    "rotation_seq": "1"
+  },
+  "demo_ship": "0",
+  "break": {
+    "old_holder_allotment": {
+      "label": "The old holder's allotment after hand-over",
+      "hash": "B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD",
+      "refused": true,
+      "decoded": "E_BERTH_CHANGED_HANDS",
+      "at": "2026-11-13T12:06:15.188Z"
+    },
+    "reserve_missing": {
+      "label": "Sign-on before four months are on board",
+      "hash": "DCJK5bxUZqqNsh2HFJYAxnHUqz56PyEwYK9gsXuaVpUa",
+      "refused": true,
+      "decoded": "E_RESERVE_NOT_ON_BOARD",
+      "at": "2026-11-13T11:57:26.263Z"
+    },
+    "lower_wage": {
+      "label": "Sign-on at a lower wage than the contract",
+      "hash": "85NEKMGxH7qz6PBCtSX9eCtRzWmW7nbjMiTjXacnBTLv",
+      "refused": true,
+      "decoded": "E_WAGE_DIFFERS_FROM_YOUR_CONTRACT",
+      "at": "2026-11-13T11:57:37.647Z"
+    },
+    "non_holder": {
+      "label": "A stranger signs on",
+      "hash": "6nNs72JiGeVzPMBhQ3BH3u7kZPF9yHiz4bwTUaKbd5JQ",
+      "refused": true,
+      "decoded": "E_NOT_BERTH_HOLDER",
+      "at": "2026-11-13T11:57:43.150Z"
+    },
+    "withdraw_reserve": {
+      "label": "The owner withdraws the reserve",
+      "hash": "F9BbzXiqb3gKP8UBhbfP3Akn9CLmWJKDtbFUoJaVMtxk",
+      "refused": true,
+      "decoded": "E_RESERVE_LOCKED",
+      "at": "2026-11-13T11:58:20.263Z"
+    },
+    "early_abandonment": {
+      "label": "Abandonment declared early",
+      "hash": "C2C5YKsJVdVctmYWZzPT48a6inQMfCGh18EzaEDCn8vQ",
+      "refused": true,
+      "decoded": "E_NOT_YET_ABANDONED",
+      "at": "2026-11-13T11:58:24.234Z"
+    },
+    "ungranted_receiver": {
+      "label": "Allotment to a receiver nobody granted",
+      "hash": "7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL",
+      "refused": true,
+      "decoded": "RECEIVER_NOT_GRANTED: receiver is not in the spend grant (HoS wallet); allotment stopped E_WALLET_REFUSED",
+      "at": "2026-11-13T12:01:47.997Z"
+    },
+    "over_budget": {
+      "label": "Allotment over the budget",
+      "hash": "6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m",
+      "refused": true,
+      "decoded": "TOKEN_CAP_EXCEEDED: spend exceeds the granted cap for this token (HoS wallet); allotment stopped E_WALLET_REFUSED",
+      "at": "2026-11-13T12:01:47.997Z"
+    },
+    "add_key": {
+      "label": "AddKey on a berth",
+      "hash": "8S2S3ZHPJ4SSer6NGAA2GCdXXJzryFek9v3tzsKgqWFL",
+      "refused": true,
+      "decoded": "the wallet has no key operation: unknown variant `add_key` (only set_signature_mode, add_extension, remove_extension)",
+      "at": "2026-11-13T12:00:26.880Z"
+    },
+    "hos_transfer_alone": {
+      "label": "House of Stake moves a live berth without the holder",
+      "hash": "2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi",
+      "refused": true,
+      "decoded": "{\"code\":\"only_registry\"}",
+      "at": "2026-11-13T12:01:47.997Z"
+    }
+  },
+  "cost": {
+    "settle": {
+      "hash": "B5mJjd7tZJhpquAV6yUD9wM2BVDYDFYXWRteNzvKXhz9",
+      "gas_burnt": "14256946665081",
+      "ok": true
+    },
+    "allotment_run": {
+      "hash": "CHMrix6jtupRsCHryhDtDnMHXkjopJmUQLDrNZRWEuQd",
+      "gas_burnt": "16393511829996",
+      "ok": true
+    },
+    "settle_near": 0.0014256946665081,
+    "settle_usd": 0.005061216066103755,
+    "note": "One settle pays one crew member every day of wages accrued since the last settle; with one settle a day this is the cost to pay one crew member one day of wages."
+  },
+  "fund": "5YxfCoJF2orKuqaKQiMb3smojYkZGnkafM5pcn7WSVMD",
+  "sign_on": {
+    "ab2-kestrel.crew.berthright.testnet": {
+      "hash": "4UHPyXnD7wK74zQRGg1LbJi6AwSvH5CT1c2BuBSuvmKC",
+      "ok": true,
+      "code": null
+    },
+    "bosun-kestrel.crew.berthright.testnet": {
+      "hash": "6D5V8m8ZoebNXGZ5DREPR7tybsovaEJXC9Z6VVQ98ri6",
+      "ok": true,
+      "code": null
+    },
+    "oiler-kestrel.crew.berthright.testnet": {
+      "hash": "849WH3W13D8JcW2jP3RifjUeEbxURsP5VzrBEXQFmbdN",
+      "ok": true,
+      "code": null
+    },
+    "cook-kestrel.crew.berthright.testnet": {
+      "hash": "Et1j6yeAAWxSBYUjv1re3oZqG2j6a9FANBDkypGyYMs4",
+      "ok": true,
+      "code": null
+    },
+    "ab3-kestrel.crew.berthright.testnet": {
+      "hash": "H4pH9fK6AZqQpheyTi4BCo8KjvjsNmthkCtX8MoYtSod",
+      "ok": true,
+      "code": null
+    },
+    "cadet-kestrel.crew.berthright.testnet": {
+      "hash": "BZfctzAR81ou3eWqYvmn2qpVA3FdTXHeuJFmkxvtJyHv",
+      "ok": false,
+      "code": "E_NOT_BERTH_HOLDER"
+    }
+  },
+  "near_price": {
+    "usd": 3.55,
+    "at": "2026-11-13T12:00:01.063Z",
+    "source": "1click.chaindefuser.com/v0/tokens"
+  },
+  "gas_price_yocto": "100000000",
+  "demo": {
+    "ship_id": "0",
+    "berths": [
+      "ab2-kestrel.crew.berthright.testnet",
+      "bosun-kestrel.crew.berthright.testnet",
+      "oiler-kestrel.crew.berthright.testnet",
+      "cook-kestrel.crew.berthright.testnet",
+      "ab3-kestrel.crew.berthright.testnet",
+      "cadet-kestrel.crew.berthright.testnet"
+    ],
+    "owner": "kestrel-bulk.berthright.testnet",
+    "crew": [
+      "arjun.berthright.testnet",
+      "bosun.berthright.testnet",
+      "oiler.berthright.testnet",
+      "cook.berthright.testnet",
+      "ab3.berthright.testnet",
+      "cadet.berthright.testnet"
+    ],
+    "family": "arjun-family.berthright.testnet",
+    "relief": "relief.berthright.testnet"
+  },
+  "seeded_at": "2026-11-13T12:00:34.409Z"
+}

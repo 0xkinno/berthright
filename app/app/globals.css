@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-@font-face { font-family: "Zodiak"; src: url("/fonts/zodiak-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Zodiak"; src: url("/fonts/zodiak-800.woff2") format("woff2"); font-weight: 800; font-display: swap; }
-@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
-@font-face { font-family: "Geist Mono"; src: url("/fonts/geist-mono-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Geist Mono"; src: url("/fonts/geist-mono-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-
+/* Berthright "sailcloth": every panel is a piece of canvas sewn on with a sailmaker's stitch,
+   and the one line that runs through the product is a hawser rope. */
 :root {
-  --paper: #ecebe4;
-  --paper-hi: #f7f6f0;
-  --ink: #11140f;
-  --slate: #4f564b;
-  --lemon: #d4f25c;
-  --lemon-glow: rgba(212, 242, 92, 0.55);
-  --signal: #00805f;
-  --signal-bright: #00b386;
-  --mayday: #b23f19;
-  --brass: #725a2c;
-  --brass-soft: #a88a54;
-  --hair: rgba(138, 111, 62, 0.28);
+  --paper: #f5efe3;          /* canvas */
+  --paper-hi: #fffbf3;       /* raised canvas */
+  --ink: #0f2a3a;            /* hull navy */
+  --slate: #3d5463;          /* secondary text, AA on canvas */
+  --stitch: #c8b28a;         /* manila thread */
+  --hair: rgba(15, 42, 58, 0.14);
+  --lemon: #f2c14e;          /* brass lamp: highlights, porthole light, tags */
+  --lemon-glow: rgba(242, 193, 78, 0.5);
+  --flare: #c23d17;          /* the one action colour, AA with canvas text */
+  --flare-hi: #a93210;
+  --flare-glow: rgba(194, 61, 23, 0.26);
+  --signal: #0f7a5c;         /* paid, observed, safe */
+  --signal-bright: #3fbf9b;
+  --mayday: #b23a14;         /* refusal, arrears */
+  --brass: #6f5527;          /* numerals and eyebrows, AA at 12 px */
+  --brass-soft: #b99a5f;
+  --sea: #5fbdb8; --sea-pale: #dcf1ee;
+  --kelp: #95c98a; --kelp-pale: #e5f3df;
+  --sand: #f2c14e; --sand-pale: #fbefc9;
+  --coral: #f39a78; --coral-pale: #fde4d8;
+  --sky: #79bfe6; --sky-pale: #ddeffa;
 }
 
 @theme inline {
@@ -28,73 +31,91 @@
   --color-paper-hi: var(--paper-hi);
   --color-ink: var(--ink);
   --color-slate: var(--slate);
-  --color-lemon: var(--lemon);
+  --color-flare: var(--flare);
   --color-signal: var(--signal);
   --color-mayday: var(--mayday);
   --color-brass: var(--brass);
-  --font-display: "Zodiak", ui-serif, Georgia, serif;
-  --font-sans: "General Sans", ui-sans-serif, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, monospace;
 }
 
 html { background: var(--paper); color: var(--ink); }
-body {
-  font-family: var(--font-sans);
-  background: var(--paper);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+body { font-family: var(--font-sans); background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: var(--flare); color: var(--paper-hi); }
 
-/* Magazine lustre: fine paper grain and a soft lemon bloom, fixed behind everything. */
-body::before {
-  content: "";
-  position: fixed; inset: 0; z-index: -2; pointer-events: none;
-  background: radial-gradient(900px 600px at 92% -10%, rgba(212, 242, 92, 0.16), transparent 70%);
-}
+/* Canvas grain, fixed behind everything. */
 body::after {
-  content: "";
-  position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @layer components {
-.display { font-family: var(--font-display); letter-spacing: -0.02em; }
-.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.eyebrow {
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass);
+  .display { font-family: var(--font-display); font-weight: 560; font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144; letter-spacing: -0.022em; line-height: 1.04; }
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); }
+  .hairline { border-color: var(--hair); }
+  .ledger-row + .ledger-row { border-top: 1px dashed var(--hair); }
+
+  /* The patch: canvas with a running stitch sewn just inside the edge. */
+  .card, .patch {
+    position: relative; background: var(--paper-hi); border-radius: 26px;
+    box-shadow: 0 1px 0 rgba(15, 42, 58, 0.06), 0 14px 34px rgba(15, 42, 58, 0.08);
+  }
+  .card::before, .patch::before {
+    content: ""; position: absolute; inset: 9px; border: 1.5px dashed var(--stitch); border-radius: 18px; pointer-events: none;
+  }
+  .tint-sea { background: var(--sea-pale); } .tint-kelp { background: var(--kelp-pale); }
+  .tint-sand { background: var(--sand-pale); } .tint-coral { background: var(--coral-pale); } .tint-sky { background: var(--sky-pale); }
+  .tint-sea::before, .tint-kelp::before, .tint-sand::before, .tint-coral::before, .tint-sky::before { border-color: rgba(15, 42, 58, 0.22); }
+
+  /* A sewn label, like a sail tag. */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px; height: 30px; padding-inline: 12px; border: 1.5px dashed rgba(15, 42, 58, 0.35);
+    border-radius: 8px; background: var(--sand); color: var(--ink); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 4px 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px;
+    border-radius: 13px; font-weight: 600; font-size: 15px; transition: background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .btn:focus-visible, a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--flare); outline-offset: 3px; }
+  /* Primary: flare canvas with a stitch inside. */
+  .btn-lemon { background: var(--flare); color: var(--paper-hi); box-shadow: 0 10px 26px -12px var(--flare-glow); }
+  .btn-lemon::after { content: ""; position: absolute; inset: 4px; border: 1.5px dashed rgba(255, 251, 243, 0.55); border-radius: 10px; pointer-events: none; }
+  .btn-lemon:hover:not(:disabled) { background: var(--flare-hi); }
+  .btn-ink { background: var(--ink); color: var(--paper-hi); }
+  .btn-ink::after { content: ""; position: absolute; inset: 4px; border: 1.5px dashed rgba(255, 251, 243, 0.3); border-radius: 10px; pointer-events: none; }
+  .btn-outline { border: 2px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn-outline:hover:not(:disabled) { background: var(--ink); color: var(--paper-hi); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  @media (prefers-reduced-motion: no-preference) { .btn:hover:not(:disabled) { transform: translateY(-1px); } }
+
+  .glow-card { overflow: hidden; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease; }
+  .glow-card:hover { transform: translateY(-3px) rotate(-0.25deg); box-shadow: 0 1px 0 rgba(15, 42, 58, 0.06), 0 22px 44px rgba(15, 42, 58, 0.12); }
+  .glow-card .glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%), var(--lemon-glow), transparent 70%); }
+  .glow-card:hover .glow { opacity: 0.7; }
+
+  /* Link with a stitched underline that sews itself in on hover. */
+  .stitch-link { position: relative; }
+  .stitch-link::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--flare) 0 6px, transparent 6px 10px);
+    clip-path: inset(0 100% 0 0); transition: clip-path 200ms ease;
+  }
+  .stitch-link:hover::after, .stitch-link:focus-visible::after { clip-path: inset(0 0 0 0); }
 }
-.hairline { border-color: var(--hair); }
-.ledger-row + .ledger-row { border-top: 1px solid var(--hair); }
 
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 600; font-size: 15px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-.btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-.btn-lemon { background: var(--lemon); color: var(--ink); box-shadow: 0 0 0 1px rgba(17,20,15,0.12) inset, 0 8px 30px -10px var(--lemon-glow); }
-.btn-lemon:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(17,20,15,0.18) inset, 0 12px 36px -8px var(--lemon-glow); }
-.btn-ink { background: var(--ink); color: var(--paper-hi); }
-.btn-ink:hover { transform: translateY(-1px); }
-.btn-outline { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
-.btn-outline:hover { background: rgba(17,20,15,0.05); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-.card { background: var(--paper-hi); border: 1px solid var(--hair); border-radius: 22px; }
-.pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 4px 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
-
-.glow-card { position: relative; overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease; }
-.glow-card:hover { transform: translateY(-2px); border-color: rgba(138, 111, 62, 0.55); }
-.glow-card .glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
-  background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), var(--lemon-glow), transparent 70%); }
-.glow-card:hover .glow { opacity: 1; }
-
-}
-
-@keyframes porthole-on { from { fill: #2a3326; filter: none; } to { fill: var(--lemon); } }
-.porthole { fill: #2a3326; }
+@keyframes porthole-on { from { fill: #31414a; } to { fill: var(--lemon); } }
+.porthole { fill: #31414a; }
 .porthole.on { animation: porthole-on 0.5s ease forwards; }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(-0.4deg); } }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-40px); } }
+@keyframes gull { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(18px, -6px); } }
+.bob { animation: bob 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.drift { animation: drift 14s linear infinite alternate; }
+.gull { animation: gull 9s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -102,3 +123,4 @@ body::after {
   .glow-card .glow { display: none; }
   .porthole { fill: var(--lemon); }
 }
+@media print { body::after { display: none; } .card::before, .patch::before { display: none; } }

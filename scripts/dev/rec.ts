@@ -1,0 +1,15 @@
+import { KeyPair, actions } from "near-api-js";
+import { readFileSync } from "node:fs";
+import { account, call, view, readDeployment, ONE_YOCTO, explorerTx } from "../lib/near.ts";
+const d = readDeployment();
+const rec = account(d.recovery), council = account(d.council), anyone = account(`stranger.${d.root}`);
+await rec.signAndSendTransaction({ receiverId: rec.accountId, actions: [actions.deployContract(readFileSync("fleet/wasm/mpc_recovery.wasm"))], waitUntil: "FINAL" } as never);
+const w = [KeyPair.fromRandom("ed25519"), KeyPair.fromRandom("ed25519")].map((k) => k.getPublicKey().toString());
+const init = await call(rec, rec.accountId, "new", { owner: d.council, signer: "v1.signer-prod.testnet", transfer_authority: d.hos_extension, watchers: w, threshold: 2 }, { gasT: 100 });
+console.log("rec new", init.ok, init.failure?.slice(0, 120), explorerTx(init.hash));
+const a = await call(council, d.recovery, "set_registry", { registry: d.registry }, { deposit: ONE_YOCTO, gasT: 50 });
+const b = await call(council, d.registry, "add_recovery_authority", { account_id: d.recovery }, { deposit: ONE_YOCTO, gasT: 50 });
+console.log("wired", a.ok, b.ok, a.failure?.slice(0, 100), b.failure?.slice(0, 100));
+console.log("pending resets", await view(d.hos_extension, "pending_recovery_resets", { from_index: 0, limit: 10 }).catch((e) => String(e).slice(0, 120)));
+const r = await call(anyone, d.hos_extension, "retry_recovery_reset", { wallet: `cadet-kestrel.${d.registrar}` }, { gasT: 100 });
+console.log("retry reset", r.ok, r.failure?.slice(0, 160), explorerTx(r.hash));

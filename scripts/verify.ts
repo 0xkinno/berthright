@@ -32,13 +32,18 @@ async function txList(account: string): Promise<{ hash: string; signer: string }
   return out;
 }
 
+const TX_RPCS = [process.env.TX_RPC ?? "https://test.rpc.fastnear.com", "https://rpc.testnet.near.org", ARCHIVAL];
+const unreadable: string[] = [];
 async function txLogs(hash: string, signer: string): Promise<string[]> {
-  for (let i = 0; i < 3; i++) {
-    const r = await fetch(ARCHIVAL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "EXPERIMENTAL_tx_status", params: { tx_hash: hash, sender_account_id: signer, wait_until: "NONE" } }) });
-    const j: any = await r.json();
-    if (j.result) return (j.result.receipts_outcome ?? []).filter((o: any) => o.outcome.executor_id === d.portage).flatMap((o: any) => o.outcome.logs);
-    await new Promise((s) => setTimeout(s, 500));
+  for (let i = 0; i < 6; i++) {
+    try {
+      const r = await fetch(TX_RPCS[i % TX_RPCS.length], { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "EXPERIMENTAL_tx_status", params: { tx_hash: hash, sender_account_id: signer, wait_until: "NONE" } }) });
+      const j: any = await r.json();
+      if (j.result?.receipts_outcome) return j.result.receipts_outcome.filter((o: any) => o.outcome.executor_id === d.portage).flatMap((o: any) => o.outcome.logs);
+    } catch {}
+    await new Promise((s) => setTimeout(s, 300 * (i + 1)));
   }
+  unreadable.push(hash);
   return [];
 }
 
@@ -62,6 +67,7 @@ async function main() {
   for (const acc of [d.portage, d.tusd]) for (const t of await txList(acc)) txs.set(t.hash, t.signer);
   const all: any[] = [];
   for (const [hash, signer] of txs) all.push(...events(await txLogs(hash, signer)).map((e) => ({ ...e, hash })));
+  check("every transaction's receipts were readable", unreadable.length === 0, unreadable.length ? `${unreadable.length} unreadable: ${unreadable.slice(0, 3).join(", ")}` : `${txs.size} read`);
   if (TAMPER) {
     const victim = all.find((e) => e.event === "funded");
     if (victim) { victim.data[0].amount = (BigInt(victim.data[0].amount) + 1n).toString(); console.log(`TAMPER: added 1 base unit to funded event in ${victim.hash}`); }

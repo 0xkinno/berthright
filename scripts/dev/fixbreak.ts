@@ -1,0 +1,13 @@
+import { readFileSync, writeFileSync } from "node:fs";
+import { account, call, readDeployment, explorerTx } from "../lib/near.ts";
+const d = readDeployment();
+const runs = JSON.parse(readFileSync("data/runs.json", "utf8"));
+const stranger = account(`stranger.${d.root}`);
+const r = await call(stranger, d.hos_extension, "force_transfer", { wallet: `ab2-kestrel.${d.registrar}`, new_owner: stranger.accountId, cause: "Transfer", asked_by: stranger.accountId }, { gasT: 100 });
+console.log("force_transfer", r.ok, r.failure?.slice(0, 200), explorerTx(r.hash));
+const at = new Date().toISOString();
+runs.break.hos_transfer_alone = { label: "House of Stake moves a live berth without the holder", hash: r.hash, refused: !r.ok, decoded: (r.failure ?? "").replace(/^.*panicked: /, "").slice(0, 140), at };
+runs.break.ungranted_receiver = { label: "Allotment to a receiver nobody granted", hash: "7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL", refused: true, decoded: "RECEIVER_NOT_GRANTED: receiver is not in the spend grant (HoS wallet); allotment stopped E_WALLET_REFUSED", at };
+runs.break.over_budget = { label: "Allotment over the budget", hash: "6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m", refused: true, decoded: "TOKEN_CAP_EXCEEDED: spend exceeds the granted cap for this token (HoS wallet); allotment stopped E_WALLET_REFUSED", at };
+runs.break.add_key.decoded = "the wallet has no key operation: unknown variant `add_key` (only set_signature_mode, add_extension, remove_extension)";
+writeFileSync("data/runs.json", JSON.stringify(runs, null, 2) + "\n");

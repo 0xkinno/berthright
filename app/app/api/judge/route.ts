@@ -12,7 +12,7 @@ export const maxDuration = 60;
 const perIp = new Map<string, { day: string; n: number }>();
 let total = { day: "", n: 0 };
 const NEAR = 10n ** 24n;
-const milli = (n: number) => (BigInt(Math.round(n * 1000)) * NEAR) / 1000n;
+const milli = (n: number) => (BigInt(Math.round(n * 1_000_000)) * NEAR) / 1_000_000n;
 const PK = /^ed25519:[1-9A-HJ-NP-Za-km-z]{43,44}$/;
 
 export async function POST(req: Request) {
