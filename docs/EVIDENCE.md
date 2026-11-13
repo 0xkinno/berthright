@@ -145,3 +145,19 @@ declared after 90 unpaid ship days, both guarantees released. Each crew member w
 
 `BASE=https://berthright-app.vercel.app node e2e/judge.mjs`: first attempt failed at setup (trust balance,
 see REDTEAM_LOG round 1); after the fix, 8 of 8 checks, 22 transactions, 0 page errors.
+
+
+## Crank on GitHub Actions (13 Nov 2026)
+
+With the `CRANK_*` secrets set, `.github/workflows/crank.yml` ran on GitHub's runners, signing only with
+the crank's function-call keys. Both runs below were started with workflow_dispatch; the schedule
+(minutes 7 and 37 each hour) runs the same job with nobody starting it.
+
+- Run 1, https://github.com/0xkinno/berthright/actions/runs/43454612211 : settled wages and declared
+  abandonment on three ships whose owners had stopped paying, including the demo ship MV Kestrel (ship 0):
+  [declare ship 0](https://testnet.nearblocks.io/txns/7Hm7hAoeso8Hj86CDYS8RnEsoQye9orsqvaXa7NVzKkX).
+  Allotment runs failed before sending: 250 Tgas of prepaid gas exceeded the key's 0.25 NEAR allowance.
+  Fixed to 160 Tgas (a run burns about 16 Tgas).
+- Run 2, https://github.com/0xkinno/berthright/actions/runs/43455049785 : two allotments sent, and seven
+  guarantees released to the crew members' own accounts, five of them MV Kestrel's, for example
+  [ab2-kestrel](https://testnet.nearblocks.io/txns/88uwJ8oaQwCZMxiW1yZrXz4HaaBg6MrEoL5yUaiHMphC).
