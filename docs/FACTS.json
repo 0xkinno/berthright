@@ -302,6 +302,23 @@
       "finished_at": "2026-11-13T15:01:35.957Z",
       "owed_wages_covered": true,
       "note": "uncovered = wages for the rest of the 9-month contract beyond the 4-month guarantee, not unpaid arrears"
+    },
+    "live_ship": {
+      "tx": {
+        "mint_ab-heron": "BB5riETbMhbd6GDPAtaBSFymQBZHHvD8DjMW4JH5f6Us",
+        "mint_oiler-heron": "5GtoMMY2c5PHWoGwEUG8hgLdxkTKJ4RkGgESTLgB3u7J",
+        "mint_cadet-heron": "H33WySDosppeyuCCVgdorxFZGdR5wMkhHZpNhXV5CVNr",
+        "create_ship": "9oU8ssN5LEjYFxSXQ8qwVng8z1mhd4WMGzJyaPjzVZtL",
+        "open_ab-heron": "EazpcjvczoBTeSJp96DdcFz3RU9wk94E24rBxjksgWdh",
+        "open_oiler-heron": "5AWopVSRbeBXYrBbbtapKgqX7Xkgm9rwagneLgWbM7Y4",
+        "open_cadet-heron": "EHizY6QWAa6KL5LxtT5bSW85pWnmj1uoRTNTNwCwm4La",
+        "fund": "CZs4UwzDSFZ89EoWcSGEJ2P1t2TUsm9YXrnijgY2UCia",
+        "sign_on_ab-heron": "Ht1ku5UCYrsFHgWKbVqZ6ZULfsDSYJLZSZtxSWF73qfo",
+        "sign_on_oiler-heron": "3SxvwpBo2zJMZya15neyhys6gDF73r1yA23XcEL5bD1c",
+        "sign_on_cadet-heron": "Ci4eiEsoNBMCMkqaw1VqAfzF8B7DroyoZnuv9JUpmCKf"
+      },
+      "faucet": "CNR117qjhzGNC6nqV5eU8AU61t2bTyfXFMYdZyh4CHpi",
+      "ship_id": "7"
     }
   }
 }
