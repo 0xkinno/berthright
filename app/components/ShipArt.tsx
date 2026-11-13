@@ -81,7 +81,7 @@ export function ShipArt({ months = 4 }: { months?: number }) {
         </motion.g>
         <rect width="560" height="420" fill="none" stroke="#A88A54" strokeOpacity="0.25" />
       </svg>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-6">
+      <div className="flex items-end justify-between gap-4 border-t border-[color:var(--brass-soft)]/30 px-5 py-4 sm:px-6">
         <div>
           <p className="eyebrow !text-[color:var(--brass-soft)]">Nº 04 · On board</p>
           <p className="mono mt-1 text-[34px] font-medium leading-none text-[color:var(--lemon)] sm:text-[44px]" aria-live="polite">{shown.toFixed(1)} months</p>
