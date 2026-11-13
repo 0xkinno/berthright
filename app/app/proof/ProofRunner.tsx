@@ -6,19 +6,24 @@ import { runChecks, type Check as C } from "@/lib/proof";
 export function ProofRunner() {
   const [r, setR] = useState<{ checks: C[]; block: number | null; at: string } | null>(null);
   const [busy, setBusy] = useState(false);
-  const go = useCallback(async () => { setBusy(true); try { setR(await runChecks()); } finally { setBusy(false); } }, []);
+  const go = useCallback(async () => {
+    setBusy(true);
+    const at = new Date().toISOString();
+    try { setR(await runChecks((checks) => setR({ checks, block: null, at }))); } finally { setBusy(false); }
+  }, []);
   useEffect(() => { go(); }, [go]);
   const passed = r?.checks.filter((c) => c.ok).length ?? 0;
+  const done = r?.checks.filter((c) => c.ok !== null).length ?? 0;
   return (
     <div className="mt-8">
       <div className="flex flex-wrap items-center gap-4">
-        <button type="button" className="btn btn-lemon" onClick={go} disabled={busy}><RefreshCw size={16} className={busy ? "animate-spin" : ""} aria-hidden /> Recheck from chain</button>
-        {r && <p className="mono text-[15px]">{passed} of {r.checks.length} checks pass · block {r.block ?? "-"} · {r.at}</p>}
+        <button type="button" className="btn btn-lemon" onClick={go} disabled={busy}><RefreshCw size={16} className={busy ? "animate-spin" : ""} aria-hidden /> {busy ? "Reading the chain" : "Recheck from chain"}</button>
+        {r && <p className="mono text-[15px]" aria-live="polite">{busy ? `${done} of ${r.checks.length} read` : `${passed} of ${r.checks.length} checks pass · block ${r.block ?? "-"} · ${r.at}`}</p>}
       </div>
       <ul className="mt-6 space-y-3">
         {r?.checks.map((c) => (
           <li key={c.id} className="card flex gap-4 p-5">
-            <span role="img" aria-label={c.ok ? "pass" : "fail"} className={`mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${c.ok ? "bg-[color:var(--signal)] text-white" : "bg-[color:var(--mayday)] text-white"}`}>{c.ok ? <Check size={15} /> : <X size={15} />}</span>
+            <span role="img" aria-label={c.ok === null ? "checking" : c.ok ? "pass" : "fail"} className={`mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white ${c.ok === null ? "bg-[color:var(--slate)]/40" : c.ok ? "bg-[color:var(--signal)]" : "bg-[color:var(--mayday)]"}`}>{c.ok === null ? <RefreshCw size={13} className="animate-spin motion-reduce:animate-none" /> : c.ok ? <Check size={15} /> : <X size={15} />}</span>
             <div className="min-w-0"><p className="font-semibold">{c.claim}</p><p className="mono mt-1 break-all text-[13px] text-[color:var(--slate)]">{c.detail}</p></div>
           </li>
         ))}

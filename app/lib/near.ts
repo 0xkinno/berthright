@@ -16,7 +16,7 @@ export async function rpc<T = any>(method: string, params: unknown, net: Net = N
     const url = list[(preferred + i) % list.length];
     try {
       const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 8000);
+      const t = setTimeout(() => ctrl.abort(), 5000);
       const res = await fetch(url, {
         method: "POST",
         headers: { "content-type": "application/json" },
