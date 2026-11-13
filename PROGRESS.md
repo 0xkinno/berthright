@@ -44,3 +44,15 @@ Updated at the end of every phase. Ticks mean done and verified.
 ## Self-judge (1 to 5, with evidence)
 
 Scored after deployment.
+
+## 13 Nov 2026, late afternoon
+
+Done:
+- Chartroom redesign (own theme, distinct from the reference site): plotting-sheet ground, night-watch hero deck of drawn plates, brass registration ticks; 80 of 80 page views clean.
+- `/berths`: the berth register, every berth NFT read from the House of Stake registry and drawn from chain state.
+- `/proof` runs its checks in parallel and fills in live (2.5 s, was a long spinner).
+- One real ITF case (SELIN, IMO 9033220) run end to end on testnet; owed wages covered.
+- Red team round 1 (`REDTEAM_LOG.md`): judge setup failure found and fixed; voyage 8 of 8 again on the live app.
+- `TASK.md` committed with every tick backed by evidence.
+
+Waiting on Kinnoski: crank secrets, one manual wallet pass, agent skills install, video, X post, form.

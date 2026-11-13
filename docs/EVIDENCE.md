@@ -84,7 +84,7 @@ Hand-over used for the last row: sign-off https://testnet.nearblocks.io/txns/26U
 
 ## Verify (13 Nov 2026, no keys)
 
-`npx tsx scripts/verify.ts`: **12 of 12 checks pass, from 141 transactions** (zero keys and matching
+`npx tsx scripts/verify.ts`: **22 of 22 checks pass, from 220 transactions** (13 Nov 2026, after the SELIN replay and a second judge voyage; a fresh clone with no keys gave 18 of 18 from 193 earlier the same day). Earlier: 12 of 12 from 141 (zero keys and matching
 code hashes on both contracts, every ship rebuilt from events equals the contract, books balance).
 `npx tsx scripts/verify.ts --tamper`: adds 1 base unit to one `funded` event, the rebuild of ship 0
 fails, **11 of 12, exit code 1**.
@@ -132,3 +132,16 @@ voyage complete: 8/8, 22 transaction links, page errors: 0
 ```
 
 Transactions from that run (in order): [1](https://testnet.nearblocks.io/txns/GK7PmbWAFkasQcbEaBSaUUxbf5sbgK3VMhDnLQK8PuXP), [2](https://testnet.nearblocks.io/txns/ENExyFqMEbMgi9sHuDuCWuhpDbi2sRfXgtWPpALiG9Wk), [3](https://testnet.nearblocks.io/txns/DE6MCZbyrgpG86pdz9mggaBarHdtYYnno7xKLKskghAo), [4](https://testnet.nearblocks.io/txns/3y3vzcKgpRWEWzDLEUfNn6yRMfXeHq19BE8HMgoAemqq), [5](https://testnet.nearblocks.io/txns/7y96Me1DEoUMFCppdUzbNpM5yiHQui6GNRf3HF3kCXGL), [6](https://testnet.nearblocks.io/txns/9gmsEqb5BZmMwUfcvprbT4UnriYN9VdHKTBGnh7yyDFn), [7](https://testnet.nearblocks.io/txns/EtBTVtC1HF2eyJyQNM2YUA4giDJ71FJRsBCM3JMpC54L), [8](https://testnet.nearblocks.io/txns/2SfjadXd4os8ZS13ZUtrZNrmiriVko4ejTawrzPLEjp4), [9](https://testnet.nearblocks.io/txns/3n57wKThD4JkyESSXSGcikkspTfksDzncrfNG2nyZi4S), [10](https://testnet.nearblocks.io/txns/GxrWzxnF68g84bBpmecCD7amt3nB67MJxNPwnJgG8Cy9), [11](https://testnet.nearblocks.io/txns/84jLGiMuSRg4trxYWYUTDM5zSsKpEWw8RogujodXa6fV), [12](https://testnet.nearblocks.io/txns/DhbeoSWqEuXtYQTnTbuTYSAdjKK41BFNitNNWhDpVUKp), [13](https://testnet.nearblocks.io/txns/7wGej81R7zWunzr6uv5T9c3M18hnyU7M7J34KPiDBp8h), [14](https://testnet.nearblocks.io/txns/5KPmrKPma1XguF7wb3wpR41CD2iSwTkpbxVDSgFrvDD8), [15](https://testnet.nearblocks.io/txns/8N3qzuqeeCjqPVhSKxpZwHh7iDUwkw3im6T6PeBZwcAW), [16](https://testnet.nearblocks.io/txns/5vyDBpqwybzt5LmgKbN4JAPdQ5CRDw7GnNAKsbsUfEBg), [17](https://testnet.nearblocks.io/txns/GqjV8wFPtUgvB5jbbeju14Zvgt8SB8E5UYWZ2bypA8Jm), [18](https://testnet.nearblocks.io/txns/6dBYfM6jxzSteXLmzCFYNb4DntCXAdAdMngHHB5QuhuW), [19](https://testnet.nearblocks.io/txns/AX41JhypxqEH9sYyVEu3HK9DAw4EDBrT1LBfsEEwMdE7), [20](https://testnet.nearblocks.io/txns/4YCMVFV7BKniL4euEXu5Cmoexqb7eb7ewqDkRMbhAuxw), [21](https://testnet.nearblocks.io/txns/9Fec6TWX2NTn9DwQRHfQvPYP73a7HtMRQENaeBV3vrdd), [22](https://testnet.nearblocks.io/txns/5rcL5UQvcCYjybGKmMWMHwFnp5pqtohmmGiG4mGq1EWo)
+
+
+## Real ITF case run on testnet (13 Nov 2026)
+
+SELIN (IMO 9033220, Sharjah, UAE; 2 seafarers, 3 months owed per the ITF list) replayed by
+`scripts/replay-case.ts` on a fast clock: berths minted by the trust, reserve only, no wages paid, abandonment
+declared after 90 unpaid ship days, both guarantees released. Each crew member was owed 1,170 tUSD and received
+1,610 tUSD. Every transaction is in `data/runs.json` (`case_replay`) and in [REDTEAM_LOG.md](../REDTEAM_LOG.md).
+
+## Judge voyage after the Chartroom redesign (13 Nov 2026)
+
+`BASE=https://berthright-app.vercel.app node e2e/judge.mjs`: first attempt failed at setup (trust balance,
+see REDTEAM_LOG round 1); after the fix, 8 of 8 checks, 22 transactions, 0 page errors.

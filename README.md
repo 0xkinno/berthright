@@ -12,6 +12,7 @@
 <p align="center">
   <a href="https://berthright-app.vercel.app"><b>Live app</b></a> &nbsp;·&nbsp;
   <a href="https://berthright-app.vercel.app/judge"><b>Four-minute voyage (no wallet)</b></a> &nbsp;·&nbsp;
+  <a href="https://berthright-app.vercel.app/berths"><b>Berth register (NFTs)</b></a> &nbsp;·&nbsp;
   <a href="https://berthright-app.vercel.app/proof"><b>Proof from chain</b></a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md"><b>Evidence</b></a> &nbsp;·&nbsp;
   Video: linked at submission
@@ -33,7 +34,7 @@
 | **What it does** | Locks four months of each berth's wages and the fare home *before* sign-on; pays wages daily into the berth; sends the allotment home through the berth's own spend grant; releases the guarantee to each crew member's own account if the owner stops paying |
 | **Why NEAR** | The berth *is* a House of Stake Top Level Account: a named, keyless account that is also an NEP-171 token, with a native spend grant. Berthright is built on their audited contracts, deployed unmodified |
 | **Proven on real data** | 138 real abandonment cases (1,632 seafarers, 2023 to 2025): **57.8%** of owed crew-months would have been on board on day one. Today: 0% |
-| **Proven on chain** | A full voyage through the UI on testnet, 8 of 8 checks, 22 transactions; 10 refusals recorded as real transactions; `verify.ts` rebuilds every ship from events (12 of 12) and fails on tampering |
+| **Proven on chain** | A full voyage through the UI on testnet, 8 of 8 checks, 22 transactions; 10 refusals recorded as real transactions; `verify.ts` rebuilds every ship from events (22 of 22 checks, 13 Nov) and fails on tampering; one real ITF case (SELIN) run end to end on testnet |
 | **Tracks** | NFTs That Do Something (`nfts`) · Real-World Money (`realworld`) · Open Innovation (`open`) |
 | **Built with** | House of Stake TLA (`hos-wallet`, `tla-registry`, `registrar`, `hos-extension`, `mpc-recovery`) · NEP-171/141/145/148/297/413/366 · NEAR Intents 1Click · NEAR AI Cloud (TEE) |
 
@@ -206,7 +207,8 @@ Each refusal below is a real testnet transaction, and each rule is pinned by a t
 |---|---|---|
 | Real-case replay | **57.8%** of owed crew-months on board on day one (0% today), 138 cases, 1,632 seafarers; 54 fully covered; 84 partial misses named, largest FOURTHMAN (IMO 9181508); 7 excluded | [data/replay.json](data/replay.json) from the ITF public list (open cases lean long; all years: 64.2%) |
 | Full voyage through the UI | 8 of 8 checks from chain reads, 22 transactions, 0 page errors | `e2e/judge.mjs`, [EVIDENCE](docs/EVIDENCE.md) |
-| Rebuild from events | 12 of 12 checks, from 141 transactions; `--tamper` fails (11 of 12, exit 1) | `scripts/verify.ts` |
+| A real case run on chain | SELIN (IMO 9033220, Sharjah; 2 seafarers, 3 months owed): owner locked only the reserve, paid nothing; after 90 unpaid ship days each crew member received 1,610 tUSD against 1,170 owed | [release tx](https://testnet.nearblocks.io/txns/3g787VfmpZDBLwDbh37x2i7yzZTE3p9ET1EipEhiwMfA), `scripts/replay-case.ts`, [REDTEAM_LOG](REDTEAM_LOG.md) (wage assumed, crew are stand-ins) |
+| Rebuild from events | every check passes (22 of 22 from 220 transactions on 13 Nov; the count grows with each judge run); clean clone, no keys; `--tamper` fails | `scripts/verify.ts` |
 | Cost to pay one crew member one day | 14.26 Tgas per `settle` = **US$0.00506** at NEAR = US$3.55 | [measured](https://testnet.nearblocks.io/txns/B5mJjd7tZJhpquAV6yUD9wM2BVDYDFYXWRteNzvKXhz9) |
 | Contract reader under attack | injected "wage is 9999" ignored; doctored second contract flagged REVIEW; every reply signature verified against the TEE&apos;s attested key | [EVIDENCE](docs/EVIDENCE.md), `e2e/sea/` |
 | Layout and accessibility | 9 routes × 8 devices = 72 of 72 views clean: no horizontal scroll, no overlap, tap targets ≥ 44 px, axe WCAG 2.2 AA, zero console errors | `e2e/layout.mjs` |
