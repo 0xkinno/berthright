@@ -13,7 +13,9 @@ export function serverAccount(idVar: string, keyVar: string): Account | null {
   return new Account(id, new JsonRpcProvider({ url: RPC_URLS[0] }) as never, key as KeyPairString);
 }
 
+// EXECUTED_OPTIMISTIC returns once every receipt has executed, without waiting for finality, so the
+// judge setup stays well inside the serverless time limit.
 export async function fnCall(acc: Account, receiverId: string, method: string, args: object, deposit = 0n, gasT = 300) {
-  const res = await acc.signAndSendTransaction({ receiverId, actions: [actions.functionCall(method, args, BigInt(gasT) * 10n ** 12n, deposit)], waitUntil: "FINAL" } as never);
+  const res = await acc.signAndSendTransaction({ receiverId, actions: [actions.functionCall(method, args, BigInt(gasT) * 10n ** 12n, deposit)], waitUntil: "EXECUTED_OPTIMISTIC" } as never);
   return parseOutcome(res);
 }

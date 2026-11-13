@@ -103,7 +103,7 @@ export function JudgeRun() {
   const start = () => run(0, async () => {
     const [o, c, f] = await Promise.all([newBrowserKey(), newBrowserKey(), newBrowserKey()]);
     const res = await fetch("/api/judge", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ownerPk: o.publicKey, crewPk: c.publicKey, familyPk: f.publicKey }) });
-    const j = await res.json();
+    const j = await res.json().catch(() => ({ ok: false, reason: "Testnet was slow to answer the setup. Press start again; a fresh set of keys is made each time." }));
     Object.entries(j.txs ?? {}).forEach(([k, h]) => add(0, { label: k.replace(/_/g, " "), hash: String(h), ok: true, at: new Date().toISOString() }));
     if (!j.ok) throw new Error(j.reason);
     const next: Judge = { owner: { accountId: j.accounts.owner, secretKey: o.secretKey }, crew: { accountId: j.accounts.crew, secretKey: c.secretKey }, family: { accountId: j.accounts.family, secretKey: f.secretKey }, berth: j.berth, step: 1, seaHash: await sha256hex(SAMPLE_SEA_TEXT) };
