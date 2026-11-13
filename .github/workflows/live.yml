@@ -1,0 +1,20 @@
+name: Live checks
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Zero access keys, code hashes, ships rebuilt from events (no keys)
+        run: npx tsx scripts/verify.ts
+      - name: The live app answers
+        run: npx tsx scripts/reachability.ts

@@ -128,6 +128,18 @@ async function main() {
   if (!(await hasState(allotment.accountId, "stats"))) await must(allotment, allotment.accountId, "new", { registry: registry.accountId }, 0n, "allotment_new");
   await call(root, tusd.accountId, "storage_deposit", { account_id: portage.accountId, registration_only: true }, { deposit: milli(0.00125) });
 
+  log("\n== seal: delete the deployer keys (nobody can upgrade or drain these contracts) ==");
+  if (process.env.SEAL !== "0") {
+    for (const c of [portage, allotment, tusd]) {
+      const keys: any[] = await accessKeys(c.accountId);
+      for (const k of keys) {
+        const r: any = await c.deleteKey(k.public_key);
+        txs[`seal_${c.accountId.split(".")[0]}`] = r?.transaction?.hash ?? r?.transaction_outcome?.id ?? "";
+        log(`  deleted ${k.public_key} on ${c.accountId}`);
+      }
+    }
+  }
+
   const out = {
     network: "testnet",
     root: ROOT,

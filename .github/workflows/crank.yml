@@ -1,0 +1,29 @@
+name: Crank
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: crank
+  cancel-in-progress: false
+jobs:
+  crank:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Settle wages, run allotments, declare and release where due
+        env:
+          CRANK_ACCOUNT_ID: ${{ secrets.CRANK_ACCOUNT_ID }}
+          CRANK_PRIVATE_KEY: ${{ secrets.CRANK_PRIVATE_KEY }}
+          CRANK_ALLOTMENT_KEY: ${{ secrets.CRANK_ALLOTMENT_KEY }}
+        run: npx tsx scripts/crank.ts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: crank-${{ github.run_id }}
+          path: data/crank-last.json

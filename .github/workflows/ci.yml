@@ -1,0 +1,46 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.97.1
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - name: Unit and property tests (10,000 cases each)
+        run: cargo test --profile proptest -p portage -p allotment -p tusd --lib
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Copy rules (no em or en dash, no emoji, no hype words)
+        run: npx tsx scripts/check-copy.ts
+      - name: Private word list (hashes only)
+        run: npx tsx scripts/check-names.ts
+      - name: FACTS.json matches its sources
+        run: npx tsx scripts/facts.ts --check
+      - name: Scripts typecheck
+        run: npx tsc -p tsconfig.json
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx next build
