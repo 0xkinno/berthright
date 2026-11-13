@@ -1,0 +1,44 @@
+# Progress
+
+Updated at the end of every phase. Ticks mean done and verified.
+
+## 13 Nov 2026
+
+**Phase 0 Ground**
+- [x] Repo, `.gitignore` (reference/, .env*, target/, node_modules/), identity 0xkinno, commit-msg and pre-commit hooks, `core.hooksPath`
+- [x] `.claude/settings.json` with empty attribution; `.github/workflows/no-claude-attribution.yml`
+- [x] `reference/` populated (HoS repo, rules, instruction, lane map, private word list); `docs/.wordlist.sha256`; `scripts/check-names.ts`
+- [x] `RULES_EXTRACT.md`, `SPONSOR_INTEL.md`, `docs/MOMENT.md` (every link opened, figures quoted), `docs/THESIS.md`, `docs/RISK.md`, `docs/THREAT_MODEL.md`
+- [x] LICENSE (MIT), SECURITY.md
+- [ ] `npx skills add near/agent-skills` (interactive installer; the official docs were read directly instead)
+- [ ] Vercel deployment at the final URL (needs Kinnoski's Vercel project)
+
+**Phase 1 The berth exists**
+- [x] Testnet root `berthright.testnet` created through the faucet service (10 NEAR)
+- [x] HoS `tla-contracts` pinned at `d85860a`; built; wasm hashes in `fleet/hos-wasm.sha256`
+- [x] Fleet deploy script mirroring HoS `testnet_deploy.rs` (`fleet/deploy-testnet.ts`), idempotent
+- [ ] Fleet on testnet (needs about 70 more testnet NEAR on the root)
+- [x] In the sandbox: berths issued, `nft_item_info` and `nft_token` agree, owner drives the berth, AddKey refused
+
+**Phase 2 Transfer detail**
+- [x] Sandbox tests: NEAR swept to seller, tokens stay and pass, grants wiped, failed sweep leaves NEAR, allowlisted token blocks the transfer
+- [x] `docs/FINDINGS.md`, `docs/FRICTION.md`
+
+**Phase 3 and 4 Contracts**
+- [x] `tusd` with capped faucet; `portage` with every method, refusal code and event; `allotment`
+- [x] All named unit tests; property tests at 10,000 cases; sandbox tests with the real fleet, including the full voyage
+- [ ] Deployed, sealed, code hashes recorded (waiting on testnet NEAR)
+
+**Phase 5 Proof harness**
+- [x] `scripts/census.ts`, `data/cases.csv` (245 cases, source URL and date per row); replay report
+- [x] `scripts/crank.ts`, `crank.yml`; `scripts/verify.ts` with `--tamper`; `live.yml`; `scripts/facts.ts` with `--check` in CI; fault switch
+- [ ] Break campaign on testnet, cost per wage day, one unattended crank run, on-chain replay of one real case (after deployment)
+
+**Phase 6 and 7 App and design**
+- [x] All routes built (`next build` green); RPC failover; block-pinned berth reads; near-connect; browser signer; judge API with caps and kill switch; NEP-366 relayer; NEP-413 gated notices; portage bill CSV and PDF; live Intents quotes
+- [x] Design system: tokens, self-hosted Zodiak, General Sans, Geist Mono; mark and favicon; hero ship with lights on board; glow cards; capsule nav with power-icon disconnect
+- [ ] Playwright suite on 8 viewports, axe, guided tour; manual pass with a real wallet
+
+## Self-judge (1 to 5, with evidence)
+
+Scored after deployment.

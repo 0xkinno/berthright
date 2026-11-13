@@ -1,6 +1,7 @@
 reference/
 .env
 .env*
+!app/.env.example
 !.env.example
 target/
 node_modules/
