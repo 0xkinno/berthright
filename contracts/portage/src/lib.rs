@@ -135,7 +135,7 @@ enum Key {
     History,
 }
 
-#[near(contract_state)]
+#[near(contract_state, contract_metadata(version = "1.0.0", link = "https://github.com/0xkinno/berthright", standard(standard = "nep297", version = "1.0.0"), standard(standard = "berthright", version = "1.0.0")))]
 #[derive(PanicOnDefault)]
 pub struct Portage {
     pub registry: AccountId,

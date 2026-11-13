@@ -32,7 +32,7 @@ const ONE_YOCTO: NearToken = NearToken::from_yoctonear(1);
 const STORAGE_DEPOSIT: NearToken = NearToken::from_micronear(1_250);
 /// The contract keeps a small NEAR float for the 1 yocto each wallet call needs and for token
 /// registration of receivers. Below this it refuses to run, in plain words.
-pub const FLOAT_FLOOR: NearToken = NearToken::from_millinear(100);
+pub const FLOAT_FLOOR: NearToken = NearToken::from_millinear(50);
 pub const SET_DEPOSIT: NearToken = NearToken::from_millinear(10);
 
 #[near(serializers = [json])]
@@ -120,13 +120,20 @@ enum Key {
     Allotments,
 }
 
-#[near(contract_state)]
+#[near(contract_state, contract_metadata(version = "1.0.0", link = "https://github.com/0xkinno/berthright", standard(standard = "nep297", version = "1.0.0"), standard(standard = "berthright", version = "1.0.0")))]
 #[derive(PanicOnDefault)]
 pub struct AllotmentContract {
     pub registry: AccountId,
     allotments: LookupMap<AccountId, Allotment>,
     pub total_sent: u128,
     pub total_runs: u64,
+}
+
+/// NEAR the contract can actually spend: its balance minus what storage locks.
+fn liquid() -> u128 {
+    env::account_balance()
+        .as_yoctonear()
+        .saturating_sub(env::storage_byte_cost().as_yoctonear() * env::storage_usage() as u128)
 }
 
 fn emit(event: &str, data: serde_json::Value) {
@@ -226,7 +233,7 @@ impl AllotmentContract {
         if now < a.next_due_ns.0 {
             env::panic_str(&format!("E_NOT_DUE {}", json!({ "seconds_left": (a.next_due_ns.0 - now).div_ceil(NS) })));
         }
-        require!(env::account_balance() >= FLOAT_FLOOR, "E_FLOAT_TOO_LOW");
+        require!(liquid() >= FLOAT_FLOOR.as_yoctonear(), "E_FLOAT_TOO_LOW");
         let token = a.token.clone();
         let receiver = a.receiver.clone();
         self.allotments.get_mut(&berth).unwrap().running = true;
@@ -303,7 +310,7 @@ impl AllotmentContract {
 
     pub fn stats(&self) -> serde_json::Value {
         json!({ "total_sent": U128(self.total_sent), "total_runs": U64(self.total_runs), "registry": self.registry,
-                "float_yocto": U128(env::account_balance().as_yoctonear()), "float_floor_yocto": U128(FLOAT_FLOOR.as_yoctonear()) })
+                "float_yocto": U128(liquid()), "float_floor_yocto": U128(FLOAT_FLOOR.as_yoctonear()) })
     }
 
     /// The request this contract would send for `berth` right now, for anyone to inspect.
