@@ -18,3 +18,9 @@ lto = true
 debug = false
 panic = "abort"
 overflow-checks = true
+
+# Optimized but unwinding, for the 10,000-case property tests.
+[profile.proptest]
+inherits = "dev"
+opt-level = 3
+debug = false

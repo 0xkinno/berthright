@@ -1,0 +1,17 @@
+# Friction: what surprised us building on House of Stake TLAs
+
+Written for the House of Stake team. None of this is a vulnerability in their code; each item is a
+behaviour a product team needs to know before putting money in a leased name. HoS commit `d85860a`.
+
+| # | What we hit | Where | What we did |
+|---|---|---|---|
+| 1 | Token balances in a leased name change hands with the NFT; native NEAR does not. A buyer can inherit tokens the seller earned, and a seller can sweep NEAR a buyer prepaid into the name. | `hos-wallet/src/lib.rs:752-818` | Wages in a token only; sign off and empty the berth in the same approval as the hand-over. See FINDINGS 1 and 2. |
+| 2 | Whether tokens block a transfer depends on the registry's FT allowlist, a council setting the item cannot see. The same berth may transfer today and be refused tomorrow. | `tla-registry/src/nft.rs:127`, `asset_gate.rs` | Our hand-over flow empties the berth first, so it works either way. Test: `an_allowlisted_token_blocks_the_transfer_until_the_berth_is_empty`. |
+| 3 | The sweep at first transfer also takes the creation deposit the issuer paid at mint (0.2 NEAR in our fleet). An issuer that pre-funds names gives that NEAR to the first seller. | `hos-wallet/src/lib.rs:1080` | Noted for the trust's budget. |
+| 4 | `hos_payout_account` is not "the holder". In a licensee-governed business namespace a paid mint pins payout to the licensee, so a holder's sweep goes to the issuer. | `tla-registry/src/rental.rs` (`assert_accepting(&tla_id, &payout_account)`) | Berthright pays the account that signed on, recorded at sign-on, never the payout account. |
+| 5 | Licensee-governed business names cannot be resold (`BusinessSubNotResellable`) until the council enables resale. Crew change needs transfers. | `tla-registry/src/marketplace.rs:334` | The crew namespace is an Open namespace with the trust as a bound payment authority (`rent_sub_account_paid`). |
+| 6 | External promises from `w_execute_extension` are detached, so an extension cannot learn whether the inner `ft_transfer` succeeded (for example, receiver not registered on the token). | `hos-wallet/src/lib.rs:963` | The allotment registers the receiver on the token before asking the berth to pay. |
+| 7 | `bind_payment_authority_tla` refuses `max_mints = 0`; there is no "unlimited". | `tla-registry/src/admin.rs:349` | We bind with a cap of 1,000 on testnet. |
+| 8 | The local sandbox node insists on raising its open-file limit to 65535 and exits if it cannot (common in CI containers). | near-sandbox 2.13 | `fleet/shim/fdlimit.c`, a test-only preload shim. |
+| 9 | The wallet code is 432 KB; publishing it as a global contract costs about 43 NEAR on testnet, more than the testnet faucet gives one account. | `wallet-impl-deployer` | Funded the testnet root by hand. |
+| 10 | No SDK and no TypeScript types. The request JSON for `w_execute_extension` (tagged `action`/`payload`, base64 args, gas as a string) had to be read from the defuse-wallet source. | `near/intents` `crates/near/promise` | `contracts/allotment/src/lib.rs` `ft_transfer_request`, with a unit test of the exact shape. |
