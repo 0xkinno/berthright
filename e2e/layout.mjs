@@ -29,8 +29,9 @@ for (const [vpName, opts] of VIEWPORTS) {
     const errors = [];
     page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
     page.on("pageerror", (e) => errors.push(String(e)));
-    await page.goto(BASE + route, { waitUntil: "networkidle" });
-    await page.waitForTimeout(600);
+    await page.goto(BASE + route, { waitUntil: "load" });
+    await page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
+    await page.waitForTimeout(800);
     const r = await page.evaluate(() => {
       const out = { hscroll: document.documentElement.scrollWidth - window.innerWidth, overlaps: [], small: [] };
       const box = (s) => { const e = document.querySelector(s); if (!e) return null; const b = e.getBoundingClientRect(); return b.width && b.height ? b : null; };

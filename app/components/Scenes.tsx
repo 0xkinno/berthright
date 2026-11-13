@@ -1,4 +1,4 @@
-// Step scenes for "How it works": small clay dioramas on a felt ground, one idea each.
+// Step scenes for "How it works": small clay models laid on a plotting sheet, one idea each.
 const Defs = ({ id }: { id: string }) => (
   <defs>
     <filter id={`${id}-c`} x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="6" floodColor="#0f2a3a" floodOpacity="0.2" /></filter>
@@ -9,10 +9,12 @@ const Defs = ({ id }: { id: string }) => (
 );
 
 function Ground({ id, fill }: { id: string; fill: string }) {
+  const t = "#a9874a";
   return (
     <g>
-      <rect x="20" y="20" width="520" height="380" rx="34" fill={fill} filter={`url(#${id}-f)`} />
-      <rect x="34" y="34" width="492" height="352" rx="24" fill="none" stroke="#0f2a3a" strokeOpacity="0.2" strokeWidth="2.5" strokeDasharray="9 8" />
+      <rect x="20" y="20" width="520" height="380" rx="10" fill={fill} filter={`url(#${id}-f)`} />
+      <path d="M20 84H540M20 148H540M20 212H540M20 276H540M20 340H540M84 20V400M148 20V400M212 20V400M276 20V400M340 20V400M404 20V400M468 20V400" stroke="#0b1d29" strokeOpacity="0.06" />
+      <path d={`M34 52V34H52M508 34H526V52M526 368V386H508M52 386H34V368`} fill="none" stroke={t} strokeWidth="2.5" />
     </g>
   );
 }
@@ -35,7 +37,7 @@ export function ReserveScene() {
   return (
     <svg viewBox="0 0 560 420" className="h-auto w-full" role="img" aria-label="Four stacks of coins, one per month, locked inside a wage chest before anyone signs on">
       <Defs id={id} />
-      <Ground id={id} fill="#fbefc9" />
+      <Ground id={id} fill="#fbfdfc" />
       <g filter={`url(#${id}-c)`}>
         <rect x="96" y="210" width="300" height="130" rx="22" fill={`url(#${id}-chest)`} />
         <path d="M96 252 h300" stroke="#f2c14e" strokeWidth="9" />
@@ -61,7 +63,7 @@ export function WagesScene() {
   return (
     <svg viewBox="0 0 560 420" className="h-auto w-full" role="img" aria-label="A tide gauge filling as daily wages flow into the berth account">
       <Defs id={id} />
-      <Ground id={id} fill="#dcf1ee" />
+      <Ground id={id} fill="#fbfdfc" />
       <g filter={`url(#${id}-c)`}>
         <rect x="88" y="70" width="84" height="280" rx="18" fill="#fffbf3" />
         <rect x="98" y="200" width="64" height="140" rx="12" fill="#5fbdb8" />
@@ -89,7 +91,7 @@ export function AllotmentScene() {
   return (
     <svg viewBox="0 0 560 420" className="h-auto w-full" role="img" aria-label="An envelope inside a roped fence: the allotment can only go to the one house the crew member named">
       <Defs id={id} />
-      <Ground id={id} fill="#fde4d8" />
+      <Ground id={id} fill="#fbfdfc" />
       <g>
         {[90, 160, 230, 300].map((x) => <rect key={x} x={x} y="190" width="14" height="110" rx="6" fill="#9c6b3f" filter={`url(#${id}-c)`} />)}
         <path d="M97 210 Q 132 230 167 210 Q 202 230 237 210 Q 272 230 307 210" stroke="#d9b679" strokeWidth="9" fill="none" strokeLinecap="round" />
@@ -119,7 +121,7 @@ export function ReleaseScene() {
   return (
     <svg viewBox="0 0 560 420" className="h-auto w-full" role="img" aria-label="A flare goes up and the locked months flow straight to the seafarer">
       <Defs id={id} />
-      <Ground id={id} fill="#ddeffa" />
+      <Ground id={id} fill="#fbfdfc" />
       <path d="M150 300 C 160 220, 170 160, 182 92" stroke="#f39a78" strokeWidth="4" strokeDasharray="2 9" strokeLinecap="round" fill="none" />
       <g filter={`url(#${id}-c)`}>
         <circle cx="184" cy="84" r="22" fill="#c23d17" />

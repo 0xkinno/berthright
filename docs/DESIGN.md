@@ -1,58 +1,44 @@
-# Design
+# Design: Chartroom
 
-## Direction
+Berthright is a wage guarantee for people who work at sea, so the interface borrows from the two rooms on a ship where money and position are kept honest: the chartroom and the night watch.
 
-Editorial, warm, cinematic. A shipping almanac crossed with a glossy magazine: ash paper, deep hull
-ink, and one electric lemon-green accent per view that glows like a lit porthole at dusk. Not blue
-and white. Not dark mode by default.
+## Grounds
 
-## Tokens (`app/app/globals.css`)
-
-| Token | Hex | Role |
+| Ground | Use | Pattern |
 |---|---|---|
-| `--paper` | `#ECEBE4` | page background |
-| `--paper-hi` | `#F7F6F0` | cards, raised surfaces |
-| `--ink` | `#11140F` | text, dark panels |
-| `--slate` | `#4F564B` | secondary text (AA on paper) |
-| `--lemon` | `#D4F25C` | the one accent: CTAs, lit portholes |
-| `--lemon-glow` | `rgba(212,242,92,0.55)` | halos, cursor light |
-| `--signal` | `#00805F` | paid, observed, safe (AA on paper) |
-| `--mayday` | `#B23F19` | refusals, arrears, abandonment |
-| `--brass` | `#725A2C` | numerals, eyebrows (AA at 12 px) |
-| `--brass-soft` | `#A88A54` | hairlines and ornaments only |
+| Chart paper `#e8eeec` | every content page | a plotting sheet: 32 px minor grid, 160 px meridians, and three depth contours, fixed so content slides over the chart |
+| Night watch `#06121a` | hero, nav, footer, closing band | a 120 px grid with a cross at each intersection, a masthead-lamp glow at the top and a faint starboard-green glow low right |
 
-Two values were darkened from the brief (`slate`, `brass`, `signal`) so small text passes WCAG AA on
-paper. Lustre: an SVG `feTurbulence` grain at 5% and a soft lemon bloom top right, fixed behind
-everything.
+## Plates
+
+Panels are plates, not cards: a crisp sheet `#fbfdfc`, a 1 px hairline, 8 px radius, and four brass registration ticks (`#a9874a`) set 7 px inside each corner, the marks a chart printer uses to line up a sheet. The same ticks frame each "How it works" scene.
 
 ## Type
 
-Display: **Zodiak** 700 and 800 (Fontshare free licence). UI and body: **General Sans** 400 to 600
-(Fontshare). Figures and labels: **Geist Mono** (OFL), tabular numerals, uppercase eyebrows tracked
-+0.12em ("Nº 04 · ON BOARD"). All self-hosted woff2 in `app/public/fonts`. No Inter, Roboto, Arial.
+- Display: Fraunces at optical size 144, weight 480, tight tracking. Headlines read like the title block on an Admiralty chart.
+- Text: Instrument Sans.
+- Labels and numbers: IBM Plex Mono, uppercase with wide tracking for corner labels, tabular for money.
 
-## Signature elements
+## Colour
 
-- **Mark:** a brass porthole ring with a lemon crescent of light and a berth-plate chevron
-  (`app/components/Logo.tsx`, `app/public/icon.svg`).
-- **Capsule nav:** 64 px, radius 18, paper at 85% with blur, brass hairline. Connect button in ink
-  with a lemon arrow disc; when connected, an account chip (copy on click) and a power-icon
-  disconnect with the label "Disconnect". On phones: logo, Connect, menu sheet.
-- **Signature motion, used once:** "lights on board". Twelve portholes on the hero ship light one by
-  one while the counter climbs to four months. Reduced motion: all lit at once.
-- **Glow cards:** cursor-following lemon light (280 px), a border that brightens, a 2 px lift.
-  Off under `prefers-reduced-motion`.
-- **Ornaments:** latitude tick marks on section edges, "Nº 01" numbering in brass mono, ledger rules.
+| Token | Hex | Job |
+|---|---|---|
+| `--ink` | `#0b1d29` | text on chart paper |
+| `--flare` | `#c53f17` | the one action colour; buttons, refusal bullets, the active bar |
+| `--lemon` | `#f5b041` | masthead lamp: lit portholes, the highlighted words on night |
+| `--signal` / `--signal-bright` | `#0f7a5c` / `#3fbf9b` | paid, covered, observed |
+| `--mayday` | `#b23a14` | refusals and arrears |
+| `--brass` / `--brass-soft` | `#6e531c` / `#c9a865` | eyebrows, numerals, corner ticks |
+| `--mist` | `#a9bcc6` | secondary text on night (AA) |
 
-## Art (all drawn in code, no stock images)
+## The hero: a deck of plates
 
-Hero: a bulk carrier at anchor at dusk, layered flat SVG, accommodation block with twelve portholes,
-lemon waterline glow, anchor chain, two gulls, haze; background layers drift on scroll.
-Section art: a lock (reserve), tide gauge (daily wages), fenced envelope (allotment), flare
-(abandonment), portage bill page.
+Seven plates, all drawn in SVG, scatter round the headline: the berth (a porthole with the NFT name and a full reserve bar), the MV Kestrel at anchor, the daily wage ledger, the sea-service record with a signed-off stamp, the verify run, the allotment arcing home to Kochi, and the flare. They fly in on springs, drift with the pointer by depth, can be dragged and swing back, and each opens the page it depicts. Corner labels carry the anchorage position and a live ship's clock (UTC+4). On phones three plates fan above the headline.
 
-## States designed as carefully as success
+## Motion
 
-Refused (mayday border, decoded code and plain words, explorer link), waiting (spinner on the
-pressed button only), not deployed / RPC down (a plain sentence, never stale numbers), NOT OBSERVED
-and REVIEW for the contract reader.
+Springs for entry; a pointer parallax on the deck; scroll reveals; stacked sticky step plates; links whose underline is ruled in from the left like a course line. Every motion is skipped under `prefers-reduced-motion`.
+
+## Checked
+
+`e2e/layout.mjs`: 9 routes on 8 devices, 72 of 72 views with no horizontal scroll, no headline collisions, tap targets of at least 44 px, axe WCAG 2.2 AA clean and no console errors.

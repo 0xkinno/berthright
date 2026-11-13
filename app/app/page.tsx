@@ -1,10 +1,10 @@
 import Link from "next/link";
 import facts from "@/lib/generated/facts.json";
 import runs from "@/lib/generated/runs.json";
-import { HarborArt } from "@/components/HarborArt";
-import { RopeUnderline } from "@/components/Rope";
+import { HeroDeck } from "@/components/HeroDeck";
+import { ShipClock } from "@/components/ShipClock";
 import { HeroLive } from "@/components/HeroLive";
-import { Reveal, RevealItem, HeroPatch } from "@/components/Reveal";
+import { Reveal, RevealItem } from "@/components/Reveal";
 import { Anatomy } from "@/components/Anatomy";
 import { LiveStats } from "@/components/LiveStats";
 import { ReserveScene, WagesScene, AllotmentScene, ReleaseScene } from "@/components/Scenes";
@@ -46,30 +46,25 @@ export default function Home() {
   ];
   return (
     <div className="-mt-24 sm:-mt-28">
-      <section aria-labelledby="hero-title" className="relative">
-        <div className="relative h-[min(56vw,660px)] min-h-[380px] overflow-hidden">
-          <HarborArt className="absolute left-1/2 top-0 h-full w-auto max-w-none -translate-x-[60%] sm:-translate-x-[52%] lg:left-0 lg:w-full lg:translate-x-0" />
-          <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[color:var(--paper)]/40" />
+      <HeroDeck
+        footer={<>
+          <span className="corner-label hidden xl:inline">25°20′N 56°22′E · Khor Fakkan</span>
+          <span className="hidden xl:inline"><HeroLive tone="night" /></span>
+          <ShipClock className="corner-label hidden xl:inline" />
+        </>}
+      >
+        <span className="tag">NEAR HACKATHON · NFTs that do something</span>
+        <h1 id="hero-title" className="display mt-5 text-[44px] leading-[0.98] text-white sm:text-[64px] xl:text-[clamp(52px,4.6vw,76px)]">
+          Four months of wages, already <em className="font-[inherit] not-italic text-[color:var(--lemon)]">on board.</em>
+        </h1>
+        <p className="mx-auto mt-5 max-w-[520px] text-[17px] leading-relaxed text-[color:var(--mist)] sm:text-[18px]">Each berth on a ship is a NEAR account that is also an NFT. The shipowner fills it before anyone signs on. Only the crew member can empty it.</p>
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
+          <Link href="/judge" className="btn btn-lemon">Run the 4-minute voyage <ArrowRight size={18} aria-hidden /></Link>
+          <Link href="/crew" className="btn btn-outline">See a berth</Link>
         </div>
-        <HeroPatch className="patch relative z-10 mx-auto -mt-[clamp(56px,8vw,128px)] w-[calc(100%-24px)] max-w-[1344px] px-6 py-9 sm:w-[calc(100%-64px)] sm:px-12 sm:py-12 lg:px-16">
-          <div className="grid items-end gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-            <div>
-              <span className="tag">NEAR HACKATHON · NFTs that do something</span>
-              <h1 id="hero-title" className="display mt-5 text-[46px] leading-[0.98] sm:text-[72px] xl:text-[88px]">
-                Four months of wages, already <RopeUnderline>on board.</RopeUnderline>
-              </h1>
-            </div>
-            <div className="space-y-6">
-              <p className="text-[18px] leading-relaxed text-[color:var(--slate)] sm:text-[19px]">Each berth on a ship is a NEAR account that is also an NFT. The shipowner fills it before anyone signs on. Only the crew member can empty it.</p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/judge" className="btn btn-lemon">Run the 4-minute voyage <ArrowRight size={18} aria-hidden /></Link>
-                <Link href="/crew" className="btn btn-outline">See a berth</Link>
-              </div>
-              <HeroLive />
-            </div>
-          </div>
-        </HeroPatch>
-      </section>
+        <p className="corner-label mt-6">Drag a plate · click to open</p>
+        <div className="mt-4 xl:hidden"><HeroLive tone="night" /></div>
+      </HeroDeck>
 
       <section className="mx-auto max-w-[1344px] px-4 pt-20 sm:px-8 sm:pt-28" aria-labelledby="moment">
         <Heading n="01" kicker="The moment" title={<span id="moment">Day 74 at anchor off Khor Fakkan.</span>} />
@@ -102,7 +97,7 @@ export default function Home() {
           {STEPS.map((s, i) => (
             <article key={s.n} className={`patch ${s.tint} grid items-center gap-8 px-6 py-8 sm:px-10 sm:py-10 lg:min-h-[min(560px,calc(100svh-140px))] lg:grid-cols-[1fr_1.1fr] lg:gap-14 lg:px-14 lg:motion-safe:sticky ${i < STEPS.length - 1 ? "mb-8 lg:motion-safe:mb-[24svh]" : "mb-2"}`} style={{ top: `${92 + i * 16}px` }}>
               <div>
-                <div className="flex items-center gap-3"><span className="tag !bg-[color:var(--paper-hi)]">{s.n}</span><span className="eyebrow">{s.k}</span></div>
+                <div className="flex items-baseline gap-4"><span className="display text-[64px] leading-none text-[color:var(--flare)] sm:text-[84px]">{s.n}</span><span className="eyebrow">{s.k}</span></div>
                 <h3 className="display mt-5 text-[32px] leading-[1.05] sm:text-[44px]">{s.h}</h3>
                 <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-[color:var(--slate)] sm:text-[18px]">{s.p}</p>
               </div>
@@ -121,7 +116,7 @@ export default function Home() {
         <Heading n="04" kicker="Proof" title="Checked against real cases and the live chain." />
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
           <Reveal className="patch tint-kelp p-8 sm:p-10">
-            <span className="tag !bg-[color:var(--paper-hi)]">Replay · {r?.window}</span>
+            <span className="tag">Replay · {r?.window}</span>
             <p className="display mt-5 text-[84px] leading-none sm:text-[104px]">{r?.share_on_board_pct}%</p>
             <p className="mt-4 text-[18px] leading-relaxed">of the wages owed in {r?.cases_replayed} real abandonment cases ({fmt(r?.seafarers ?? 0)} seafarers) would already have been on board on the day abandonment began. Today that figure is 0%.</p>
             <p className="mt-3 text-[15px] text-[color:var(--slate)]">{r?.cases_partial_miss} cases owed more than four months and are named as partial misses; {r?.cases_excluded_missing_data} were excluded for missing data. Source: ITF abandonment list, retrieved {r?.retrieved}. Counted in crew-months.</p>
@@ -176,16 +171,16 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-[1344px] px-4 pt-24 sm:px-8 sm:pt-32">
-        <Reveal className="patch relative overflow-hidden !bg-[color:var(--ink)] px-8 py-14 text-[color:var(--paper-hi)] before:!border-[rgba(200,178,138,0.45)] sm:px-14">
+        <Reveal className="night relative overflow-hidden rounded-[8px] px-8 py-14 sm:px-14">
           <div className="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
             <div>
               <span className="tag">Four minutes · no wallet</span>
               <h2 className="display mt-5 text-[38px] leading-[1.02] sm:text-[56px]">Sail the whole voyage yourself.</h2>
-              <p className="mt-4 max-w-xl text-[17px] text-[#d8d2c4]">Your browser makes three keys. A real House of Stake berth is issued to your crew account. Watch a sign-on refused, wages land, the allotment go home, and the guarantee released, all on NEAR testnet.</p>
+              <p className="mt-4 max-w-xl text-[17px] text-[color:var(--mist)]">Your browser makes three keys. A real House of Stake berth is issued to your crew account. Watch a sign-on refused, wages land, the allotment go home, and the guarantee released, all on NEAR testnet.</p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link href="/judge" className="btn btn-lemon">Start the voyage <ArrowRight size={18} aria-hidden /></Link>
-              <Link href="/proof" className="btn border-2 border-[color:var(--paper-hi)] text-[color:var(--paper-hi)] hover:bg-[color:var(--paper-hi)] hover:text-[color:var(--ink)]">Proof from chain</Link>
+              <Link href="/proof" className="btn btn-outline">Proof from chain</Link>
             </div>
           </div>
         </Reveal>
