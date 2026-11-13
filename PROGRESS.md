@@ -37,7 +37,9 @@ Updated at the end of every phase. Ticks mean done and verified.
 **Phase 6 and 7 App and design**
 - [x] All routes built (`next build` green); RPC failover; block-pinned berth reads; near-connect; browser signer; judge API with caps and kill switch; NEP-366 relayer; NEP-413 gated notices; portage bill CSV and PDF; live Intents quotes
 - [x] Design system: tokens, self-hosted Zodiak, General Sans, Geist Mono; mark and favicon; hero ship with lights on board; glow cards; capsule nav with power-icon disconnect
-- [ ] Playwright suite on 8 viewports, axe, guided tour; manual pass with a real wallet
+- [x] Layout and axe suite (`e2e/layout.mjs`): 9 routes on 8 viewports, 72 of 72 page views clean (no horizontal scroll, no overlap, tap targets of at least 44 px, axe WCAG 2.2 AA, zero console errors)
+- [x] Guided tour on `/judge` (7 steps, spotlight, timeline, keyboard, `?tour=1&render=1`)
+- [ ] Playwright money-path flows on testnet and one manual pass with a real wallet (after deployment)
 
 ## Self-judge (1 to 5, with evidence)
 
