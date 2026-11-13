@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { IDS, DEPLOYED } from "@/lib/config";
 import { serverAccount, fnCall } from "@/lib/server-near";
+import { PublicKey } from "near-api-js";
+import { NEAR as NEAR_TOKEN } from "near-api-js/tokens";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -32,21 +34,25 @@ export async function POST(req: Request) {
   if (!keys.every((k) => typeof k === "string" && PK.test(k))) return NextResponse.json({ ok: false, reason: "Send three ed25519 public keys created in your browser." }, { status: 400 });
 
   const bal = BigInt((await sponsor.getBalance()) as unknown as string);
-  if (bal < milli(3)) return NextResponse.json({ ok: false, reason: "The judge sponsor account is out of testnet NEAR. The operator has been asked to top it up." }, { status: 503 });
+  if (bal < milli(1)) return NextResponse.json({ ok: false, reason: "The judge sponsor account is out of testnet NEAR. The operator has been asked to top it up." }, { status: 503 });
 
+  // Judge wallets are implicit accounts: the id is the browser key itself, so the sponsor only sends
+  // a small grant (no sub-account to create) and the server never holds a judge key.
+  const implicit = (pk: string) => Buffer.from(PublicKey.fromString(pk).data).toString("hex");
   const rand = Math.random().toString(36).slice(2, 8);
-  const base = sponsor.accountId;
-  const ids = { owner: `j${rand}-owner.${base}`, crew: `j${rand}-crew.${base}`, family: `j${rand}-family.${base}` };
+  const ids = { owner: implicit(keys[0]), crew: implicit(keys[1]), family: implicit(keys[2]) };
   const txs: Record<string, string> = {};
   try {
-    for (const [role, near, pk] of [["owner", 0.6, keys[0]], ["crew", 0.6, keys[1]], ["family", 0.15, keys[2]]] as const) {
-      const r: any = await sponsor.createSubAccount({ accountOrPrefix: ids[role], publicKey: pk, nearToTransfer: milli(near) } as never);
-      txs[`create_${role}`] = r?.transaction?.hash ?? r?.transaction_outcome?.id ?? "";
+    // Measured needs: owner 0.25 (ship and berth deposits, three registrations, about ten calls),
+    // crew 0.15 (registration, allotment deposit, grant), family 0.06 (anyone-may-call steps).
+    for (const [role, near] of [["owner", 0.25], ["crew", 0.15], ["family", 0.06]] as const) {
+      const r: any = await sponsor.transfer({ token: NEAR_TOKEN, amount: milli(near), receiverId: ids[role] } as never);
+      txs[`grant_${role}`] = r?.transaction?.hash ?? r?.transaction_outcome?.id ?? "";
     }
     const berthName = `j${rand}-ab2`;
     const minted = await fnCall(trust, IDS.registry, "rent_sub_account_paid", {
       tla_id: IDS.registrar, name: berthName, owner_account: ids.crew, payout_account: ids.crew, order_id: `judge-${rand}-${Date.now()}`,
-    }, milli(0.3));
+    }, milli(0.1));
     txs.issue_berth = minted.hash;
     if (!minted.ok) throw new Error(`berth issue failed: ${minted.failure}`);
     perIp.set(ip, { day, n: (mine?.day === day ? mine.n : 0) + 1 });

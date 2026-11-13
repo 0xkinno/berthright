@@ -13,7 +13,7 @@ const env = (k: string) => (typeof process !== "undefined" ? process.env[k] : un
 export const NETWORK = (env("NEXT_PUBLIC_NETWORK") ?? "testnet") as "testnet" | "mainnet";
 export const RPC_URLS = (env("NEXT_PUBLIC_RPC_URLS") ?? "https://test.rpc.fastnear.com,https://rpc.testnet.near.org").split(",");
 export const MAINNET_RPC_URLS = (env("NEXT_PUBLIC_MAINNET_RPC_URLS") ?? "https://free.rpc.fastnear.com,https://rpc.mainnet.near.org").split(",");
-export const APP_URL = env("NEXT_PUBLIC_APP_URL") ?? "https://berthright.vercel.app";
+export const APP_URL = env("NEXT_PUBLIC_APP_URL") ?? "https://berthright-app.vercel.app";
 
 export const IDS = {
   portage: env("NEXT_PUBLIC_PORTAGE_ID") ?? dep?.portage ?? "",

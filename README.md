@@ -1,7 +1,7 @@
 <p align="center"><img src="app/public/icon.svg" width="72" alt="Berthright"></p>
 <h1 align="center">Berthright</h1>
 <p align="center"><b>Four months of crew wages on board, without an insurance claim.</b></p>
-<p align="center"><a href="https://berthright.vercel.app">Live app</a> · <a href="https://berthright.vercel.app/judge">For judges: 4-minute run</a> · Video (link added at submission) · <a href="https://berthright.vercel.app/proof">Proof from chain</a></p>
+<p align="center"><a href="https://berthright-app.vercel.app">Live app</a> · <a href="https://berthright-app.vercel.app/judge">For judges: 4-minute run</a> · Video (link added at submission) · <a href="https://berthright-app.vercel.app/proof">Proof from chain</a></p>
 <p align="center"><a href="https://github.com/0xkinno/berthright/actions/workflows/ci.yml"><img src="https://github.com/0xkinno/berthright/actions/workflows/ci.yml/badge.svg" alt="CI"></a> <img src="https://img.shields.io/badge/licence-MIT-111" alt="MIT"></p>
 
 Each berth on a ship is a NEAR Top Level Account that is also an NFT. The shipowner must lock four
@@ -11,7 +11,7 @@ guarantee to each crew member's own account.
 
 | | |
 |---|---|
-| Live | https://berthright.vercel.app, no login; judge accounts are created in your browser |
+| Live | https://berthright-app.vercel.app, no login; judge wallets are created in your browser |
 | For judges | `/judge`: a 4-minute walk whose checklist ticks itself from chain |
 | Tracks | NFTs That Do Something (`nfts`), Real-World Money (`realworld`), Open Innovation (`open`) |
 | Built on | House of Stake Top Level Accounts (`hos-wallet`, `tla-registry`), NEP-171, NEP-141, NEP-413, NEP-366, NEAR Intents 1Click, NEAR AI Cloud |
@@ -62,7 +62,7 @@ guarantee released, berth frozen, hand-over requested.
 
 ## Try it in 4 minutes
 
-1. Open [/judge](https://berthright.vercel.app/judge), press **Start the 4-minute run**. See three
+1. Open [/judge](https://berthright-app.vercel.app/judge), press **Start the 4-minute run**. See three
    accounts created in your browser and a berth issued to your crew account.
 2. Press **Do it** on each step. See a refused sign-on (`E_RESERVE_NOT_ON_BOARD`), a sign-on, wages
    in the berth, an allotment at the family account, an early declaration refused with seconds
@@ -175,7 +175,7 @@ storage reserve is swept to the seller's payout account, while NEP-141 token bal
 account and pass to the buyer (unless the registry allowlists the token, in which case the transfer
 is refused until the name is empty). Grants and extensions are wiped. So Berthright pays wages in a
 token, signs off before every hand-over, and empties the berth in the same approval. Reproduced in
-a sandbox: [docs/FINDINGS.md](docs/FINDINGS.md), [/findings](https://berthright.vercel.app/findings).
+a sandbox: [docs/FINDINGS.md](docs/FINDINGS.md), [/findings](https://berthright-app.vercel.app/findings).
 
 ## Measured
 
@@ -202,11 +202,11 @@ a sandbox: [docs/FINDINGS.md](docs/FINDINGS.md), [/findings](https://berthright.
 
 | Piece | State |
 |---|---|
-| Wage chest, allotment, tUSD | live on testnet once deployed (see EVIDENCE.md) |
+| Wage chest, allotment, tUSD | live on testnet, keyless, code hashes equal the reproducible build (EVIDENCE.md) |
 | House of Stake TLA fleet | live on testnet: their code, unmodified, deployed by us under `berthright.testnet` (HoS's own mainnet fleet does not issue our crew namespace) |
 | Test dollars | `tUSD`, a test token with a faucet; on mainnet a ship would use USDC |
-| NEAR Intents | live mainnet quotes, `dry: true`; no swap is executed |
-| NEAR AI contract reader | built; live once a NEAR AI key is configured, otherwise the screen says so |
+| NEAR Intents | live mainnet 1Click quotes on a partner key, `dry: true`; no swap is executed |
+| NEAR AI contract reader | live: Qwen3-VL in a TEE, reply signatures verified against the attested signer; injected and doctored contracts land in REVIEW |
 | Relayer | built; live once a relayer key is configured |
 | Mainnet leased name read | designed; shown on `/proof` when `NEXT_PUBLIC_MAINNET_SAMPLE_LEASED_NAME` is set |
 

@@ -1,5 +1,5 @@
 // Checks that the deployed app and its machine-readable twins answer. Usage: APP_URL=... tsx scripts/reachability.ts
-const APP = process.env.APP_URL ?? "https://berthright.vercel.app";
+const APP = process.env.APP_URL ?? "https://berthright-app.vercel.app";
 const paths = ["/", "/judge", "/crew", "/proof", "/break", "/findings", "/api/status", "/api/stats", "/proof.json"];
 let bad = 0;
 for (const p of paths) {
