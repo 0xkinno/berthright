@@ -30,12 +30,13 @@ async function main() {
       }
       if (v.status === "Signed" && (BigInt(v.due_now) > 0n || BigInt(v.payable) > 0n)) {
         const r = await call(crank, d.portage, "settle", { berth: b }, { gasT: 150 });
-        out.push({ action: "settle", target: b, hash: r.hash, ok: r.ok, note: String(r.value ?? refusal(r.logs, r.failure) ?? "") });
+        out.push({ action: "settle", target: b, hash: r.hash, ok: r.ok, note: String(r.value ?? refusal(r.logs, r.failure) ?? r.failure ?? "") });
       }
       const a = await view<any>(d.allotment, "get_allotment", { berth: b }).catch(() => null);
       if (a && !a.stopped && !a.running && BigInt(a.next_due_ns) <= now()) {
-        const r = await call(crankAllot, d.allotment, "run", { berth: b }, { gasT: 250 });
-        out.push({ action: "allotment.run", target: b, hash: r.hash, ok: r.ok, note: String(r.value ?? refusal(r.logs, r.failure) ?? "") });
+        // 160 Tgas: a run burns about 16 Tgas; the key's 0.25 NEAR allowance must cover the prepaid gas reservation.
+        const r = await call(crankAllot, d.allotment, "run", { berth: b }, { gasT: 160 });
+        out.push({ action: "allotment.run", target: b, hash: r.hash, ok: r.ok, note: String(r.value ?? refusal(r.logs, r.failure) ?? r.failure ?? "") });
       }
     }
     if (s.status === "Active") {

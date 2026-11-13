@@ -17,3 +17,4 @@ fleet/shim/*.so
 app/AGENTS.md
 app/CLAUDE.md
 e2e/screens/
+TASK.md
