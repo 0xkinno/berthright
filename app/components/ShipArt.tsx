@@ -8,7 +8,7 @@ const PORTS = Array.from({ length: 12 }, (_, i) => ({ id: `port-${i + 1}`, cx: 3
 
 export function ShipArt({ months = 4 }: { months?: number }) {
   const reduce = useReducedMotion();
-  const [lit, setLit] = useState(reduce ? 12 : 0);
+  const [lit, setLit] = useState(0);
   const { scrollY } = useScroll();
   const far = useTransform(scrollY, [0, 600], [0, reduce ? 0 : 12]);
   const mid = useTransform(scrollY, [0, 600], [0, reduce ? 0 : 6]);

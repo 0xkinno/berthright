@@ -79,7 +79,7 @@ export function BerthPublic({ account }: { account: string }) {
       <section className="mt-10" aria-labelledby="record">
         <h2 id="record" className="display text-[32px] font-bold">Sea-service record</h2>
         <p className="mt-2 text-[15px] text-[color:var(--slate)]">Kept by the wage chest, last {64} entries. Every line is backed by a transaction on testnet.</p>
-        <div className="card mt-4 overflow-x-auto">
+        <div className="card mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Sea-service record table">
           <table className="w-full min-w-[640px] text-left text-[14px]">
             <thead><tr className="border-b border-[color:var(--hair)]"><th className="p-3">Event</th><th className="p-3">Holder</th><th className="p-3">From</th><th className="p-3">At</th><th className="p-3 text-right">Earned</th><th className="p-3 text-right">Paid</th></tr></thead>
             <tbody>

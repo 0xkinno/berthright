@@ -19,7 +19,7 @@ export default function Page() {
       <p className="eyebrow">For House of Stake engineers</p>
       <h1 className="display mt-3 text-[40px] font-extrabold leading-[1] sm:text-[56px]">What moves when a berth changes hands.</h1>
       <p className="mt-5 max-w-3xl text-[18px] text-[color:var(--slate)]">Read in source at commit <span className="mono">{HOS_COMMIT.slice(0, 10)}</span>, then reproduced in a local sandbox against the real House of Stake wasm. This is a design detail, not a vulnerability: it is why Berthright pays wages in a token, signs off before the hand-over, and empties the berth in the same approval.</p>
-      <div className="card mt-8 overflow-x-auto">
+      <div className="card mt-8 overflow-x-auto" tabIndex={0} role="region" aria-label="Findings table">
         <table className="w-full min-w-[820px] text-left text-[14px]">
           <thead><tr className="border-b border-[color:var(--hair)]"><th className="p-3">What happens</th><th className="p-3">Source</th><th className="p-3">Sandbox test and output</th></tr></thead>
           <tbody>

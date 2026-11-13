@@ -96,7 +96,7 @@ export function ShipView({ id }: { id: string }) {
             <button type="button" className="btn btn-outline" onClick={() => window.print()} disabled={!bill.length}><Printer size={16} aria-hidden /> PDF</button>
           </div>
         </div>
-        <div className="card mt-4 max-h-[70vh] overflow-auto">
+        <div className="card mt-4 max-h-[70vh] overflow-auto" tabIndex={0} role="region" aria-label="Portage bill table">
           <table className="w-full min-w-[860px] text-left text-[14px]">
             <thead className="sticky top-0 bg-[color:var(--paper-hi)]"><tr className="border-b border-[color:var(--hair)]">
               {["Berth", "Holder", "Status", "Days", "Daily wage", "Earned", "Paid to berth", "Paid to own account", "Awaiting", "Unpaid", "Reserve"].map((h) => <th key={h} className="p-3 font-semibold">{h}</th>)}

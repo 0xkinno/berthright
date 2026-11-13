@@ -16,3 +16,4 @@ fleet/.tla-contracts/
 fleet/shim/*.so
 app/AGENTS.md
 app/CLAUDE.md
+e2e/screens/

@@ -7,6 +7,7 @@ import { tx, SAMPLE_SEA_TEXT, sha256hex } from "@/lib/actions";
 import { tusd, short } from "@/lib/format";
 import { TxList, type TxRecord } from "@/components/TxList";
 import { useSession } from "@/components/Session";
+import { Tour } from "@/components/Tour";
 
 const WAGE = "10000000"; // 10 tUSD per ship day
 const ALLOWANCE = "200000000"; // 200 tUSD fare home
@@ -189,12 +190,24 @@ export function JudgeRun() {
   }
 
   return (
-    <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_320px]">
+    <>
+    <div className="mt-6 flex justify-end">
+      <Tour steps={[
+        { target: "#judge-title", title: "Arjun's berth, on chain", body: "Every step below is a real NEAR testnet transaction signed in this browser. People and ships are fictional; the ship runs on a fast clock." },
+        { target: "[data-tour=step-2]", title: "Sign-on refused", body: "Four months of wages and the fare home are not on board yet, so the contract refuses the crew member. The shipowner cannot skip this." },
+        { target: "[data-tour=step-3]", title: "Signed on", body: "The owner tops up, the crew member confirms the wage from their own contract, and 1,400 tUSD are locked for this berth." },
+        { target: "[data-tour=step-4]", title: "Wages arriving", body: "Wages accrue by the second. Anyone may settle them into the berth account, which is a House of Stake leased name with no keys." },
+        { target: "[data-tour=step-5]", title: "The allotment home", body: "A spend grant on the berth fences the allotment to one receiver and a budget. House of Stake's wallet enforces it, not our code." },
+        { target: "[data-tour=step-6]", title: "The owner stops paying", body: "The surplus runs out, wages become arrears, and the grace clock starts. Declaring early is refused with the seconds left." },
+        { target: "[data-tour=step-7]", title: "Released to the crew member", body: "After the grace, anyone declares abandonment and releases four months and the fare home to the crew member's own account. No claim, no insurer." },
+      ]} />
+    </div>
+    <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_320px]">
       <ol className="space-y-4">
         {STEPS.map((s, i) => {
           const active = i === step && !busy;
           return (
-            <li key={s.t} className={`card p-5 sm:p-6 ${i === step ? "ring-2 ring-[color:var(--ink)]" : ""}`}>
+            <li key={s.t} data-tour={`step-${i}`} className={`card p-5 sm:p-6 ${i === step ? "ring-2 ring-[color:var(--ink)]" : ""}`}>
               <div className="flex items-start gap-4">
                 <span aria-hidden className={`mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border ${done[i] ? "border-[color:var(--signal)] bg-[color:var(--signal)] text-white" : "border-[color:var(--hair)]"}`}>
                   {done[i] ? <Check size={16} /> : <span className="mono text-[13px]">{i + 1}</span>}
@@ -253,5 +266,6 @@ export function JudgeRun() {
         {error && <p role="alert" className="rounded-xl border border-[color:var(--mayday)] bg-[#f8ebe4] p-4 text-[15px] text-[color:var(--mayday)]">{error}</p>}
       </aside>
     </div>
+    </>
   );
 }

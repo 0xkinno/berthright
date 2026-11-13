@@ -18,7 +18,7 @@ export function ProofRunner() {
       <ul className="mt-6 space-y-3">
         {r?.checks.map((c) => (
           <li key={c.id} className="card flex gap-4 p-5">
-            <span aria-label={c.ok ? "pass" : "fail"} className={`mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${c.ok ? "bg-[color:var(--signal)] text-white" : "bg-[color:var(--mayday)] text-white"}`}>{c.ok ? <Check size={15} /> : <X size={15} />}</span>
+            <span role="img" aria-label={c.ok ? "pass" : "fail"} className={`mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${c.ok ? "bg-[color:var(--signal)] text-white" : "bg-[color:var(--mayday)] text-white"}`}>{c.ok ? <Check size={15} /> : <X size={15} />}</span>
             <div className="min-w-0"><p className="font-semibold">{c.claim}</p><p className="mono mt-1 break-all text-[13px] text-[color:var(--slate)]">{c.detail}</p></div>
           </li>
         ))}
