@@ -41,7 +41,7 @@ export function JudgeRun() {
   const [txs, setTxs] = useState<TxRecord[][]>(STEPS.map(() => []));
   const [error, setError] = useState<string | null>(null);
   const [facts, setFacts] = useState<Record<string, string>>({});
-  const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState<number | null>(null);
   const tick = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => { getKey<Judge>("judge").then((j) => j && setJudge(j)); }, []);
@@ -238,7 +238,7 @@ export function JudgeRun() {
               <li key={s.t} className="flex items-center gap-2">{done[i] ? <Check size={16} className="text-[color:var(--signal)]" aria-label="done" /> : <Circle size={16} className="text-[color:var(--hair)]" aria-label="not yet" />}{s.t}</li>
             ))}
           </ul>
-          <p className="mono mt-3 text-[12px] text-[color:var(--slate)]">Rechecked every 6 s · {new Date(now).toISOString().slice(11, 19)} UTC</p>
+          <p className="mono mt-3 text-[12px] text-[color:var(--slate)]">Rechecked every 6 s{now ? ` · ${new Date(now).toISOString().slice(11, 19)} UTC` : ""}</p>
         </div>
         {judge && (
           <div className="card space-y-2 p-5 text-[14px]">

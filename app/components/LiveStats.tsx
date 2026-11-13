@@ -20,11 +20,11 @@ export function LiveStats() {
   ];
   return (
     <div>
-      <dl className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+      <dl className="grid grid-cols-2 gap-4 sm:grid-cols-3">
         {items.map(([k, v]) => (
-          <div key={k} className="card p-4">
+          <div key={k} className="patch px-5 py-5">
             <dt className="eyebrow">{k}</dt>
-            <dd className="mono mt-2 text-[20px]">{v}</dd>
+            <dd className="display mt-2 text-[26px] leading-none">{v}</dd>
           </div>
         ))}
       </dl>

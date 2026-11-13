@@ -19,8 +19,8 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   return (
-    <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4 sm:px-6">
-      <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 rounded-[18px] border border-[color:var(--hair)] bg-[color:var(--paper-hi)]/85 px-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_10px_30px_-18px_rgba(17,20,15,0.5)] backdrop-blur-md sm:px-4">
+    <header className="fixed inset-x-0 top-0 z-50 px-2 sm:px-6">
+      <nav aria-label="Main" className="relative mx-auto flex h-16 max-w-[1344px] items-center justify-between gap-3 rounded-b-[22px] bg-[color:var(--paper-hi)]/95 px-3 shadow-[0_10px_28px_rgba(15,42,58,0.16)] backdrop-blur-md after:pointer-events-none after:absolute after:inset-x-[7px] after:bottom-[7px] after:top-0 after:rounded-b-[16px] after:border-[1.5px] after:border-t-0 after:border-dashed after:border-[color:var(--stitch)] after:content-[''] sm:px-6">
         <Link href="/" className="flex min-h-11 items-center gap-2.5 rounded-xl pr-2" aria-label="Berthright home">
           <Mark size={34} title="" />
           <Wordmark />
@@ -28,13 +28,13 @@ export function Nav() {
         <ul className="hidden items-center gap-1 lg:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
-              <Link href={l.href} className="inline-flex min-h-11 items-center rounded-xl px-3 text-[15px] font-medium text-[color:var(--ink)] hover:bg-black/5">{l.label}</Link>
+              <Link href={l.href} className="stitch-link inline-flex min-h-11 items-center px-3 text-[15px] font-medium text-[color:var(--ink)]">{l.label}</Link>
             </li>
           ))}
         </ul>
         <div className="flex items-center gap-2">
           <span className="pill hidden border border-[color:var(--hair)] bg-[color:var(--paper)] text-[color:var(--ink)] sm:inline-flex">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-[color:var(--lemon)] shadow-[0_0_0_2px_rgba(17,20,15,0.25)]" />
+            <span aria-hidden className="h-2 w-2 rounded-full bg-[color:var(--signal-bright)] shadow-[0_0_0_3px_rgba(63,191,155,0.25)]" />
             {NETWORK}
           </span>
           {wallet ? (
@@ -47,14 +47,14 @@ export function Nav() {
               >
                 {copied ? "Copied" : short(wallet.accountId, 18)} <Copy size={14} aria-hidden />
               </button>
-              <button type="button" onClick={disconnect} className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--ink)] text-[color:var(--lemon)]" aria-label="Disconnect" title="Disconnect">
+              <button type="button" onClick={disconnect} className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--flare)] text-[color:var(--paper-hi)]" aria-label="Disconnect" title="Disconnect">
                 <Power size={18} aria-hidden />
               </button>
             </>
           ) : (
-            <button type="button" onClick={connect} disabled={connecting} className="btn btn-ink !min-h-11 !rounded-xl !px-3 sm:!px-4">
+            <button type="button" onClick={connect} disabled={connecting} className="btn btn-lemon !min-h-11 !rounded-xl !px-3 sm:!px-4">
               <span>{connecting ? "Opening" : "Connect"}</span>
-              <span aria-hidden className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[color:var(--lemon)] text-[color:var(--ink)]"><ArrowRight size={14} /></span>
+              <ArrowRight size={15} aria-hidden />
             </button>
           )}
           <button type="button" className="inline-flex h-11 w-11 items-center justify-center rounded-xl lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -63,7 +63,7 @@ export function Nav() {
         </div>
       </nav>
       {open && (
-        <div className="mx-auto mt-2 max-w-6xl rounded-[18px] border border-[color:var(--hair)] bg-[color:var(--paper-hi)] p-2 shadow-xl lg:hidden">
+        <div className="patch mx-auto mt-2 max-w-6xl p-3 lg:hidden">
           <ul>
             {LINKS.map((l) => (
               <li key={l.href}>

@@ -15,11 +15,11 @@ export function Anatomy() {
   const p = PARTS.find((x) => x.id === active)!;
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[1.1fr_1fr]">
-      <div className="card relative overflow-hidden p-6 sm:p-8">
-        <div className="rounded-2xl border-2 border-[color:var(--ink)] bg-[color:var(--paper)] p-5 sm:p-6">
+      <div className="patch tint-sea relative overflow-hidden p-6 sm:p-9">
+        <div className="rounded-2xl border-2 border-[color:var(--ink)] bg-[color:var(--paper-hi)] p-5 shadow-[0_10px_24px_rgba(15,42,58,0.12)] sm:p-6">
           <div className="flex items-center justify-between gap-3">
             <span className="eyebrow">Berth plate</span>
-            <span className="pill bg-[color:var(--ink)] text-[color:var(--lemon)]">Signed on</span>
+            <span className="tag">Signed on</span>
           </div>
           <p className="mono mt-4 break-all text-[17px] sm:text-[20px]">ab2-kestrel<span className="text-[color:var(--slate)]">.crew.berthright.testnet</span></p>
           <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3" role="tablist" aria-label="Parts of a berth">
@@ -31,7 +31,7 @@ export function Anatomy() {
                   onMouseEnter={() => setActive(x.id)}
                   onFocus={() => setActive(x.id)}
                   onClick={() => setActive(x.id)}
-                  className={`min-h-12 w-full rounded-xl border px-3 text-left text-[14px] font-medium transition ${active === x.id ? "border-[color:var(--ink)] bg-[color:var(--lemon)]" : "border-[color:var(--hair)] bg-[color:var(--paper-hi)] hover:border-[color:var(--ink)]"}`}
+                  className={`min-h-12 w-full rounded-xl border px-3 text-left text-[14px] font-medium transition ${active === x.id ? "border-dashed border-[color:var(--ink)] bg-[color:var(--sand)]" : "border-[color:var(--hair)] bg-[color:var(--paper)] hover:border-[color:var(--ink)]"}`}
                 >
                   {x.label}
                 </button>
@@ -42,7 +42,7 @@ export function Anatomy() {
       </div>
       <div role="tabpanel" aria-live="polite" className="lg:pt-6">
         <p className="eyebrow">{p.where}</p>
-        <h3 className="display mt-2 text-[32px] font-bold leading-tight">{p.label}</h3>
+        <h3 className="display mt-2 text-[40px] leading-tight">{p.label}</h3>
         <p className="mt-4 text-[18px] leading-relaxed text-[color:var(--slate)]">{p.text}</p>
       </div>
     </div>
