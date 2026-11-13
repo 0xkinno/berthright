@@ -161,8 +161,8 @@ const PLATES: Plate[] = [
   { key: "berth", href: "/crew", label: "Open a crew berth", art: <BerthPlate />, rot: -2, depth: 1.3, xl: "xl:left-[50%] xl:top-[28%] xl:w-[29%]", small: "z-10 w-[52%] sm:w-[40%]", mobile: true },
   { key: "ledger", href: "/crew", label: "Wages settled into the berth every day", art: <LedgerPlate />, rot: 12, depth: 0.9, xl: "xl:left-[86%] xl:top-[54%] xl:w-[22%]", small: "w-[36%] sm:w-[30%]", mobile: true },
   { key: "proof", href: "/proof", label: "Recheck every claim from chain", art: <ProofPlate />, rot: -8, depth: 0.5, xl: "xl:left-[85%] xl:top-[23%] xl:w-[15%]", small: "", mobile: false },
-  { key: "allot", href: "/judge", label: "Send an allotment home in the four-minute voyage", art: <AllotmentPlate />, rot: -20, depth: 0.7, xl: "xl:left-[22%] xl:top-[84%] xl:w-[16%]", small: "", mobile: false },
-  { key: "flare", href: "/break", label: "Every refusal, as a real transaction", art: <FlarePlate />, rot: 17, depth: 0.7, xl: "xl:left-[78%] xl:top-[85%] xl:w-[16%]", small: "", mobile: false },
+  { key: "allot", href: "/judge", label: "Send an allotment home in the four-minute voyage", art: <AllotmentPlate />, rot: -20, depth: 0.7, xl: "xl:left-[24%] xl:top-[79%] xl:w-[14.5%]", small: "", mobile: false },
+  { key: "flare", href: "/break", label: "Every refusal, as a real transaction", art: <FlarePlate />, rot: 17, depth: 0.7, xl: "xl:left-[76%] xl:top-[79%] xl:w-[14.5%]", small: "", mobile: false },
 ];
 
 function PlateCard({ p, i, mx, my }: { p: Plate; i: number; mx: MotionValue<number>; my: MotionValue<number> }) {
