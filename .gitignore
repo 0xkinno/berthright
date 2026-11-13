@@ -1,0 +1,12 @@
+reference/
+.env
+.env*
+!.env.example
+target/
+node_modules/
+.next/
+.vercel/
+*.log
+.DS_Store
+e2e/test-results/
+e2e/playwright-report/

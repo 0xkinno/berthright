@@ -1,0 +1,22 @@
+{
+  "name": "berthright-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:copy": "tsx scripts/check-copy.ts",
+    "check:names": "tsx scripts/check-names.ts",
+    "verify": "tsx scripts/verify.ts",
+    "facts": "tsx scripts/facts.ts",
+    "crank": "tsx scripts/crank.ts",
+    "replay": "tsx scripts/replay.ts",
+    "reachability": "tsx scripts/reachability.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "near-api-js": "^7.5.3"
+  }
+}
