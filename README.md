@@ -1,104 +1,135 @@
-<p align="center"><img src="app/public/icon.svg" width="72" alt="Berthright"></p>
-<h1 align="center">Berthright</h1>
-<p align="center"><b>Four months of crew wages on board, without an insurance claim.</b></p>
-<p align="center"><a href="https://berthright-app.vercel.app">Live app</a> · <a href="https://berthright-app.vercel.app/judge">For judges: 4-minute run</a> · Video (link added at submission) · <a href="https://berthright-app.vercel.app/proof">Proof from chain</a></p>
-<p align="center"><a href="https://github.com/0xkinno/berthright/actions/workflows/ci.yml"><img src="https://github.com/0xkinno/berthright/actions/workflows/ci.yml/badge.svg" alt="CI"></a> <img src="https://img.shields.io/badge/licence-MIT-111" alt="MIT"></p>
+<p align="center">
+  <img src="app/public/icon.svg" width="76" alt="Berthright mark: a porthole with a lit crescent and a berth chevron">
+</p>
 
-Each berth on a ship is a NEAR Top Level Account that is also an NFT. The shipowner must lock four
-months of that berth's wages before anyone signs on. Wages flow into the berth every day. The
-allotment home pays itself. If the shipowner stops paying, anyone can trigger the release of the
-guarantee to each crew member's own account.
+<h1 align="center">Berthright</h1>
+
+<p align="center">
+  <b>Four months of crew wages on board, without an insurance claim.</b><br>
+  Each berth on a ship is a NEAR account that is also an NFT. The shipowner fills it before anyone signs on. Only the crew member can empty it.
+</p>
+
+<p align="center">
+  <a href="https://berthright-app.vercel.app"><b>Live app</b></a> &nbsp;·&nbsp;
+  <a href="https://berthright-app.vercel.app/judge"><b>Four-minute voyage (no wallet)</b></a> &nbsp;·&nbsp;
+  <a href="https://berthright-app.vercel.app/proof"><b>Proof from chain</b></a> &nbsp;·&nbsp;
+  <a href="docs/EVIDENCE.md"><b>Evidence</b></a> &nbsp;·&nbsp;
+  Video: linked at submission
+</p>
+
+<p align="center">
+  <a href="https://github.com/0xkinno/berthright/actions/workflows/ci.yml"><img src="https://github.com/0xkinno/berthright/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/NEAR-testnet%20live-0f2a3a" alt="NEAR testnet live">
+  <img src="https://img.shields.io/badge/licence-MIT-c23d17" alt="MIT">
+</p>
+
+<p align="center"><img src="docs/screens/landing.png" alt="The Berthright landing page: a clay harbour at dawn with a seafarer beside the wage chest, a rope to a ship whose portholes are lit, and the headline Four months of wages, already on board" width="100%"></p>
+
+## At a glance
 
 | | |
 |---|---|
-| Live | https://berthright-app.vercel.app, no login; judge wallets are created in your browser |
-| For judges | `/judge`: a 4-minute walk whose checklist ticks itself from chain |
-| Tracks | NFTs That Do Something (`nfts`), Real-World Money (`realworld`), Open Innovation (`open`) |
-| Built on | House of Stake Top Level Accounts (`hos-wallet`, `tla-registry`), NEP-171, NEP-141, NEP-413, NEP-366, NEAR Intents 1Click, NEAR AI Cloud |
-| Measured | 138 real abandonment cases replayed: 57.8% of owed crew-months would have been on board on day one (today: 0%) |
+| **Who it is for** | Seafarers like Arjun (fictional), able seaman, day 74 at anchor, two months unpaid |
+| **What it does** | Locks four months of each berth's wages and the fare home *before* sign-on; pays wages daily into the berth; sends the allotment home through the berth's own spend grant; releases the guarantee to each crew member's own account if the owner stops paying |
+| **Why NEAR** | The berth *is* a House of Stake Top Level Account: a named, keyless account that is also an NEP-171 token, with a native spend grant. Berthright is built on their audited contracts, deployed unmodified |
+| **Proven on real data** | 138 real abandonment cases (1,632 seafarers, 2023 to 2025): **57.8%** of owed crew-months would have been on board on day one. Today: 0% |
+| **Proven on chain** | A full voyage through the UI on testnet, 8 of 8 checks, 22 transactions; 10 refusals recorded as real transactions; `verify.ts` rebuilds every ship from events (12 of 12) and fails on tampering |
+| **Tracks** | NFTs That Do Something (`nfts`) · Real-World Money (`realworld`) · Open Innovation (`open`) |
+| **Built with** | House of Stake TLA (`hos-wallet`, `tla-registry`, `registrar`, `hos-extension`, `mpc-recovery`) · NEP-171/141/145/148/297/413/366 · NEAR Intents 1Click · NEAR AI Cloud (TEE) |
 
-**Reality rung:** the full money loop runs on NEAR testnet against House of Stake's own audited
-contracts, deployed unmodified. Intents quotes are live on mainnet (quote only). See
-[Live, substituted, designed](#live-substituted-designed).
+### See it happen on testnet
+
+| What happens | Call | Transaction |
+|---|---|---|
+| Sign-on refused: four months not on board yet | `portage.sign_on` | [refused, `E_RESERVE_NOT_ON_BOARD`](https://testnet.nearblocks.io/txns/DhbeoSWqEuXtYQTnTbuTYSAdjKK41BFNitNNWhDpVUKp) |
+| Crew member signs on with the wage from their own contract | `portage.sign_on` | [signed on](https://testnet.nearblocks.io/txns/5KPmrKPma1XguF7wb3wpR41CD2iSwTkpbxVDSgFrvDD8) |
+| Wages land in the berth account | `portage.settle` | [settled](https://testnet.nearblocks.io/txns/8N3qzuqeeCjqPVhSKxpZwHh7iDUwkw3im6T6PeBZwcAW) |
+| Allotment home, fenced by the berth's spend grant | `allotment.run` → `w_execute_extension` | [sent](https://testnet.nearblocks.io/txns/AX41JhypxqEH9sYyVEu3HK9DAw4EDBrT1LBfsEEwMdE7) |
+| Owner stopped paying; abandonment declared after the grace | `portage.declare_abandonment` | [declared](https://testnet.nearblocks.io/txns/9Fec6TWX2NTn9DwQRHfQvPYP73a7HtMRQENaeBV3vrdd) |
+| Four months and the fare home released to the crew member's own account | `portage.release_guarantee` | [released](https://testnet.nearblocks.io/txns/5rcL5UQvcCYjybGKmMWMHwFnp5pqtohmmGiG4mGq1EWo) |
+
+All six come from one unattended browser run of `/judge` (`e2e/judge.mjs`); the full list of 22 is in [EVIDENCE.md](docs/EVIDENCE.md).
+
+---
 
 ## Day 74 at anchor
 
-**Arjun Nair** (fictional), 31, able seaman from Kochi. Day 74 at anchor off Khor Fakkan, UAE, 21:40
-ship's time. His company has not paid wages for two months; under the Maritime Labour Convention
-that already counts as abandonment. His sister's college fee is due on Friday. The insurer is meant
-to cover up to four months of wages, but first he has to find out who the insurer is, file a claim
-from a ship with patchy internet, and wait. One insurer took 8 months to accept liability.
+> *Arjun Nair is fictional. Everything around him is not.*
 
-Arjun is fictional. These are not:
+It is 21:40 ship&apos;s time off Khor Fakkan, UAE. Arjun, 31, an able seaman from Kochi, has not been paid for two months. Under the Maritime Labour Convention that already counts as abandonment. His sister&apos;s college fee is due on Friday. The ship&apos;s insurer is meant to cover up to four months of wages, but first he has to find out who the insurer is, file a claim from a ship with patchy internet, and wait. One insurer took **8 months** to accept a valid claim.
 
 | What is true | Source |
 |---|---|
-| 6,223 seafarers were abandoned on 410 ships in 2025, owed US$25.8M; the ITF recovered US$16.5M | [ITF, 2025 data](https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record) |
-| Indian seafarers were the most abandoned group, 1,125, two years running; the UAE had the second most abandoned vessels | same |
-| Two months of unpaid wages is abandonment; the financial security covers up to four months plus repatriation | MLC 2006 as amended, Standard A2.5.2 paras 2(c) and 9 |
-| An insurer took eight months to accept liability and pay | [ITF to IMO, LEG 105/4/3](https://www.itfglobal.org/sites/default/files/node/resources/files/2018%20LEG%20105-4-3%20-%20Implementation%20of%20the%20financial%20security%20requirement%20under%20MLC%2C%202006%2C%20as%20amended%2C%20for%20the...%20%28ITF%29.pdf) |
+| **6,223** seafarers were abandoned on **410** ships in 2025, owed **US$25.8M**; the ITF recovered US$16.5M. The sixth record year in a row for vessels | [ITF, 2025 data](https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record) |
+| Indian seafarers were the most abandoned group, **1,125**, two years running; the Middle East was the worst region | same |
+| Two months of unpaid wages is abandonment; the mandatory financial security covers up to four months plus repatriation | MLC 2006 as amended, Standard A2.5.2, paras 2(c) and 9 |
+| An insurer took eight months to accept liability and pay | [ITF to the IMO Legal Committee, LEG 105/4/3](https://www.itfglobal.org/sites/default/files/node/resources/files/2018%20LEG%20105-4-3%20-%20Implementation%20of%20the%20financial%20security%20requirement%20under%20MLC%2C%202006%2C%20as%20amended%2C%20for%20the...%20%28ITF%29.pdf) |
 
-Full table with exact quotes: [docs/MOMENT.md](docs/MOMENT.md). I am training for STCW
-certification; sea-service records and wage abandonment are the two things every seafarer I have
-met talks about. No practitioner has reviewed this yet.
+Every figure is quoted word for word, with its retrieval date, in [docs/MOMENT.md](docs/MOMENT.md) and asserted from `data/sources.json`.
 
-## What Berthright does
+**The insight.** Everyone treats wage protection as insurance you claim *after* the harm. But the wages can sit inside the berth from the first day, where nobody but the crew member can touch them, and the berth itself becomes the seafarer&apos;s sea-service record.
 
-1. **Before anyone signs on**, the shipowner locks four months of the berth's wages and the fare
-   home in the wage chest (`portage`). No reserve, no sign-on.
-2. **Every day**, wages accrue by the second; anyone may settle them into the berth account. A
-   scheduled job does it every ten minutes.
-3. **The allotment home** goes through the berth's own spend grant: one receiver, one token, a
-   budget, an expiry, enforced by House of Stake's audited wallet code.
-4. **If the shipowner stops paying**, after a 14-day grace (MLC allows two months) anyone declares
-   abandonment and releases each crew member's guarantee straight to their own account.
-5. **At crew change**, the crew member signs off (final pay to their own account) and hands the berth
-   NFT to the relief. The berth keeps its sea-service record.
+### From the engine room
 
-**What the human does that software cannot:** signs on and off at the gangway, confirms the wage
-from their own contract, chooses who gets the allotment, hands the berth over in person. After
-sign-on Berthright asks for at most one decision a month. Always shown: abandonment declared,
-guarantee released, berth frozen, hand-over requested.
+On 13 Nov 2026 we walked a serving **Second Engineer (Engr. Femi)** through the two core rules. His questions were exactly the ones the contract answers:
 
-## Try it in 4 minutes
+> **"What happens when a shipowner does not have enough money to cover the crew's wages?"**
+> → `sign_on` refuses until four months and the fare home are locked ([refusal on testnet](https://testnet.nearblocks.io/txns/DCJK5bxUZqqNsh2HFJYAxnHUqz56PyEwYK9gsXuaVpUa)).
+>
+> **"Can the shipowner withdraw the reserved money or control the crew member's wages?"**
+> → `withdraw_surplus` can only reach true surplus ([refusal on testnet](https://testnet.nearblocks.io/txns/F9BbzXiqb3gKP8UBhbfP3Akn9CLmWJKDtbFUoJaVMtxk)); the allotment is fenced by the crew member's own grant.
 
-1. Open [/judge](https://berthright-app.vercel.app/judge), press **Start the 4-minute run**. See three
-   accounts created in your browser and a berth issued to your crew account.
-2. Press **Do it** on each step. See a refused sign-on (`E_RESERVE_NOT_ON_BOARD`), a sign-on, wages
-   in the berth, an allotment at the family account, an early declaration refused with seconds
-   left, then the release to the crew member's own account.
-3. Press the failure buttons. See each refusal on chain with its decoded code.
-4. From a clean clone with no keys: `npm ci && npx tsx scripts/verify.ts` ends with
-   `N of N checks pass`; `--tamper` fails.
+His reply was *"Alright.. Noted."* We record it as a review of the two rules, not an endorsement. I am training for STCW certification myself; wage abandonment and sea-service records are the two things every seafarer I have met talks about.
+
+---
 
 ## How it works
+
+<table>
+<tr>
+<td width="50%"><b>1 · No reserve, no sign-on.</b><br>The shipowner locks four months of the berth&apos;s wages and the fare home in the wage chest (<code>portage</code>). The contract refuses any sign-on until they are on board.</td>
+<td width="50%"><b>2 · Wages arrive by themselves.</b><br>Pay accrues by the second, exact to the base unit, with the remainder carried. Anyone may settle it into the berth; a scheduled crank does.</td>
+</tr>
+<tr>
+<td><b>3 · The allotment goes inside a fence.</b><br>The crew member grants the <code>allotment</code> extension one receiver, one token, a budget and an expiry with <code>hos_grant_spend</code>. House of Stake&apos;s wallet enforces it.</td>
+<td><b>4 · If the owner stops paying, the flare goes up.</b><br>After 14 ship days of unpaid wages (MLC allows two months), anyone declares abandonment and releases each crew member&apos;s guarantee to their own account.</td>
+</tr>
+</table>
+
+<p align="center"><img src="docs/screens/how.png" alt="How it works: stacked stitched cards, each with a clay scene for the reserve, the daily wages, the fenced allotment and the release" width="100%"></p>
+
+**What the human does that software cannot:** sign on and off at the gangway; confirm the wage from their own contract (a model may read the photo, the crew member decides); choose who gets the allotment; hand the berth to the relief. After sign-on Berthright asks for at most one decision a month. Always shown, whatever else: abandonment declared, guarantee released, berth frozen, hand-over requested.
+
+### Architecture
 
 ```mermaid
 flowchart LR
   subgraph App["Next.js on Vercel"]
-    UI[/judge, /crew, /ship, /berth, /proof, /break/]
-    W[near-connect wallet or browser key]
+    UI["/, /judge, /crew, /ship, /berth, /proof, /break, /findings"]
+    W["near-connect wallet, or browser keys for the judge run"]
   end
   subgraph API["Stateless API routes"]
-    R[NEP-366 relayer: our contracts and berths only]
-    Q[1Click quotes, mainnet, dry]
-    A[NEAR AI contract reader + signature check]
+    J["/api/judge: implicit-account grants, berth issue"]
+    Q["/api/quote: 1Click, mainnet, dry"]
+    A["/api/sea: NEAR AI TEE reader + signature check"]
+    N["/api/notices: NEP-413 holder gate"]
+    R["/api/relay: NEP-366, allowlisted"]
   end
   subgraph NEAR["NEAR testnet"]
-    REG[HoS tla-registry + registrar: crew namespace]
-    B1[(berth: ab2-kestrel.crew...\nHoS hos-wallet, no keys)]
-    P[portage: wage chest, no keys]
-    AL[allotment: extension, no keys]
-    T[tUSD test dollars]
+    REG["HoS tla-registry + registrar: the crew namespace"]
+    B1[("berth: ab2-kestrel.crew.berthright.testnet\nHoS hos-wallet, no keys")]
+    P["portage: wage chest, no keys"]
+    AL["allotment: wallet extension, no keys"]
+    T["tUSD: test dollars, no keys"]
   end
-  GH[GitHub Actions crank, every 10 min] -->|settle, run, declare, release| P
+  GH["GitHub Actions crank"] -->|settle, run, declare, release| P
   W -->|sign_on, sign_off| P
   W -->|w_execute_extension, hos_grant_spend, hos_freeze| B1
   W -->|nft_transfer| REG
+  P -->|"nft_item_info + nft_token (joint read)"| REG
   P -->|ft_transfer wages| B1
-  P -->|nft_item_info + nft_token| REG
-  AL -->|w_execute_extension ft_transfer| B1
-  B1 -->|allotment| FAM[family account]
+  AL -->|"w_execute_extension: ft_transfer inside the grant"| B1
+  B1 -->|allotment| FAM["family account"]
 ```
 
 ```mermaid
@@ -110,132 +141,166 @@ sequenceDiagram
   participant C as Crew member
   O->>P: create_ship, open_berth, fund (ft_transfer_call)
   C->>P: sign_on(berth, my wage, contract hash)
-  P->>B: nft_item_info
-  P->>R: nft_token
-  P-->>P: refuse unless both name C, berth Active, wage matches, reserve on board
-  loop every 10 minutes
-    P->>B: settle: re-read rotation_seq, pay wages
+  par one joint promise
+    P->>B: nft_item_info
+    P->>R: nft_token
   end
-  Note over O,P: owner stops funding; arrears start; 14 ship days of grace
-  C->>P: declare_abandonment, release_guarantee (anyone may)
-  P->>C: four months + fare home, to C's own account
+  P-->>P: refuse unless both name C, berth Active, wage and hash match, reserve on board
+  loop every crank
+    P->>B: settle: re-read rotation_seq, pay wages into the berth
+  end
+  Note over O,P: the owner stops funding, arrears start, 14 ship days of grace
+  C->>P: declare_abandonment, release_guarantee (anyone may call)
+  P->>C: four months + fare home, to the account that signed on
 ```
 
-```
- berth plate: ab2-kestrel.crew.berthright.testnet
- +-- name     a real NEAR account, created by the crew namespace registrar
- +-- NFT      the same name is a token in the HoS registry; the holder is the crew member
- +-- no keys  zero access keys; only the holder acts, through w_execute_extension
- +-- lease    fixed term; HoS cannot move a live lease without the holder
- +-- grant    hos_grant_spend: the allotment fence (receivers, token budget, expiry)
- +-- record   portage.berth_history: who held it, when, what they earned and were paid
-```
+---
 
 ## The berth is the account
 
-| TLA property | Its job in Berthright | Code |
+House of Stake shipped Top Level Accounts on 21 Sep 2026 and the NFT track names them, with "no SDK yet". Berthright is built directly on their contracts, and every property does a job:
+
+| TLA property | Its job in Berthright | Where it is proven |
 |---|---|---|
-| A name that is an account | The chest pays it; the family recognises it; the record attaches to it | HoS `registrar`; `portage.open_berth` checks `.{registrar}` |
-| NEP-171 token | Crew change is a token transfer | HoS `tla-registry/src/nft.rs:127`; `app/lib/actions.ts` `handOver` |
-| No access keys, owner acts through `w_execute_extension` | Nobody can bolt a key on; the shipowner never controls a berth | HoS `hos-wallet/src/lib.rs:251`; test `add_key_on_a_berth_is_impossible_and_house_of_stake_cannot_move_it_alone` |
-| HoS cannot move a live lease alone | The company cannot seize a berth | HoS `apply_rotation` `needs_holder`; same test |
-| Owner freeze | A stolen phone in port: freeze, wages keep arriving | HoS `hos_freeze`; test `a_frozen_berth_does_not_lose_wages` |
-| Spend grant | The allotment home, fenced by audited code | HoS `hos_grant_spend`; test `allotment_pays_only_the_granted_receiver_up_to_the_budget` |
-| Transfer wipes grants and extensions | The old holder's allotment dies at hand-over | HoS `hos-wallet/src/lib.rs:786,795`; test `tla_transfer_wipes_the_allotment_grant` |
-| `nft_item_info` with `rotation_seq` | The chest detects an unannounced hand-over and pays the account that signed on | `portage.on_settle_checked`; test `an_unannounced_hand_over_pays_the_recorded_holder_and_never_the_berth` |
-| Namespace issuer | A crew welfare trust (fictional) issues berths, never the shipowner | `fleet/deploy-testnet.ts` (payment authority bound to the namespace) |
+| A name that is an account | The chest pays it, the family recognises it, the record attaches to it | `portage.open_berth` accepts only `*.crew.berthright.testnet` |
+| NEP-171 token | Crew change is a token transfer; the holder is the crew member | test `sign_off_then_hand_over_pays_arjun_and_lets_the_relief_sign_on` |
+| No access keys; the owner acts through `w_execute_extension` | Nobody can bolt a key on; the shipowner never controls a berth | [AddKey refused on testnet](https://testnet.nearblocks.io/txns/8S2S3ZHPJ4SSer6NGAA2GCdXXJzryFek9v3tzsKgqWFL) (the wallet has no key operation at all) |
+| A live lease cannot move without its holder | The company cannot seize a berth | [`only_registry`](https://testnet.nearblocks.io/txns/2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi); test `add_key_on_a_berth_is_impossible_and_house_of_stake_cannot_move_it_alone` |
+| Owner freeze | A stolen phone in port: freeze, and wages keep arriving | test `a_frozen_berth_does_not_lose_wages` |
+| Spend grant (receivers, token budgets, expiry) | The allotment home, fenced by audited code | [ungranted receiver refused](https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL) · [over budget refused](https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m) |
+| Every rotation wipes grants and extensions | The old holder&apos;s allotment dies at hand-over | [`E_BERTH_CHANGED_HANDS` on testnet](https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD); test `tla_transfer_wipes_the_allotment_grant` |
+| `nft_item_info` with `rotation_seq` (sharded-item draft) | The chest detects an unannounced hand-over and pays the account that signed on, never the new holder | test `an_unannounced_hand_over_on_chain_pays_arjun_not_the_relief` |
+| A namespace issuer | A crew welfare trust (fictional) issues berths, never the shipowner | the trust is a payment authority bound to the namespace |
+
+### What actually moves when a berth changes hands
+
+We read `apply_rotation` in House of Stake&apos;s wallet and reproduced it in a sandbox on their real wasm: native NEAR above the storage reserve is **swept to the seller** (5.19 NEAR in our run, including the issuer&apos;s creation deposit); NEP-141 balances **stay and pass to the buyer**, unless the registry allowlists the token, in which case the transfer is **refused until the name is empty**; every grant and extension is **wiped**; a failed sweep leaves the NEAR for the new owner. So Berthright pays wages in a token, signs off before every hand-over, and empties the berth in the same approval. Details with file:line: [docs/FINDINGS.md](docs/FINDINGS.md) · [/findings](https://berthright-app.vercel.app/findings). Thirteen more things we hit, for the House of Stake team: [docs/FRICTION.md](docs/FRICTION.md).
+
+---
 
 ## What it will not do
 
-| Refusal | Code | Test |
-|---|---|---|
-| Sign-on before four months are on board | `E_RESERVE_NOT_ON_BOARD` | `sign_on_is_refused_until_four_months_are_on_board` |
-| Sign-on at a different wage than the crew member's contract | `E_WAGE_DIFFERS_FROM_YOUR_CONTRACT` | `sign_on_is_refused_when_the_wage_differs_from_the_crew_members_contract` |
-| A stranger signs on | `E_NOT_BERTH_HOLDER` | `a_non_holder_cannot_sign_on` |
-| A ship promising less than four months | `E_RESERVE_BELOW_MLC` | `a_ship_cannot_promise_less_than_four_months` |
-| The owner takes the reserve | `E_RESERVE_LOCKED` | `the_owner_cannot_withdraw_the_reserve` |
-| Abandonment declared early | `E_NOT_YET_ABANDONED` | `abandonment_cannot_be_declared_before_the_grace_ends` |
-| A guarantee released twice | `E_ALREADY_RELEASED` | `release_guarantee_pays_once` |
-| Release paying more than is owed | by construction | `release_never_pays_more_than_is_owed` |
-| The old holder's allotment after hand-over | `E_BERTH_CHANGED_HANDS` | `allotment_stops_after_hand_over` |
-| Allotment to an ungranted receiver, or over budget | `RECEIVER_NOT_GRANTED`, `TOKEN_CAP_EXCEEDED` (HoS wallet) | `allotment_pays_only_the_granted_receiver_up_to_the_budget` |
+Each refusal below is a real testnet transaction, and each rule is pinned by a test.
 
-Tests: 26 unit and property tests (`contracts/portage/src/tests.rs`, two properties at 10,000 cases
-each) and 11 sandbox tests against the real HoS wasm (`contracts/portage/tests/`).
+| Attempt | Refusal | Testnet | Test |
+|---|---|---|---|
+| Sign on before four months are on board | `E_RESERVE_NOT_ON_BOARD` | [tx](https://testnet.nearblocks.io/txns/DCJK5bxUZqqNsh2HFJYAxnHUqz56PyEwYK9gsXuaVpUa) | `sign_on_is_refused_until_four_months_are_on_board` |
+| Sign on at a lower wage than the contract | `E_WAGE_DIFFERS_FROM_YOUR_CONTRACT` | [tx](https://testnet.nearblocks.io/txns/85NEKMGxH7qz6PBCtSX9eCtRzWmW7nbjMiTjXacnBTLv) | `sign_on_is_refused_when_the_wage_differs_from_the_crew_members_contract` |
+| A stranger signs on | `E_NOT_BERTH_HOLDER` | [tx](https://testnet.nearblocks.io/txns/6nNs72JiGeVzPMBhQ3BH3u7kZPF9yHiz4bwTUaKbd5JQ) | `a_non_holder_cannot_sign_on` |
+| The owner takes the reserve back | `E_RESERVE_LOCKED` | [tx](https://testnet.nearblocks.io/txns/F9BbzXiqb3gKP8UBhbfP3Akn9CLmWJKDtbFUoJaVMtxk) | `the_owner_cannot_withdraw_the_reserve` |
+| Abandonment declared early | `E_NOT_YET_ABANDONED` | [tx](https://testnet.nearblocks.io/txns/C2C5YKsJVdVctmYWZzPT48a6inQMfCGh18EzaEDCn8vQ) | `abandonment_cannot_be_declared_before_the_grace_ends` |
+| Allotment to a receiver nobody granted | `RECEIVER_NOT_GRANTED` (HoS wallet) | [tx](https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL) | `allotment_pays_only_the_granted_receiver_up_to_the_budget` |
+| Allotment past its budget | `TOKEN_CAP_EXCEEDED` (HoS wallet) | [tx](https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m) | same |
+| The old holder&apos;s allotment after hand-over | `E_BERTH_CHANGED_HANDS` | [tx](https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD) | `allotment_stops_after_hand_over` |
+| AddKey on a berth | no key operation exists | [tx](https://testnet.nearblocks.io/txns/8S2S3ZHPJ4SSer6NGAA2GCdXXJzryFek9v3tzsKgqWFL) | `add_key_on_a_berth_is_impossible_and_house_of_stake_cannot_move_it_alone` |
+| A third party moves a live berth | `only_registry` | [tx](https://testnet.nearblocks.io/txns/2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi) | same |
+| Release a guarantee twice, or pay more than is owed | `E_ALREADY_RELEASED`, by construction | sandbox | `release_guarantee_pays_once`, `release_never_pays_more_than_is_owed` |
 
-## What NEAR does here
+**Tests:** 26 unit and property tests (two properties at **10,000 random histories each**: exact accrual with carry, and money conserved across any mix of funding, sign-on, settle, withdraw, sign-off, abandonment and release) and **11 sandbox tests on House of Stake&apos;s real wasm**, including `full_voyage_sign_on_wages_allotment_abandonment_release`.
 
-House of Stake's Top Level Accounts are the product, not a backdrop: each berth is a leased name
-running HoS's audited wallet, the NFT is HoS's registry, and the allotment is HoS's spend grant. We
-call their contracts directly (there is no SDK yet) and deploy them unmodified from commit
-`d85860a`. Full list: [docs/SDK_SURFACE.md](docs/SDK_SURFACE.md).
-
-**Design note from reading their code.** When a leased name changes hands, native NEAR above the
-storage reserve is swept to the seller's payout account, while NEP-141 token balances stay in the
-account and pass to the buyer (unless the registry allowlists the token, in which case the transfer
-is refused until the name is empty). Grants and extensions are wiped. So Berthright pays wages in a
-token, signs off before every hand-over, and empties the berth in the same approval. Reproduced in
-a sandbox: [docs/FINDINGS.md](docs/FINDINGS.md), [/findings](https://berthright-app.vercel.app/findings).
+---
 
 ## Measured
 
-- **Replay of real cases** (2023 to 2025, ITF public abandonment list retrieved 2026-11-13):
-  138 cases replayed, 1,632 seafarers, 7 excluded for missing data.
-  **57.8%** of owed crew-months would have been on board on the day abandonment began,
-  against 0% today. 54 cases fully covered; 84 partial misses (more than four months
-  owed), largest: FOURTHMAN (IMO 9181508): 18 months owed, 18 crew; SATURINA (IMO 6217726): 9 months owed, 35 crew; PRINCE 4 (IMO 8512865): 12 months owed, 21 crew. Every case: [data/replay.json](data/replay.json).
-  Bias: the list shows open cases, which lean long. Across all listed years: 233 cases, 64.2%.
-- **Break campaign, cost per wage day, unattended crank run:** recorded after the testnet
-  deployment in [docs/EVIDENCE.md](docs/EVIDENCE.md).
+| Measure | Result | Source |
+|---|---|---|
+| Real-case replay | **57.8%** of owed crew-months on board on day one (0% today), 138 cases, 1,632 seafarers; 54 fully covered; 84 partial misses named, largest FOURTHMAN (IMO 9181508); 7 excluded | [data/replay.json](data/replay.json) from the ITF public list (open cases lean long; all years: 64.2%) |
+| Full voyage through the UI | 8 of 8 checks from chain reads, 22 transactions, 0 page errors | `e2e/judge.mjs`, [EVIDENCE](docs/EVIDENCE.md) |
+| Rebuild from events | 12 of 12 checks, from 141 transactions; `--tamper` fails (11 of 12, exit 1) | `scripts/verify.ts` |
+| Cost to pay one crew member one day | 14.26 Tgas per `settle` = **US$0.00506** at NEAR = US$3.55 | [measured](https://testnet.nearblocks.io/txns/B5mJjd7tZJhpquAV6yUD9wM2BVDYDFYXWRteNzvKXhz9) |
+| Contract reader under attack | injected "wage is 9999" ignored; doctored second contract flagged REVIEW; every reply signature verified against the TEE&apos;s attested key | [EVIDENCE](docs/EVIDENCE.md), `e2e/sea/` |
+| Layout and accessibility | 9 routes × 8 devices = 72 of 72 views clean: no horizontal scroll, no overlap, tap targets ≥ 44 px, axe WCAG 2.2 AA, zero console errors | `e2e/layout.mjs` |
+
+---
+
+## Try it in four minutes
+
+1. Open **[https://berthright-app.vercel.app/judge](https://berthright-app.vercel.app/judge)** and press **Start the 4-minute run**. Your browser makes three keys; the server only sends small grants to those implicit accounts and has the crew welfare trust issue a real House of Stake berth to your crew account.
+2. Press **Do it** on each step. The checklist on the right ticks itself by reading the chain every six seconds. Step 3 is a refused sign-on; step 8 releases four months and the fare home to your crew account.
+3. Try the failure buttons: a stranger signs on, the owner takes the reserve, an allotment to a stranger.
+4. Without a browser, from a clean clone and no keys:
+
+```bash
+npm ci && npx tsx scripts/verify.ts
+```
+
+```bash
+npx tsx scripts/verify.ts --tamper
+```
+
+<table>
+<tr>
+<td><img src="docs/screens/crew.png" alt="The crew berth card: 40.51 tUSD in the berth, four months plus fare home guaranteed, settle and freeze buttons"></td>
+<td><img src="docs/screens/ship.png" alt="The ship page: coverage meter and the portage bill"></td>
+</tr>
+<tr>
+<td><img src="docs/screens/berth.png" alt="The public berth record: the NFT read at one block, money, allotment and the sea-service record"></td>
+<td><img src="docs/screens/proof.png" alt="Proof from chain: every check passes, run in the browser against public RPC"></td>
+</tr>
+</table>
+
+---
+
+## Who holds which key
+
+| Account | Keys | Can | Cannot |
+|---|---|---|---|
+| `portage.berthright.testnet` (wage chest) | **none** (deleted after init) | run its own rules | be upgraded or drained by anyone, including us |
+| `allotment.berthright.testnet` | **none** | ask a berth to pay inside its grant | pay anyone the crew member did not name, or more than they allowed |
+| `tusd.berthright.testnet` | **none** | mint 5,000 test dollars a day per account | anything else |
+| each berth (`*.crew.berthright.testnet`) | **none** (HoS wallet) | act only when its holder calls it | be driven by the shipowner, the trust or us |
+| `trust.berthright.testnet` | one, server-side | issue berths in the crew namespace | move, freeze or seize a live berth |
+| `judge.berthright.testnet` | one, server-side | send small testnet grants to judge implicit accounts | sign anything for a judge |
+| `crank.berthright.testnet` | two function-call keys | `settle`, `declare_abandonment`, `release_guarantee`, `allotment.run` | change any parameter or move money anywhere the rules do not send it |
+
+Judge keys are created in the browser and never leave it.
+
+---
 
 ## Judging criteria map
 
 | Criterion | Where to look |
 |---|---|
-| Technical implementation | `contracts/portage` (exact accrual with carry, conservation property-tested), sandbox tests on the real HoS fleet, `scripts/verify.ts` |
-| Design | `/` and `/crew` on a phone; [docs/DESIGN.md](docs/DESIGN.md) |
-| Impact | the replay above; the portage bill a master already keeps (`/ship/<id>`, CSV and PDF) |
-| Originality | the first product on HoS Top Level Accounts; the berth as an account that holds its own guarantee |
-| Sustainability | keyless contracts, a permissionless crank, Vercel plus chain only, no server holding user keys |
+| **Technical implementation** | `contracts/portage` (exact accrual with carry; conservation property-tested over 10,000 histories); sandbox suite on House of Stake&apos;s real wasm; the joint `nft_item_info` + `nft_token` read; `scripts/verify.ts` with `--tamper`; reproducible builds whose hashes match chain |
+| **Design** | the landing page and `/crew` on a phone; the guided tour on `/judge`; [docs/DESIGN.md](docs/DESIGN.md); 72 of 72 views clean |
+| **Impact** | the real-case replay; the portage bill a master already keeps (`/ship/0`, CSV and PDF); a practitioner&apos;s questions answered by code |
+| **Originality** | the first product on House of Stake Top Level Accounts; the berth as an account that holds its own guarantee; a documented account of what moves at hand-over |
+| **Sustainability** | keyless contracts; a permissionless crank; Vercel plus chain, no database; no server holds a user key; cost per wage day measured |
 
 ## Live, substituted, designed
 
 | Piece | State |
 |---|---|
-| Wage chest, allotment, tUSD | live on testnet, keyless, code hashes equal the reproducible build (EVIDENCE.md) |
-| House of Stake TLA fleet | live on testnet: their code, unmodified, deployed by us under `berthright.testnet` (HoS's own mainnet fleet does not issue our crew namespace) |
-| Test dollars | `tUSD`, a test token with a faucet; on mainnet a ship would use USDC |
-| NEAR Intents | live mainnet 1Click quotes on a partner key, `dry: true`; no swap is executed |
-| NEAR AI contract reader | live: Qwen3-VL in a TEE, reply signatures verified against the attested signer; injected and doctored contracts land in REVIEW |
-| Relayer | built; live once a relayer key is configured |
-| Mainnet leased name read | designed; shown on `/proof` when `NEXT_PUBLIC_MAINNET_SAMPLE_LEASED_NAME` is set |
+| Wage chest, allotment, tUSD | **live** on testnet, keyless; code hashes equal the reproducible build |
+| House of Stake TLA fleet | **live** on testnet: their six contracts, unmodified from commit `d85860a`, deployed by us under `berthright.testnet` (HoS&apos;s mainnet fleet does not issue our crew namespace) |
+| House of Stake on mainnet | **live read**: `/proof` pins a real leased name (`gun.club`, collection `registry.hos`) to one block |
+| NEAR AI contract reader | **live**: Qwen3-VL in a TEE; reply signatures verified against the attested signer |
+| NEAR Intents | **live** 1Click quotes on mainnet, partner key, `dry: true`; no swap executed |
+| Test dollars | `tUSD` stands in for a stablecoin; ships accept any NEP-141 token |
+| Relayer (NEP-366) | built and allowlisted; off unless a relayer key is configured |
 
 ## Risk
 
 | Parameter | MLC 2006 | Berthright |
 |---|---|---|
-| Wage security | up to 4 months via an insurer claim | 4 months locked before sign-on |
-| Abandonment trigger | 2 months unpaid | 14 ship days unpaid (max 30) |
-| Who pays out | insurer, after a claim | the contract, to the crew member's own account |
+| Wage security | up to 4 months, through an insurer claim | 4 months locked **before** sign-on; a ship cannot promise fewer |
+| Abandonment trigger | 2 months unpaid | 14 ship days unpaid (30 at most) |
+| Who pays out | the insurer, after a claim | the contract, to the account that signed on, called by anyone |
+| Shipowner withdrawal | n/a | only true surplus, never while wages are owed, never after abandonment |
 
-Maximum loss for a crew member: wages beyond four months. Circle can freeze USDC on mainnet. Full
-table: [docs/RISK.md](docs/RISK.md). Threat model for the hand-over: [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md).
+**Maximum loss** for a crew member: wages beyond four months, stated on the berth card and in every release event (`uncovered`). Circle can freeze USDC on mainnet. Full table: [docs/RISK.md](docs/RISK.md). Every way to keep or divert money at hand-over, and what stops it: [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md).
 
 ## Limits
 
-- Testnet only for the money loop. No real wages have moved.
-- A cross-contract read can be one or two blocks stale; a settle racing a hand-over could pay one
-  settlement into the berth the relief now holds. The app signs off before every hand-over.
-- The guarantee covers four months. Some real cases ran 18 months or more; those are partial misses.
+- The money loop runs on testnet. No real wages have moved.
+- A cross-contract read can be one or two blocks stale; a settle racing a hand-over could pay one settlement into a berth the relief now holds. The app signs off before every hand-over.
+- The deployed allotment records "sent" when the berth wallet accepts the request, even if the inner token transfer then fails (House of Stake runs it detached; FRICTION #12). The crank only runs an allotment when the berth holds the amount; v1.1 adds a joint balance read and is ready to deploy.
+- The guarantee is four months. Some real cases ran 18 months or more: those are the partial misses above.
+- The contract reader verifies reply signatures against the attested signer; it does not yet verify the hardware quote itself in the app.
 
 ## Disclosures
 
-AI tools: built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces,
-near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react,
-proptest. House of Stake code is deployed unmodified from commit
-`d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). People, ships and companies in the
-demo are fictional; demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the
-hackathon window. Other project led by Kinnoski in this hackathon (Q-015): to be confirmed by Kinnoski before submission.
+Built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces, near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react, proptest. House of Stake code is deployed unmodified from commit `d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). Fonts: Fraunces, Instrument Sans, IBM Plex Mono (OFL). All art is drawn in code. People, ships and companies in the demo are fictional; demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the hackathon window. Other project led by Kinnoski in this hackathon (Q-015): to be confirmed before submission.
 
 ## Run it
 
@@ -248,26 +313,27 @@ cargo test --profile proptest -p portage -p allotment -p tusd --lib
 ```
 
 ```bash
-fleet/build-hos.sh && for c in tusd portage allotment; do (cd contracts/$c && cargo near build non-reproducible-wasm --locked --no-abi); done && cargo test -p portage --test tla_transfer --test allotment --test voyage
+fleet/build-hos.sh && CA_BUNDLE= fleet/repro-build.sh && cargo test -p portage --test tla_transfer --test allotment --test voyage
 ```
 
 ```bash
 cd app && npm ci && npx next dev
 ```
 
-Environment for the app: see `app/.env.example`.
+App environment: `app/.env.example`. Testnet accounts and code hashes: `deployments/testnet.json`.
 
 ## Repository map
 
 ```
-contracts/portage     wage chest + unit, property and sandbox tests
-contracts/allotment   HoS wallet extension that sends the allotment
-contracts/tusd        test dollars
-fleet/                build and deploy the HoS fleet unmodified
-app/                  Next.js app and API routes
-scripts/              census, replay, facts, verify, crank, seed-demo, checks
-data/                 cases.csv, replay.json, sources.json
-docs/                 MOMENT, THESIS, RISK, THREAT_MODEL, FINDINGS, FRICTION, SDK_SURFACE, EVIDENCE, ...
+contracts/portage     wage chest: unit, property and sandbox tests (real HoS wasm)
+contracts/allotment   House of Stake wallet extension that sends the allotment
+contracts/tusd        test dollars with a capped faucet
+fleet/                build and deploy the HoS fleet unmodified; reproducible builds of ours
+app/                  Next.js app, API routes, design system
+scripts/              census, replay, facts, verify, crank, seed-demo, copy and name checks
+e2e/                  judge voyage, layout and accessibility suite, contract-reader photos
+data/                 cases.csv (245 real cases), replay.json, sources.json, runs.json
+docs/                 MOMENT, THESIS, RISK, THREAT_MODEL, FINDINGS, FRICTION, SDK_SURFACE, EVIDENCE, PROOF, JUDGE, DESIGN
 ```
 
-Licence: MIT. Links: [EVIDENCE](docs/EVIDENCE.md) · [PROOF](docs/PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [THREAT_MODEL](docs/THREAT_MODEL.md) · [JUDGE](docs/JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md)
+MIT licence · [EVIDENCE](docs/EVIDENCE.md) · [PROOF](docs/PROOF.md) · [FINDINGS](docs/FINDINGS.md) · [FRICTION](docs/FRICTION.md) · [THREAT_MODEL](docs/THREAT_MODEL.md) · [JUDGE](docs/JUDGE.md) · [PROGRESS](PROGRESS.md) · [MILESTONES](MILESTONES.md)
