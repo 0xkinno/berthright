@@ -1,0 +1,1466 @@
+{
+  "source": "https://www.itfseafarers.org/en/directories/abandonment-list",
+  "retrieved": "2026-11-13",
+  "set": "wild: ITF public abandonment list (open cases at retrieval); scripted by scripts/census.ts",
+  "bias_note": "The list shows cases open on the retrieval date, which leans towards longer, unresolved cases. Months owed are as reported to the ITF, rounded by the ITF.",
+  "cover_months": 4,
+  "window_2023_2025": {
+    "window": [
+      2023,
+      2024,
+      2025
+    ],
+    "cases_in_window": 145,
+    "cases_replayed": 138,
+    "cases_excluded_missing_data": 7,
+    "seafarers": 1632,
+    "crew_months_owed": 9683,
+    "crew_months_on_board_with_berthright": 5599,
+    "crew_months_on_board_without": 0,
+    "share_on_board_pct": 57.8,
+    "cases_fully_covered": 54,
+    "cases_partial_miss": 84,
+    "partial_misses": [
+      {
+        "vessel": "FOURTHMAN",
+        "imo": "9181508",
+        "months_owed": 18,
+        "seafarers": 18,
+        "uncovered_crew_months": 252
+      },
+      {
+        "vessel": "SATURINA",
+        "imo": "6217726",
+        "months_owed": 9,
+        "seafarers": 35,
+        "uncovered_crew_months": 175
+      },
+      {
+        "vessel": "PRINCE 4",
+        "imo": "8512865",
+        "months_owed": 12,
+        "seafarers": 21,
+        "uncovered_crew_months": 168
+      },
+      {
+        "vessel": "LARUS",
+        "imo": "9148506",
+        "months_owed": 14,
+        "seafarers": 15,
+        "uncovered_crew_months": 150
+      },
+      {
+        "vessel": "MYRA Q",
+        "imo": "8871601",
+        "months_owed": 11,
+        "seafarers": 20,
+        "uncovered_crew_months": 140
+      },
+      {
+        "vessel": "ANUNNAKI",
+        "imo": "9210713",
+        "months_owed": 12,
+        "seafarers": 16,
+        "uncovered_crew_months": 128
+      },
+      {
+        "vessel": "HAPPY 18",
+        "imo": "9146132",
+        "months_owed": 11,
+        "seafarers": 18,
+        "uncovered_crew_months": 126
+      },
+      {
+        "vessel": "RAKAN 5",
+        "imo": "8922199",
+        "months_owed": 10,
+        "seafarers": 20,
+        "uncovered_crew_months": 120
+      },
+      {
+        "vessel": "SALVADOR PRIMO",
+        "imo": "7938933",
+        "months_owed": 7,
+        "seafarers": 39,
+        "uncovered_crew_months": 117
+      },
+      {
+        "vessel": "YOUNGI YI",
+        "imo": "8358518",
+        "months_owed": 11,
+        "seafarers": 16,
+        "uncovered_crew_months": 112
+      },
+      {
+        "vessel": "PARSIAN SHILA",
+        "imo": "9404285",
+        "months_owed": 11,
+        "seafarers": 15,
+        "uncovered_crew_months": 105
+      },
+      {
+        "vessel": "CS 28",
+        "imo": "8309048",
+        "months_owed": 13,
+        "seafarers": 11,
+        "uncovered_crew_months": 99
+      },
+      {
+        "vessel": "SEA MASTER",
+        "imo": "8601991",
+        "months_owed": 15,
+        "seafarers": 9,
+        "uncovered_crew_months": 99
+      },
+      {
+        "vessel": "CAPTAIN ADAM 1",
+        "imo": "8914087",
+        "months_owed": 9,
+        "seafarers": 18,
+        "uncovered_crew_months": 90
+      },
+      {
+        "vessel": "PASCAL",
+        "imo": "9142411",
+        "months_owed": 10,
+        "seafarers": 14,
+        "uncovered_crew_months": 84
+      },
+      {
+        "vessel": "BASEL S3",
+        "imo": "8703256",
+        "months_owed": 10,
+        "seafarers": 14,
+        "uncovered_crew_months": 84
+      },
+      {
+        "vessel": "SONA",
+        "imo": "9005053",
+        "months_owed": 7,
+        "seafarers": 27,
+        "uncovered_crew_months": 81
+      },
+      {
+        "vessel": "PAX",
+        "imo": "8416750",
+        "months_owed": 12,
+        "seafarers": 9,
+        "uncovered_crew_months": 72
+      },
+      {
+        "vessel": "SUNSHINE 1",
+        "imo": "7027502",
+        "months_owed": 10,
+        "seafarers": 12,
+        "uncovered_crew_months": 72
+      },
+      {
+        "vessel": "EXPRESS 1",
+        "imo": "1074539",
+        "months_owed": 12,
+        "seafarers": 8,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "Sahab",
+        "imo": "7602821",
+        "months_owed": 12,
+        "seafarers": 8,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "GAS ATHENA",
+        "imo": "9267950",
+        "months_owed": 8,
+        "seafarers": 16,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "NAYAN",
+        "imo": "8626111",
+        "months_owed": 13,
+        "seafarers": 7,
+        "uncovered_crew_months": 63
+      },
+      {
+        "vessel": "OCEANLEC 322",
+        "imo": "9506954",
+        "months_owed": 10,
+        "seafarers": 10,
+        "uncovered_crew_months": 60
+      },
+      {
+        "vessel": "PRINCESS JESSICA",
+        "imo": "8912467",
+        "months_owed": 18,
+        "seafarers": 4,
+        "uncovered_crew_months": 56
+      },
+      {
+        "vessel": "SAN LORENZO",
+        "imo": "9141053",
+        "months_owed": 10,
+        "seafarers": 9,
+        "uncovered_crew_months": 54
+      },
+      {
+        "vessel": "AVADH",
+        "imo": "9564358",
+        "months_owed": 10,
+        "seafarers": 9,
+        "uncovered_crew_months": 54
+      },
+      {
+        "vessel": "DTA 2",
+        "imo": "9208710",
+        "months_owed": 14,
+        "seafarers": 5,
+        "uncovered_crew_months": 50
+      },
+      {
+        "vessel": "MATAF PRIDE",
+        "imo": "9582714",
+        "months_owed": 10,
+        "seafarers": 8,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "LIANA",
+        "imo": "9000390",
+        "months_owed": 8,
+        "seafarers": 12,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "CARLA G",
+        "imo": "8408789",
+        "months_owed": 8,
+        "seafarers": 12,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "BRAWLSTARS",
+        "imo": "8110992",
+        "months_owed": 12,
+        "seafarers": 6,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "MEKHANIK CHEREVKO",
+        "imo": "9137222",
+        "months_owed": 12,
+        "seafarers": 6,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "GRACE",
+        "imo": "9486300",
+        "months_owed": 7,
+        "seafarers": 15,
+        "uncovered_crew_months": 45
+      },
+      {
+        "vessel": "AL 1",
+        "imo": "",
+        "months_owed": 8,
+        "seafarers": 11,
+        "uncovered_crew_months": 44
+      },
+      {
+        "vessel": "VENUS I",
+        "imo": "8721193",
+        "months_owed": 6,
+        "seafarers": 22,
+        "uncovered_crew_months": 44
+      },
+      {
+        "vessel": "ROYAL 1",
+        "imo": "9109005",
+        "months_owed": 7,
+        "seafarers": 14,
+        "uncovered_crew_months": 42
+      },
+      {
+        "vessel": "SOILDER",
+        "imo": "9590008",
+        "months_owed": 6,
+        "seafarers": 20,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "STRATOS",
+        "imo": "79030498",
+        "months_owed": 8,
+        "seafarers": 10,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "IDRA Q",
+        "imo": "9013737",
+        "months_owed": 8,
+        "seafarers": 10,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "PASHA 9",
+        "imo": "9124885",
+        "months_owed": 6,
+        "seafarers": 20,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "PAYVAR 1",
+        "imo": "9581218",
+        "months_owed": 13,
+        "seafarers": 4,
+        "uncovered_crew_months": 36
+      },
+      {
+        "vessel": "FU YUAN YU 9997",
+        "imo": "8567779",
+        "months_owed": 8,
+        "seafarers": 9,
+        "uncovered_crew_months": 36
+      },
+      {
+        "vessel": "YOUNES 6",
+        "imo": "9519755",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "DAYNA",
+        "imo": "7331551",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "FU YUAN YU 9993",
+        "imo": "8567743",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "SUNNY LYNN",
+        "imo": "9124926",
+        "months_owed": 6,
+        "seafarers": 16,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "TAISIZ",
+        "imo": "8301137",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "MOUNT",
+        "imo": "9252618",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "SAMAD 21",
+        "imo": "8211954",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "JOURI",
+        "imo": "9174775",
+        "months_owed": 5,
+        "seafarers": 30,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "LAGAVULIN",
+        "imo": "9130810",
+        "months_owed": 6,
+        "seafarers": 15,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "DESTINY HELPER",
+        "imo": "8910354",
+        "months_owed": 6,
+        "seafarers": 12,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "SUNNY LISA",
+        "imo": "7359278",
+        "months_owed": 7,
+        "seafarers": 8,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "BASIM",
+        "imo": "8649618",
+        "months_owed": 7,
+        "seafarers": 7,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "RAHIMA",
+        "imo": "9072989",
+        "months_owed": 7,
+        "seafarers": 7,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "GORGAN",
+        "imo": "7378171",
+        "months_owed": 10,
+        "seafarers": 3,
+        "uncovered_crew_months": 18
+      },
+      {
+        "vessel": "ANADI",
+        "imo": "9080871",
+        "months_owed": 6,
+        "seafarers": 9,
+        "uncovered_crew_months": 18
+      },
+      {
+        "vessel": "MILLA",
+        "imo": "9004487",
+        "months_owed": 5,
+        "seafarers": 17,
+        "uncovered_crew_months": 17
+      },
+      {
+        "vessel": "ONTARIO",
+        "imo": "9316581",
+        "months_owed": 12,
+        "seafarers": 2,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "BRILLIANCE",
+        "imo": "9348692",
+        "months_owed": 12,
+        "seafarers": 2,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "MLS SARATU",
+        "imo": "9691852",
+        "months_owed": 6,
+        "seafarers": 8,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "GAS ZEUS",
+        "imo": "9267962",
+        "months_owed": 5,
+        "seafarers": 16,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "NOVO RUIVO",
+        "imo": "8734671",
+        "months_owed": 7,
+        "seafarers": 4,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "HADI 49",
+        "imo": "9845336",
+        "months_owed": 6,
+        "seafarers": 6,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "PINK",
+        "imo": "9631149",
+        "months_owed": 5,
+        "seafarers": 11,
+        "uncovered_crew_months": 11
+      },
+      {
+        "vessel": "APARAJITA",
+        "imo": "9237254",
+        "months_owed": 9,
+        "seafarers": 2,
+        "uncovered_crew_months": 10
+      },
+      {
+        "vessel": "FARVARDIN 1",
+        "imo": "8350889",
+        "months_owed": 14,
+        "seafarers": 1,
+        "uncovered_crew_months": 10
+      },
+      {
+        "vessel": "BETELGEUSE",
+        "imo": "8706741",
+        "months_owed": 13,
+        "seafarers": 1,
+        "uncovered_crew_months": 9
+      },
+      {
+        "vessel": "ADWAY",
+        "imo": "9563081",
+        "months_owed": 5,
+        "seafarers": 9,
+        "uncovered_crew_months": 9
+      },
+      {
+        "vessel": "GMC SILVER",
+        "imo": "8509002",
+        "months_owed": 5,
+        "seafarers": 8,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "KASHI",
+        "imo": "1039527",
+        "months_owed": 6,
+        "seafarers": 4,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "LADY MINA",
+        "imo": "8801113",
+        "months_owed": 5,
+        "seafarers": 8,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "EMANTHA",
+        "imo": "9469455",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "VASILIY BOZHENKO",
+        "imo": "8623999",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "CHI FU",
+        "imo": "8990172",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "GREGALE",
+        "imo": "",
+        "months_owed": 7,
+        "seafarers": 2,
+        "uncovered_crew_months": 6
+      },
+      {
+        "vessel": "SEA TRUCK",
+        "imo": "7611509",
+        "months_owed": 5,
+        "seafarers": 6,
+        "uncovered_crew_months": 6
+      },
+      {
+        "vessel": "VICTORY 1",
+        "imo": "9088598",
+        "months_owed": 5,
+        "seafarers": 5,
+        "uncovered_crew_months": 5
+      },
+      {
+        "vessel": "HADI 44",
+        "imo": "9690743",
+        "months_owed": 6,
+        "seafarers": 2,
+        "uncovered_crew_months": 4
+      },
+      {
+        "vessel": "PRUVALINE",
+        "imo": "7615232",
+        "months_owed": 6,
+        "seafarers": 2,
+        "uncovered_crew_months": 4
+      },
+      {
+        "vessel": "PROFESOR MIKHAYLO ALEKANDROV",
+        "imo": "9121118",
+        "months_owed": 5,
+        "seafarers": 3,
+        "uncovered_crew_months": 3
+      },
+      {
+        "vessel": "SARAH",
+        "imo": "8120478",
+        "months_owed": 6,
+        "seafarers": 1,
+        "uncovered_crew_months": 2
+      },
+      {
+        "vessel": "KAM STAR",
+        "imo": "8220096",
+        "months_owed": 5,
+        "seafarers": 1,
+        "uncovered_crew_months": 1
+      }
+    ],
+    "over_release_cases": 0,
+    "over_release_note": "Impossible by construction: release pays only wages owed up to the contract end, capped at the reserve (test release_never_pays_more_than_is_owed)."
+  },
+  "all_listed": {
+    "window": "all",
+    "cases_in_window": 245,
+    "cases_replayed": 233,
+    "cases_excluded_missing_data": 12,
+    "seafarers": 2934,
+    "crew_months_owed": 14956,
+    "crew_months_on_board_with_berthright": 9607,
+    "crew_months_on_board_without": 0,
+    "share_on_board_pct": 64.2,
+    "cases_fully_covered": 114,
+    "cases_partial_miss": 119,
+    "partial_misses": [
+      {
+        "vessel": "BLUEFLOSS",
+        "imo": "7419042",
+        "months_owed": 33,
+        "seafarers": 10,
+        "uncovered_crew_months": 290
+      },
+      {
+        "vessel": "CUTETA",
+        "imo": "8605935",
+        "months_owed": 12,
+        "seafarers": 35,
+        "uncovered_crew_months": 280
+      },
+      {
+        "vessel": "FOURTHMAN",
+        "imo": "9181508",
+        "months_owed": 18,
+        "seafarers": 18,
+        "uncovered_crew_months": 252
+      },
+      {
+        "vessel": "SATURINA",
+        "imo": "6217726",
+        "months_owed": 9,
+        "seafarers": 35,
+        "uncovered_crew_months": 175
+      },
+      {
+        "vessel": "PRINCE 4",
+        "imo": "8512865",
+        "months_owed": 12,
+        "seafarers": 21,
+        "uncovered_crew_months": 168
+      },
+      {
+        "vessel": "LARUS",
+        "imo": "9148506",
+        "months_owed": 14,
+        "seafarers": 15,
+        "uncovered_crew_months": 150
+      },
+      {
+        "vessel": "MYRA Q",
+        "imo": "8871601",
+        "months_owed": 11,
+        "seafarers": 20,
+        "uncovered_crew_months": 140
+      },
+      {
+        "vessel": "ANUNNAKI",
+        "imo": "9210713",
+        "months_owed": 12,
+        "seafarers": 16,
+        "uncovered_crew_months": 128
+      },
+      {
+        "vessel": "HAPPY 18",
+        "imo": "9146132",
+        "months_owed": 11,
+        "seafarers": 18,
+        "uncovered_crew_months": 126
+      },
+      {
+        "vessel": "RAKAN 5",
+        "imo": "8922199",
+        "months_owed": 10,
+        "seafarers": 20,
+        "uncovered_crew_months": 120
+      },
+      {
+        "vessel": "SALVADOR PRIMO",
+        "imo": "7938933",
+        "months_owed": 7,
+        "seafarers": 39,
+        "uncovered_crew_months": 117
+      },
+      {
+        "vessel": "YOUNGI YI",
+        "imo": "8358518",
+        "months_owed": 11,
+        "seafarers": 16,
+        "uncovered_crew_months": 112
+      },
+      {
+        "vessel": "PARSIAN SHILA",
+        "imo": "9404285",
+        "months_owed": 11,
+        "seafarers": 15,
+        "uncovered_crew_months": 105
+      },
+      {
+        "vessel": "CS 28",
+        "imo": "8309048",
+        "months_owed": 13,
+        "seafarers": 11,
+        "uncovered_crew_months": 99
+      },
+      {
+        "vessel": "SEA MASTER",
+        "imo": "8601991",
+        "months_owed": 15,
+        "seafarers": 9,
+        "uncovered_crew_months": 99
+      },
+      {
+        "vessel": "CAPTAIN ADAM 1",
+        "imo": "8914087",
+        "months_owed": 9,
+        "seafarers": 18,
+        "uncovered_crew_months": 90
+      },
+      {
+        "vessel": "PASCAL",
+        "imo": "9142411",
+        "months_owed": 10,
+        "seafarers": 14,
+        "uncovered_crew_months": 84
+      },
+      {
+        "vessel": "BASEL S3",
+        "imo": "8703256",
+        "months_owed": 10,
+        "seafarers": 14,
+        "uncovered_crew_months": 84
+      },
+      {
+        "vessel": "SONA",
+        "imo": "9005053",
+        "months_owed": 7,
+        "seafarers": 27,
+        "uncovered_crew_months": 81
+      },
+      {
+        "vessel": "PAX",
+        "imo": "8416750",
+        "months_owed": 12,
+        "seafarers": 9,
+        "uncovered_crew_months": 72
+      },
+      {
+        "vessel": "SUNSHINE 1",
+        "imo": "7027502",
+        "months_owed": 10,
+        "seafarers": 12,
+        "uncovered_crew_months": 72
+      },
+      {
+        "vessel": "FRIEND-3",
+        "imo": "9107253",
+        "months_owed": 10,
+        "seafarers": 12,
+        "uncovered_crew_months": 72
+      },
+      {
+        "vessel": "SETAREGAN",
+        "imo": "7529392",
+        "months_owed": 8,
+        "seafarers": 17,
+        "uncovered_crew_months": 68
+      },
+      {
+        "vessel": "EXPRESS 1",
+        "imo": "1074539",
+        "months_owed": 12,
+        "seafarers": 8,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "Sahab",
+        "imo": "7602821",
+        "months_owed": 12,
+        "seafarers": 8,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "GAS ATHENA",
+        "imo": "9267950",
+        "months_owed": 8,
+        "seafarers": 16,
+        "uncovered_crew_months": 64
+      },
+      {
+        "vessel": "NAYAN",
+        "imo": "8626111",
+        "months_owed": 13,
+        "seafarers": 7,
+        "uncovered_crew_months": 63
+      },
+      {
+        "vessel": "OCEANLEC 322",
+        "imo": "9506954",
+        "months_owed": 10,
+        "seafarers": 10,
+        "uncovered_crew_months": 60
+      },
+      {
+        "vessel": "PRINCESS JESSICA",
+        "imo": "8912467",
+        "months_owed": 18,
+        "seafarers": 4,
+        "uncovered_crew_months": 56
+      },
+      {
+        "vessel": "SAN LORENZO",
+        "imo": "9141053",
+        "months_owed": 10,
+        "seafarers": 9,
+        "uncovered_crew_months": 54
+      },
+      {
+        "vessel": "AVADH",
+        "imo": "9564358",
+        "months_owed": 10,
+        "seafarers": 9,
+        "uncovered_crew_months": 54
+      },
+      {
+        "vessel": "SANITY",
+        "imo": "9113056",
+        "months_owed": 9,
+        "seafarers": 10,
+        "uncovered_crew_months": 50
+      },
+      {
+        "vessel": "DTA 2",
+        "imo": "9208710",
+        "months_owed": 14,
+        "seafarers": 5,
+        "uncovered_crew_months": 50
+      },
+      {
+        "vessel": "MATAF PRIDE",
+        "imo": "9582714",
+        "months_owed": 10,
+        "seafarers": 8,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "LIANA",
+        "imo": "9000390",
+        "months_owed": 8,
+        "seafarers": 12,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "CARLA G",
+        "imo": "8408789",
+        "months_owed": 8,
+        "seafarers": 12,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "BRAWLSTARS",
+        "imo": "8110992",
+        "months_owed": 12,
+        "seafarers": 6,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "MEKHANIK CHEREVKO",
+        "imo": "9137222",
+        "months_owed": 12,
+        "seafarers": 6,
+        "uncovered_crew_months": 48
+      },
+      {
+        "vessel": "GRACE",
+        "imo": "9486300",
+        "months_owed": 7,
+        "seafarers": 15,
+        "uncovered_crew_months": 45
+      },
+      {
+        "vessel": "AL 1",
+        "imo": "",
+        "months_owed": 8,
+        "seafarers": 11,
+        "uncovered_crew_months": 44
+      },
+      {
+        "vessel": "VENUS I",
+        "imo": "8721193",
+        "months_owed": 6,
+        "seafarers": 22,
+        "uncovered_crew_months": 44
+      },
+      {
+        "vessel": "ROYAL 1",
+        "imo": "9109005",
+        "months_owed": 7,
+        "seafarers": 14,
+        "uncovered_crew_months": 42
+      },
+      {
+        "vessel": "SHETAB",
+        "imo": "9208019",
+        "months_owed": 10,
+        "seafarers": 7,
+        "uncovered_crew_months": 42
+      },
+      {
+        "vessel": "SOILDER",
+        "imo": "9590008",
+        "months_owed": 6,
+        "seafarers": 20,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "STRATOS",
+        "imo": "79030498",
+        "months_owed": 8,
+        "seafarers": 10,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "IDRA Q",
+        "imo": "9013737",
+        "months_owed": 8,
+        "seafarers": 10,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "PASHA 9",
+        "imo": "9124885",
+        "months_owed": 6,
+        "seafarers": 20,
+        "uncovered_crew_months": 40
+      },
+      {
+        "vessel": "MOUJE AQIANOOS",
+        "imo": "9302360",
+        "months_owed": 7,
+        "seafarers": 13,
+        "uncovered_crew_months": 39
+      },
+      {
+        "vessel": "PAYVAR 1",
+        "imo": "9581218",
+        "months_owed": 13,
+        "seafarers": 4,
+        "uncovered_crew_months": 36
+      },
+      {
+        "vessel": "FU YUAN YU 9997",
+        "imo": "8567779",
+        "months_owed": 8,
+        "seafarers": 9,
+        "uncovered_crew_months": 36
+      },
+      {
+        "vessel": "YOUNES 6",
+        "imo": "9519755",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "DAYNA",
+        "imo": "7331551",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "FU YUAN YU 9993",
+        "imo": "8567743",
+        "months_owed": 8,
+        "seafarers": 8,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "SUNNY LYNN",
+        "imo": "9124926",
+        "months_owed": 6,
+        "seafarers": 16,
+        "uncovered_crew_months": 32
+      },
+      {
+        "vessel": "TAISIZ",
+        "imo": "8301137",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "MOUNT",
+        "imo": "9252618",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "SAMAD 21",
+        "imo": "8211954",
+        "months_owed": 9,
+        "seafarers": 6,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "JOURI",
+        "imo": "9174775",
+        "months_owed": 5,
+        "seafarers": 30,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "LAGAVULIN",
+        "imo": "9130810",
+        "months_owed": 6,
+        "seafarers": 15,
+        "uncovered_crew_months": 30
+      },
+      {
+        "vessel": "OCEAN ENERGY",
+        "imo": "9350111",
+        "months_owed": 6,
+        "seafarers": 14,
+        "uncovered_crew_months": 28
+      },
+      {
+        "vessel": "ONUR",
+        "imo": "8853594",
+        "months_owed": 6,
+        "seafarers": 12,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "KEVER",
+        "imo": "9088653",
+        "months_owed": 6,
+        "seafarers": 12,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "ARMONY",
+        "imo": "7615012",
+        "months_owed": 7,
+        "seafarers": 8,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "DESTINY HELPER",
+        "imo": "8910354",
+        "months_owed": 6,
+        "seafarers": 12,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "SUNNY LISA",
+        "imo": "7359278",
+        "months_owed": 7,
+        "seafarers": 8,
+        "uncovered_crew_months": 24
+      },
+      {
+        "vessel": "MARIA",
+        "imo": "9041772",
+        "months_owed": 5,
+        "seafarers": 23,
+        "uncovered_crew_months": 23
+      },
+      {
+        "vessel": "MK LION",
+        "imo": "9232553",
+        "months_owed": 5,
+        "seafarers": 21,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "PRUVALINE",
+        "imo": "7615232",
+        "months_owed": 11,
+        "seafarers": 3,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "BASIM",
+        "imo": "8649618",
+        "months_owed": 7,
+        "seafarers": 7,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "RAHIMA",
+        "imo": "9072989",
+        "months_owed": 7,
+        "seafarers": 7,
+        "uncovered_crew_months": 21
+      },
+      {
+        "vessel": "ASTRAM",
+        "imo": "9307748",
+        "months_owed": 5,
+        "seafarers": 20,
+        "uncovered_crew_months": 20
+      },
+      {
+        "vessel": "AALIYAH",
+        "imo": "1072866",
+        "months_owed": 5,
+        "seafarers": 20,
+        "uncovered_crew_months": 20
+      },
+      {
+        "vessel": "OCEAN EXPLORER",
+        "imo": "9303637",
+        "months_owed": 5,
+        "seafarers": 19,
+        "uncovered_crew_months": 19
+      },
+      {
+        "vessel": "MAHMOUD. A",
+        "imo": "6702272",
+        "months_owed": 6,
+        "seafarers": 9,
+        "uncovered_crew_months": 18
+      },
+      {
+        "vessel": "GORGAN",
+        "imo": "7378171",
+        "months_owed": 10,
+        "seafarers": 3,
+        "uncovered_crew_months": 18
+      },
+      {
+        "vessel": "ANADI",
+        "imo": "9080871",
+        "months_owed": 6,
+        "seafarers": 9,
+        "uncovered_crew_months": 18
+      },
+      {
+        "vessel": "MILLA",
+        "imo": "9004487",
+        "months_owed": 5,
+        "seafarers": 17,
+        "uncovered_crew_months": 17
+      },
+      {
+        "vessel": "TOMSON GAS",
+        "imo": "8811766",
+        "months_owed": 5,
+        "seafarers": 17,
+        "uncovered_crew_months": 17
+      },
+      {
+        "vessel": "HADI 50",
+        "imo": "9845348",
+        "months_owed": 5,
+        "seafarers": 17,
+        "uncovered_crew_months": 17
+      },
+      {
+        "vessel": "SUNDRY",
+        "imo": "9045651",
+        "months_owed": 5,
+        "seafarers": 16,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "XIANG FU",
+        "imo": "8864933",
+        "months_owed": 6,
+        "seafarers": 8,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "RAY GAS",
+        "imo": "9040883",
+        "months_owed": 5,
+        "seafarers": 16,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "ONTARIO",
+        "imo": "9316581",
+        "months_owed": 12,
+        "seafarers": 2,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "BRILLIANCE",
+        "imo": "9348692",
+        "months_owed": 12,
+        "seafarers": 2,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "MLS SARATU",
+        "imo": "9691852",
+        "months_owed": 6,
+        "seafarers": 8,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "GAS ZEUS",
+        "imo": "9267962",
+        "months_owed": 5,
+        "seafarers": 16,
+        "uncovered_crew_months": 16
+      },
+      {
+        "vessel": "GUZIDE S",
+        "imo": "7726213",
+        "months_owed": 5,
+        "seafarers": 12,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "HAI HAO 6",
+        "imo": "1128598",
+        "months_owed": 6,
+        "seafarers": 6,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "LSS SUCCESS",
+        "imo": "6927092",
+        "months_owed": 5,
+        "seafarers": 12,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "BANDAR SOLTAN",
+        "imo": "9993470",
+        "months_owed": 8,
+        "seafarers": 3,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "NOVO RUIVO",
+        "imo": "8734671",
+        "months_owed": 7,
+        "seafarers": 4,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "HADI 49",
+        "imo": "9845336",
+        "months_owed": 6,
+        "seafarers": 6,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "ONDA",
+        "imo": "8912467",
+        "months_owed": 7,
+        "seafarers": 4,
+        "uncovered_crew_months": 12
+      },
+      {
+        "vessel": "PINK",
+        "imo": "9631149",
+        "months_owed": 5,
+        "seafarers": 11,
+        "uncovered_crew_months": 11
+      },
+      {
+        "vessel": "APARAJITA",
+        "imo": "9237254",
+        "months_owed": 9,
+        "seafarers": 2,
+        "uncovered_crew_months": 10
+      },
+      {
+        "vessel": "FARVARDIN 1",
+        "imo": "8350889",
+        "months_owed": 14,
+        "seafarers": 1,
+        "uncovered_crew_months": 10
+      },
+      {
+        "vessel": "SAMED",
+        "imo": "9415375",
+        "months_owed": 5,
+        "seafarers": 10,
+        "uncovered_crew_months": 10
+      },
+      {
+        "vessel": "BETELGEUSE",
+        "imo": "8706741",
+        "months_owed": 13,
+        "seafarers": 1,
+        "uncovered_crew_months": 9
+      },
+      {
+        "vessel": "ADWAY",
+        "imo": "9563081",
+        "months_owed": 5,
+        "seafarers": 9,
+        "uncovered_crew_months": 9
+      },
+      {
+        "vessel": "HADI 51",
+        "imo": "9619581",
+        "months_owed": 5,
+        "seafarers": 8,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "GMC SILVER",
+        "imo": "8509002",
+        "months_owed": 5,
+        "seafarers": 8,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "KASHI",
+        "imo": "1039527",
+        "months_owed": 6,
+        "seafarers": 4,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "LADY MINA",
+        "imo": "8801113",
+        "months_owed": 5,
+        "seafarers": 8,
+        "uncovered_crew_months": 8
+      },
+      {
+        "vessel": "STAR JANET",
+        "imo": "8532372",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "EMANTHA",
+        "imo": "9469455",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "VASILIY BOZHENKO",
+        "imo": "8623999",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "CHI FU",
+        "imo": "8990172",
+        "months_owed": 5,
+        "seafarers": 7,
+        "uncovered_crew_months": 7
+      },
+      {
+        "vessel": "SAFEEN VICTORIA",
+        "imo": "9647033",
+        "months_owed": 10,
+        "seafarers": 1,
+        "uncovered_crew_months": 6
+      },
+      {
+        "vessel": "GREGALE",
+        "imo": "",
+        "months_owed": 7,
+        "seafarers": 2,
+        "uncovered_crew_months": 6
+      },
+      {
+        "vessel": "SEA TRUCK",
+        "imo": "7611509",
+        "months_owed": 5,
+        "seafarers": 6,
+        "uncovered_crew_months": 6
+      },
+      {
+        "vessel": "LEBBIE",
+        "imo": "4682894",
+        "months_owed": 5,
+        "seafarers": 5,
+        "uncovered_crew_months": 5
+      },
+      {
+        "vessel": "VICTORY 1",
+        "imo": "9088598",
+        "months_owed": 5,
+        "seafarers": 5,
+        "uncovered_crew_months": 5
+      },
+      {
+        "vessel": "HADI 44",
+        "imo": "9690743",
+        "months_owed": 6,
+        "seafarers": 2,
+        "uncovered_crew_months": 4
+      },
+      {
+        "vessel": "PRUVALINE",
+        "imo": "7615232",
+        "months_owed": 6,
+        "seafarers": 2,
+        "uncovered_crew_months": 4
+      },
+      {
+        "vessel": "NIKO PIROSMANI",
+        "imo": "8872344",
+        "months_owed": 5,
+        "seafarers": 3,
+        "uncovered_crew_months": 3
+      },
+      {
+        "vessel": "PROFESOR MIKHAYLO ALEKANDROV",
+        "imo": "9121118",
+        "months_owed": 5,
+        "seafarers": 3,
+        "uncovered_crew_months": 3
+      },
+      {
+        "vessel": "SARAH",
+        "imo": "8120478",
+        "months_owed": 6,
+        "seafarers": 1,
+        "uncovered_crew_months": 2
+      },
+      {
+        "vessel": "KONYUI",
+        "imo": "7607613",
+        "months_owed": 5,
+        "seafarers": 1,
+        "uncovered_crew_months": 1
+      },
+      {
+        "vessel": "KAM STAR",
+        "imo": "8220096",
+        "months_owed": 5,
+        "seafarers": 1,
+        "uncovered_crew_months": 1
+      }
+    ],
+    "over_release_cases": 0,
+    "over_release_note": "Impossible by construction: release pays only wages owed up to the contract end, capped at the reserve (test release_never_pays_more_than_is_owed)."
+  }
+}

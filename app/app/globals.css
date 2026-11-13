@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@font-face { font-family: "Zodiak"; src: url("/fonts/zodiak-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Zodiak"; src: url("/fonts/zodiak-800.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "General Sans"; src: url("/fonts/general-sans-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("/fonts/geist-mono-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("/fonts/geist-mono-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+
+:root {
+  --paper: #ecebe4;
+  --paper-hi: #f7f6f0;
+  --ink: #11140f;
+  --slate: #4f564b;
+  --lemon: #d4f25c;
+  --lemon-glow: rgba(212, 242, 92, 0.55);
+  --signal: #00805f;
+  --signal-bright: #00b386;
+  --mayday: #b23f19;
+  --brass: #725a2c;
+  --brass-soft: #a88a54;
+  --hair: rgba(138, 111, 62, 0.28);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-hi: var(--paper-hi);
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-lemon: var(--lemon);
+  --color-signal: var(--signal);
+  --color-mayday: var(--mayday);
+  --color-brass: var(--brass);
+  --font-display: "Zodiak", ui-serif, Georgia, serif;
+  --font-sans: "General Sans", ui-sans-serif, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+html { background: var(--paper); color: var(--ink); }
+body {
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Magazine lustre: fine paper grain and a soft lemon bloom, fixed behind everything. */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(900px 600px at 92% -10%, rgba(212, 242, 92, 0.16), transparent 70%);
+}
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.display { font-family: var(--font-display); letter-spacing: -0.02em; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass);
+}
+.hairline { border-color: var(--hair); }
+.ledger-row + .ledger-row { border-top: 1px solid var(--hair); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 600; font-size: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.btn-lemon { background: var(--lemon); color: var(--ink); box-shadow: 0 0 0 1px rgba(17,20,15,0.12) inset, 0 8px 30px -10px var(--lemon-glow); }
+.btn-lemon:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(17,20,15,0.18) inset, 0 12px 36px -8px var(--lemon-glow); }
+.btn-ink { background: var(--ink); color: var(--paper-hi); }
+.btn-ink:hover { transform: translateY(-1px); }
+.btn-outline { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+.btn-outline:hover { background: rgba(17,20,15,0.05); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.card { background: var(--paper-hi); border: 1px solid var(--hair); border-radius: 22px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 4px 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.glow-card { position: relative; overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease; }
+.glow-card:hover { transform: translateY(-2px); border-color: rgba(138, 111, 62, 0.55); }
+.glow-card .glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), var(--lemon-glow), transparent 70%); }
+.glow-card:hover .glow { opacity: 1; }
+
+@keyframes porthole-on { from { fill: #2a3326; filter: none; } to { fill: var(--lemon); } }
+.porthole { fill: #2a3326; }
+.porthole.on { animation: porthole-on 0.5s ease forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .glow-card:hover { transform: none; }
+  .glow-card .glow { display: none; }
+  .porthole { fill: var(--lemon); }
+}
