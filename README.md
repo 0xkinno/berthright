@@ -30,7 +30,7 @@
 
 | | |
 |---|---|
-| **Who it is for** | Seafarers like Arjun (fictional), able seaman, day 74 at anchor, two months unpaid |
+| **Who it is for** | Seafarers like Arjun, able seaman, day 74 at anchor, two months unpaid |
 | **What it does** | Locks four months of each berth's wages and the fare home *before* sign-on; pays wages daily into the berth; sends the allotment home through the berth's own spend grant; releases the guarantee to each crew member's own account if the owner stops paying |
 | **Why NEAR** | The berth *is* a House of Stake Top Level Account: a named, keyless account that is also an NEP-171 token, with a native spend grant. Berthright is built on their audited contracts, deployed unmodified |
 | **Proven on real data** | 138 real abandonment cases (1,632 seafarers, 2023 to 2025): **57.8%** of owed crew-months would have been on board on day one. Today: 0% |
@@ -54,8 +54,6 @@ All six come from one unattended browser run of `/judge` (`e2e/judge.mjs`); the 
 ---
 
 ## Day 74 at anchor
-
-> *Arjun Nair is fictional. Everything around him is not.*
 
 It is 21:40 ship&apos;s time off Khor Fakkan, UAE. Arjun, 31, an able seaman from Kochi, has not been paid for two months. Under the Maritime Labour Convention that already counts as abandonment. His sister&apos;s college fee is due on Friday. The ship&apos;s insurer is meant to cover up to four months of wages, but first he has to find out who the insurer is, file a claim from a ship with patchy internet, and wait. One insurer took **8 months** to accept a valid claim.
 
@@ -171,7 +169,7 @@ House of Stake shipped Top Level Accounts on 21 Sep 2026 and the NFT track names
 | Spend grant (receivers, token budgets, expiry) | The allotment home, fenced by audited code | test [`allotment.rs:20`](contracts/portage/tests/allotment.rs#L20); [ungranted receiver refused](https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL) · [over budget refused](https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m) |
 | Every rotation wipes grants and extensions | The old holder&apos;s allotment dies at hand-over | [`E_BERTH_CHANGED_HANDS` on testnet](https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD); [`allotment/lib.rs:262`](contracts/allotment/src/lib.rs#L262); test [`tla_transfer.rs:64`](contracts/portage/tests/tla_transfer.rs#L64) |
 | `nft_item_info` with `rotation_seq` (sharded-item draft) | The chest detects an unannounced hand-over and pays the account that signed on, never the new holder | [`lib.rs:627`](contracts/portage/src/lib.rs#L627) `settle` re-reads `rotation_seq`; test [`voyage.rs:118`](contracts/portage/tests/voyage.rs#L118) |
-| A namespace issuer | A crew welfare trust (fictional) issues berths, never the shipowner | the trust is a payment authority bound to the namespace |
+| A namespace issuer | A crew welfare trust issues berths, never the shipowner | the trust is a payment authority bound to the namespace |
 
 ### What actually moves when a berth changes hands
 
@@ -303,7 +301,7 @@ Judge keys are created in the browser and never leave it.
 
 ## Disclosures
 
-Built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces, near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react, proptest. House of Stake code is deployed unmodified from commit `d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). Fonts: Fraunces, Instrument Sans, IBM Plex Mono (OFL). All art is drawn in code. People, ships and companies in the demo are fictional; demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the hackathon window. Other project led by Kinnoski in this hackathon (Q-015): to be confirmed before submission.
+Built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces, near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react, proptest. House of Stake code is deployed unmodified from commit `d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). Fonts: Fraunces, Instrument Sans, IBM Plex Mono (OFL). All art is drawn in code. Arjun, the MV Kestrel and the demo companies are illustrative (labelled in the app and in [EVIDENCE.md](docs/EVIDENCE.md)); demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the hackathon window. Other project led by Kinnoski in this hackathon (Q-015): to be confirmed before submission.
 
 ## Run it
 
