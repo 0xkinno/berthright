@@ -23,7 +23,7 @@
   <img src="https://img.shields.io/badge/licence-MIT-c23d17" alt="MIT">
 </p>
 
-<p align="center"><img src="docs/screens/landing.png" alt="The Berthright landing page: a clay harbour at dawn with a seafarer beside the wage chest, a rope to a ship whose portholes are lit, and the headline Four months of wages, already on board" width="100%"></p>
+<p align="center"><img src="docs/screens/landing.png" alt="The Berthright landing page at night: seven drawn plates scattered round the headline Four months of wages, already on board, including the berth NFT with a full reserve bar, the ship at anchor, the daily wage ledger and the abandonment flare" width="100%"></p>
 
 ## At a glance
 
@@ -96,7 +96,7 @@ His reply was *"Alright.. Noted."* We record it as a review of the two rules, no
 </tr>
 </table>
 
-<p align="center"><img src="docs/screens/how.png" alt="How it works: stacked stitched cards, each with a clay scene for the reserve, the daily wages, the fenced allotment and the release" width="100%"></p>
+<p align="center"><img src="docs/screens/how.png" alt="How it works: stacked chart plates with brass corner ticks, each with a scene for the reserve, the daily wages, the fenced allotment and the release" width="100%"></p>
 
 **What the human does that software cannot:** sign on and off at the gangway; confirm the wage from their own contract (a model may read the photo, the crew member decides); choose who gets the allotment; hand the berth to the relief. After sign-on Berthright asks for at most one decision a month. Always shown, whatever else: abandonment declared, guarantee released, berth frozen, hand-over requested.
 

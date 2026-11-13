@@ -8,7 +8,7 @@ const DEMO = "ab2-kestrel.crew.berthright.testnet";
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
   const p = await ctx.newPage();
   const shot = async (path, name, opts = {}) => {
-    await p.goto(BASE + path, { waitUntil: "networkidle" });
+    await p.goto(BASE + path, { waitUntil: "load" });
     await p.waitForTimeout(opts.wait ?? 4500);
     if (opts.scroll) { await p.evaluate((y) => window.scrollTo(0, y), opts.scroll); await p.waitForTimeout(1500); }
     if (opts.before) await opts.before();
@@ -24,7 +24,7 @@ const DEMO = "ab2-kestrel.crew.berthright.testnet";
   await shot("/", "how", { scroll: 2350 });
   const m = await b.newContext({ ...require("playwright").devices["iPhone 15"] });
   const mp = await m.newPage();
-  await mp.goto(BASE + "/", { waitUntil: "networkidle" }); await mp.waitForTimeout(4500);
+  await mp.goto(BASE + "/", { waitUntil: "load" }); await mp.waitForTimeout(4500);
   await mp.screenshot({ path: OUT + "phone.png" }); console.log("saved phone");
   await b.close();
 })();
