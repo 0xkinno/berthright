@@ -10,6 +10,7 @@ import { short } from "@/lib/format";
 const LINKS = [
   { href: "/#how", label: "How it works" },
   { href: "/crew", label: "The berth" },
+  { href: "/berths", label: "Register" },
   { href: "/proof", label: "Proof" },
   { href: "/judge", label: "For judges" },
 ];

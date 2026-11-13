@@ -15,7 +15,7 @@ export function Footer() {
         <nav aria-label="Product">
           <p className="eyebrow">Product</p>
           <ul className="mt-3 space-y-1 text-[15px]">
-            {[["/crew", "Crew berth"], ["/judge", "For judges"], ["/proof", "Proof from chain"], ["/break", "Break it"], ["/findings", "Findings"]].map(([h, l]) => (
+            {[["/crew", "Crew berth"], ["/berths", "Berth register (NFTs)"], ["/judge", "For judges"], ["/proof", "Proof from chain"], ["/break", "Break it"], ["/findings", "Findings"]].map(([h, l]) => (
               <li key={h}><Link className="stitch-link inline-flex min-h-11 items-center" href={h}>{l}</Link></li>
             ))}
           </ul>

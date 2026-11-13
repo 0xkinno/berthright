@@ -110,6 +110,7 @@ export default function Home() {
       <section className="mx-auto max-w-[1344px] px-4 pt-24 sm:px-8 sm:pt-32">
         <Heading n="03" kicker="NFTs as accounts" title="The berth is the account." />
         <Reveal className="mt-10"><Anatomy /></Reveal>
+        <Link href="/berths" className="btn btn-outline mt-8">Every berth NFT, read from the registry <ArrowRight size={18} aria-hidden /></Link>
       </section>
 
       <section className="mx-auto max-w-[1344px] px-4 pt-24 sm:px-8 sm:pt-32">

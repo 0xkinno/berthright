@@ -17,7 +17,7 @@ const VIEWPORTS = [
   ["pixel-7", devices["Pixel 7"]],
   ["galaxy-s9", devices["Galaxy S9+"]],
 ];
-const ROUTES = ["/", "/judge", "/crew", "/proof", "/break", "/findings", "/ship/0", "/berth/ab2-kestrel.crew.berthright.testnet", "/family/arjun-family.berthright.testnet"];
+const ROUTES = ["/", "/judge", "/crew", "/berths", "/proof", "/break", "/findings", "/ship/0", "/berth/ab2-kestrel.crew.berthright.testnet", "/family/arjun-family.berthright.testnet"];
 mkdirSync("e2e/screens", { recursive: true });
 const report = [];
 let failures = 0;
