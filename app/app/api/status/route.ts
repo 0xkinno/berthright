@@ -28,6 +28,15 @@ async function viewProbe(contract: string, method: string, args: object = {}) {
   return `${contract}.${method} answered`;
 }
 
+async function balanceProbe(account: string | undefined, floor: number, job: string) {
+  if (!account) throw new Error("not configured on this deployment");
+  const r = await fetch(RPC_URLS[0], { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "query", params: { request_type: "view_account", finality: "final", account_id: account } }), cache: "no-store", signal: AbortSignal.timeout(6000) });
+  const j = await r.json();
+  const near = Number(BigInt(j.result.amount) / 10n ** 21n) / 1000;
+  if (near < floor) throw new Error(`${account} holds ${near.toFixed(3)} NEAR, below the ${floor} NEAR needed to ${job}`);
+  return `${account} holds ${near.toFixed(3)} NEAR (needs ${floor} to ${job})`;
+}
+
 export async function GET() {
   const fault = process.env.BERTHRIGHT_FAULT ?? null;
   const probes = await Promise.all([
@@ -37,6 +46,8 @@ export async function GET() {
     probe("allotment", () => viewProbe(IDS.allotment, "stats")),
     probe("House of Stake registry", () => viewProbe(IDS.registry, "nft_metadata")),
     probe("tUSD", () => viewProbe(IDS.tusd, "ft_metadata")),
+    probe("judge sponsor balance", () => balanceProbe(process.env.JUDGE_SPONSOR_ACCOUNT_ID, 0.5, "fund a judge run")),
+    probe("crew welfare trust balance", () => balanceProbe(process.env.TRUST_ACCOUNT_ID, 0.35, "issue a berth")),
     probe("NEAR Intents 1Click", async () => {
       const r = await fetch(`${ONECLICK}/tokens`, { cache: "no-store", signal: AbortSignal.timeout(6000) });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);

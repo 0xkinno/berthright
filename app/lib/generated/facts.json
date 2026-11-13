@@ -243,6 +243,65 @@
       "family": "arjun-family.berthright.testnet",
       "relief": "relief.berthright.testnet"
     },
-    "seeded_at": "2026-11-13T12:00:34.409Z"
+    "seeded_at": "2026-11-13T12:00:34.409Z",
+    "case_replay": {
+      "vessel": "SELIN",
+      "imo": "9033220",
+      "port": "Sharjah",
+      "country": "UAE",
+      "months_owed": 3,
+      "seafarers_listed": 2,
+      "crew_replayed": 2,
+      "source_url": "https://www.itfseafarers.org/en/directories/abandonment-list",
+      "retrieved": "2026-11-13",
+      "assumptions": {
+        "daily_wage_tusd": 13,
+        "secs_per_ship_day": 10,
+        "crew_accounts": "stand-ins"
+      },
+      "tx": {
+        "mint_selin-1": "G1ndCVdUy9SN7tNHEWNAxysohWkxdArMd2ktsk7UhQKp",
+        "mint_selin-2": "5rjR21kWoizumncJUrj1qcxUScm2RfiWsdYtFNhsQ6FT",
+        "faucet": "4R8dx8UBe4Q5HnzVpW2VEKbAonUMinqVf7Cx6uQmEt6q",
+        "create_ship": "9W1C9uQ6nwR6XibjPL1eXXzkiJ4ZoNVJeQhA5pk27qSf",
+        "open_selin-1": "7pWKXDMANUnt7RdpScQPj8GDLrDeMxgkVjw2DQ5NFyJW",
+        "open_selin-2": "3a7Xy5G2xUhPXxRFmrpPwVJbvfKPsJKFr5EDELprhSyJ",
+        "fund_reserve_only": "GkHD3yxiw5TXpMWuVXdH6Cw1etaV81MAZ8caiy2Ayo1m",
+        "sign_on_1": "78Hkrfhqpm1dowz7do5pkDKeGCBvAmcGnMGWuQcEPp2J",
+        "sign_on_2": "ByuqcKc8iTfYpo8DrRgN1QcqsdMG5oHE5gfUCJpj2Ab6",
+        "settle_records_arrears": "42iEA2xpy6RoezCwX3hvGGPQKF4CM7N9BsV2YoBLiND4",
+        "declare_abandonment": "AFLfqkAN6tZZgVtnTdsf14MaKVVoqzW8pMhGWbT3HLea",
+        "release_1": "3g787VfmpZDBLwDbh37x2i7yzZTE3p9ET1EipEhiwMfA",
+        "release_2": "Gm2mmGxsGpQxyRbC4WUUiD6yseCCstMYP9tRWtCWeTr"
+      },
+      "ship_id": "5",
+      "started_at": "2026-11-13T14:46:01.866Z",
+      "arrears_before_declare": "1201322016",
+      "crew": [
+        {
+          "berth": "selin-1.crew.berthright.testnet",
+          "holder": "selin-crew1.berthright.testnet",
+          "owed_wages": "1170000000",
+          "released": "1610000000",
+          "covered_wages": "1560000000",
+          "allowance": "50000000",
+          "uncovered": "1949999999",
+          "ok": true
+        },
+        {
+          "berth": "selin-2.crew.berthright.testnet",
+          "holder": "selin-crew2.berthright.testnet",
+          "owed_wages": "1170000000",
+          "released": "1610000000",
+          "covered_wages": "1560000000",
+          "allowance": "50000000",
+          "uncovered": "1949999999",
+          "ok": true
+        }
+      ],
+      "finished_at": "2026-11-13T15:01:35.957Z",
+      "owed_wages_covered": true,
+      "note": "uncovered = wages for the rest of the 9-month contract beyond the 4-month guarantee, not unpaid arrears"
+    }
   }
 }

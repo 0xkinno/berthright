@@ -162,14 +162,14 @@ House of Stake shipped Top Level Accounts on 21 Sep 2026 and the NFT track names
 
 | TLA property | Its job in Berthright | Where it is proven |
 |---|---|---|
-| A name that is an account | The chest pays it, the family recognises it, the record attaches to it | `portage.open_berth` accepts only `*.crew.berthright.testnet` |
-| NEP-171 token | Crew change is a token transfer; the holder is the crew member | test `sign_off_then_hand_over_pays_arjun_and_lets_the_relief_sign_on` |
+| A name that is an account | The chest pays it, the family recognises it, the record attaches to it | [`lib.rs:324`](contracts/portage/src/lib.rs#L324) `open_berth` accepts only `*.crew.berthright.testnet` ([/berths](https://berthright-app.vercel.app/berths) lists every one) |
+| NEP-171 token | Crew change is a token transfer; the holder is the crew member | [`lib.rs:426`](contracts/portage/src/lib.rs#L426) sign-on reads the holder; test [`voyage.rs:98`](contracts/portage/tests/voyage.rs#L98) |
 | No access keys; the owner acts through `w_execute_extension` | Nobody can bolt a key on; the shipowner never controls a berth | [AddKey refused on testnet](https://testnet.nearblocks.io/txns/8S2S3ZHPJ4SSer6NGAA2GCdXXJzryFek9v3tzsKgqWFL) (the wallet has no key operation at all) |
-| A live lease cannot move without its holder | The company cannot seize a berth | [`only_registry`](https://testnet.nearblocks.io/txns/2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi); test `add_key_on_a_berth_is_impossible_and_house_of_stake_cannot_move_it_alone` |
-| Owner freeze | A stolen phone in port: freeze, and wages keep arriving | test `a_frozen_berth_does_not_lose_wages` |
-| Spend grant (receivers, token budgets, expiry) | The allotment home, fenced by audited code | [ungranted receiver refused](https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL) · [over budget refused](https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m) |
-| Every rotation wipes grants and extensions | The old holder&apos;s allotment dies at hand-over | [`E_BERTH_CHANGED_HANDS` on testnet](https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD); test `tla_transfer_wipes_the_allotment_grant` |
-| `nft_item_info` with `rotation_seq` (sharded-item draft) | The chest detects an unannounced hand-over and pays the account that signed on, never the new holder | test `an_unannounced_hand_over_on_chain_pays_arjun_not_the_relief` |
+| A live lease cannot move without its holder | The company cannot seize a berth | [`only_registry`](https://testnet.nearblocks.io/txns/2Emhnus11YLooFugqGMh1EpVtwma6GZsjit1eSJAuYwi); test [`tla_transfer.rs:97`](contracts/portage/tests/tla_transfer.rs#L97) |
+| Owner freeze | A stolen phone in port: freeze, and wages keep arriving | test [`voyage.rs:78`](contracts/portage/tests/voyage.rs#L78) |
+| Spend grant (receivers, token budgets, expiry) | The allotment home, fenced by audited code | test [`allotment.rs:20`](contracts/portage/tests/allotment.rs#L20); [ungranted receiver refused](https://testnet.nearblocks.io/txns/7c7681vh2qqsyhucgJZuCgtKRm76xNxhq5B8XqXwfBUL) · [over budget refused](https://testnet.nearblocks.io/txns/6VBhNiScDuQyTNZEBrQ6huWJoii4qJ2q5w7o2ep2wC7m) |
+| Every rotation wipes grants and extensions | The old holder&apos;s allotment dies at hand-over | [`E_BERTH_CHANGED_HANDS` on testnet](https://testnet.nearblocks.io/txns/B8dunJfq4qkzViz8yUAdhttspNgzmgN8mrxYqK8QARBD); [`allotment/lib.rs:262`](contracts/allotment/src/lib.rs#L262); test [`tla_transfer.rs:64`](contracts/portage/tests/tla_transfer.rs#L64) |
+| `nft_item_info` with `rotation_seq` (sharded-item draft) | The chest detects an unannounced hand-over and pays the account that signed on, never the new holder | [`lib.rs:627`](contracts/portage/src/lib.rs#L627) `settle` re-reads `rotation_seq`; test [`voyage.rs:118`](contracts/portage/tests/voyage.rs#L118) |
 | A namespace issuer | A crew welfare trust (fictional) issues berths, never the shipowner | the trust is a payment authority bound to the namespace |
 
 ### What actually moves when a berth changes hands

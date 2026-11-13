@@ -35,6 +35,10 @@ export async function POST(req: Request) {
 
   const bal = BigInt((await sponsor.getBalance()) as unknown as string);
   if (bal < milli(0.5)) return NextResponse.json({ ok: false, reason: "The judge sponsor account is out of testnet NEAR. The operator has been asked to top it up." }, { status: 503 });
+  // The trust pays a 0.1 NEAR mint deposit and must hold the prepaid gas reservation for 200 Tgas.
+  // Checked before anything moves, so a short trust never strands the judge grants.
+  const trustBal = BigInt((await trust.getBalance()) as unknown as string);
+  if (trustBal < milli(0.35)) return NextResponse.json({ ok: false, reason: "The crew welfare trust is low on testnet NEAR, so it cannot issue a berth right now. Nothing was sent. The operator has been asked to top it up." }, { status: 503 });
 
   // Judge wallets are implicit accounts: the id is the browser key itself, so the sponsor only sends
   // a small grant (no sub-account to create) and the server never holds a judge key.
@@ -43,18 +47,19 @@ export async function POST(req: Request) {
   const ids = { owner: implicit(keys[0]), crew: implicit(keys[1]), family: implicit(keys[2]) };
   const txs: Record<string, string> = {};
   try {
+    // Mint first: if the berth cannot be issued, no grant has been sent yet.
+    const berthName = `j${rand}-ab2`;
+    const minted = await fnCall(trust, IDS.registry, "rent_sub_account_paid", {
+      tla_id: IDS.registrar, name: berthName, owner_account: ids.crew, payout_account: ids.crew, order_id: `judge-${rand}-${Date.now()}`,
+    }, milli(0.1), 200);
+    txs.issue_berth = minted.hash;
+    if (!minted.ok) throw new Error(`berth issue failed: ${minted.failure}`);
     // Sized from measured runs. NEAR reserves prepaid gas at a pessimistic price (about 0.1 NEAR per
     // 100 Tgas, refunded), so each account must hold enough for its largest single call.
     for (const [role, near] of [["owner", 0.3], ["crew", 0.15], ["family", 0.12]] as const) {
       const r: any = await sponsor.transfer({ token: NEAR_TOKEN, amount: milli(near), receiverId: ids[role] } as never);
       txs[`grant_${role}`] = r?.transaction?.hash ?? r?.transaction_outcome?.id ?? "";
     }
-    const berthName = `j${rand}-ab2`;
-    const minted = await fnCall(trust, IDS.registry, "rent_sub_account_paid", {
-      tla_id: IDS.registrar, name: berthName, owner_account: ids.crew, payout_account: ids.crew, order_id: `judge-${rand}-${Date.now()}`,
-    }, milli(0.1));
-    txs.issue_berth = minted.hash;
-    if (!minted.ok) throw new Error(`berth issue failed: ${minted.failure}`);
     perIp.set(ip, { day, n: (mine?.day === day ? mine.n : 0) + 1 });
     total = { day, n: (total.day === day ? total.n : 0) + 1 };
     return NextResponse.json({ ok: true, accounts: ids, berth: `${berthName}.${IDS.registrar}`, txs });

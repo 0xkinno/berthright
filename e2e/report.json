@@ -28,6 +28,15 @@
   },
   {
     "viewport": "desktop-1440",
+    "route": "/berths",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "desktop-1440",
     "route": "/proof",
     "hscroll": 0,
     "overlaps": [],
@@ -109,6 +118,15 @@
   },
   {
     "viewport": "laptop-1280",
+    "route": "/berths",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "laptop-1280",
     "route": "/proof",
     "hscroll": 0,
     "overlaps": [],
@@ -190,6 +208,15 @@
   },
   {
     "viewport": "ipad-mini",
+    "route": "/berths",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "ipad-mini",
     "route": "/proof",
     "hscroll": 0,
     "overlaps": [],
@@ -263,6 +290,15 @@
   {
     "viewport": "ipad-pro-11",
     "route": "/crew",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "ipad-pro-11",
+    "route": "/berths",
     "hscroll": 0,
     "overlaps": [],
     "small": [],
@@ -344,6 +380,15 @@
   {
     "viewport": "iphone-15",
     "route": "/crew",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "iphone-15",
+    "route": "/berths",
     "hscroll": 0,
     "overlaps": [],
     "small": [],
@@ -425,6 +470,15 @@
   {
     "viewport": "iphone-se",
     "route": "/crew",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "iphone-se",
+    "route": "/berths",
     "hscroll": 0,
     "overlaps": [],
     "small": [],
@@ -506,6 +560,15 @@
   {
     "viewport": "pixel-7",
     "route": "/crew",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "pixel-7",
+    "route": "/berths",
     "hscroll": 0,
     "overlaps": [],
     "small": [],
@@ -587,6 +650,15 @@
   {
     "viewport": "galaxy-s9",
     "route": "/crew",
+    "hscroll": 0,
+    "overlaps": [],
+    "small": [],
+    "axe": [],
+    "errors": []
+  },
+  {
+    "viewport": "galaxy-s9",
+    "route": "/berths",
     "hscroll": 0,
     "overlaps": [],
     "small": [],

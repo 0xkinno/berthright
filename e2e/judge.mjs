@@ -10,7 +10,7 @@ const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
 const errors = [];
 p.on("pageerror", (e) => errors.push(String(e)));
-await p.goto(`${BASE}/judge`, { waitUntil: "networkidle" });
+await p.goto(`${BASE}/judge`, { waitUntil: "load" });
 const count = async () => Number((await p.locator("aside p.mono").first().innerText()).split("/")[0]);
 async function step(i, wantCount, opts = {}) {
   const t0 = Date.now();
