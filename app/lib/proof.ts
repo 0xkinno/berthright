@@ -49,9 +49,10 @@ export async function runChecks(): Promise<{ checks: Check[]; block: number | nu
   await add("hos_commit", "House of Stake code deployed unmodified from a pinned commit", async () => [true, `houseofstake/tla-contracts@${HOS_COMMIT.slice(0, 10)}; wasm hashes in fleet/hos-wasm.sha256`]);
   const mainnetName = process.env.NEXT_PUBLIC_MAINNET_SAMPLE_LEASED_NAME;
   if (mainnetName) {
-    await add("mainnet_tla", "The same reader works on a real mainnet leased name", async () => {
+    await add("mainnet_tla", "The same reader works on a real House of Stake leased name on mainnet", async () => {
       const item = await view<any>(mainnetName, "nft_item_info", {}, { net: "mainnet" });
-      return [item.spec === "sharded-item-1.0.0", `${mainnetName}: owner ${item.owner_id}, status ${item.status}, rotation ${item.rotation_seq}`];
+      const p = await pinnedBerth(mainnetName, item.collection_id, "mainnet");
+      return [p.agree && item.spec === "sharded-item-1.0.0", `${mainnetName} at mainnet block ${p.block.height}: item owner ${p.item.owner_id}, ${item.collection_id} says ${p.token?.owner_id}, status ${p.item.status}, rotation ${p.item.rotation_seq}`];
     });
   }
   return { checks, block: block.height, at };

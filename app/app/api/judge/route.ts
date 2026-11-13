@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   if (!keys.every((k) => typeof k === "string" && PK.test(k))) return NextResponse.json({ ok: false, reason: "Send three ed25519 public keys created in your browser." }, { status: 400 });
 
   const bal = BigInt((await sponsor.getBalance()) as unknown as string);
-  if (bal < milli(1)) return NextResponse.json({ ok: false, reason: "The judge sponsor account is out of testnet NEAR. The operator has been asked to top it up." }, { status: 503 });
+  if (bal < milli(0.5)) return NextResponse.json({ ok: false, reason: "The judge sponsor account is out of testnet NEAR. The operator has been asked to top it up." }, { status: 503 });
 
   // Judge wallets are implicit accounts: the id is the browser key itself, so the sponsor only sends
   // a small grant (no sub-account to create) and the server never holds a judge key.
@@ -43,9 +43,9 @@ export async function POST(req: Request) {
   const ids = { owner: implicit(keys[0]), crew: implicit(keys[1]), family: implicit(keys[2]) };
   const txs: Record<string, string> = {};
   try {
-    // Measured needs: owner 0.25 (ship and berth deposits, three registrations, about ten calls),
-    // crew 0.15 (registration, allotment deposit, grant), family 0.06 (anyone-may-call steps).
-    for (const [role, near] of [["owner", 0.25], ["crew", 0.15], ["family", 0.06]] as const) {
+    // Sized from measured runs. NEAR reserves prepaid gas at a pessimistic price (about 0.1 NEAR per
+    // 100 Tgas, refunded), so each account must hold enough for its largest single call.
+    for (const [role, near] of [["owner", 0.3], ["crew", 0.15], ["family", 0.12]] as const) {
       const r: any = await sponsor.transfer({ token: NEAR_TOKEN, amount: milli(near), receiverId: ids[role] } as never);
       txs[`grant_${role}`] = r?.transaction?.hash ?? r?.transaction_outcome?.id ?? "";
     }

@@ -113,3 +113,22 @@ Photos rendered by `e2e/sea/make.cjs`; results in `e2e/sea/*.result.json`.
   bytes, and its signer `c6eb7050...8b6d` matches the model report fetched with a fresh nonce before
   the request. Limit: we do not yet verify the hardware quote in that report inside the app (NEAR AI's
   Verification Center does).
+
+## The judge voyage, end to end through the UI (13 Nov 2026)
+
+`node e2e/judge.mjs` drives `/judge` in headless Chromium with browser keys against the live testnet
+contracts and asserts every checklist tick, which the page derives from chain reads, not from its own state:
+
+```
+step 0 ok 1
+step 1 ok (2/8) in 30s
+step 2 ok (3/8) in 24s
+step 3 ok (4/8) in 15s
+step 4 ok (5/8) in 9s
+step 5 ok (6/8) in 24s
+step 6 ok (7/8) in 24s
+step 7 ok (8/8) in 35s
+voyage complete: 8/8, 22 transaction links, page errors: 0
+```
+
+Transactions from that run (in order): [1](https://testnet.nearblocks.io/txns/GK7PmbWAFkasQcbEaBSaUUxbf5sbgK3VMhDnLQK8PuXP), [2](https://testnet.nearblocks.io/txns/ENExyFqMEbMgi9sHuDuCWuhpDbi2sRfXgtWPpALiG9Wk), [3](https://testnet.nearblocks.io/txns/DE6MCZbyrgpG86pdz9mggaBarHdtYYnno7xKLKskghAo), [4](https://testnet.nearblocks.io/txns/3y3vzcKgpRWEWzDLEUfNn6yRMfXeHq19BE8HMgoAemqq), [5](https://testnet.nearblocks.io/txns/7y96Me1DEoUMFCppdUzbNpM5yiHQui6GNRf3HF3kCXGL), [6](https://testnet.nearblocks.io/txns/9gmsEqb5BZmMwUfcvprbT4UnriYN9VdHKTBGnh7yyDFn), [7](https://testnet.nearblocks.io/txns/EtBTVtC1HF2eyJyQNM2YUA4giDJ71FJRsBCM3JMpC54L), [8](https://testnet.nearblocks.io/txns/2SfjadXd4os8ZS13ZUtrZNrmiriVko4ejTawrzPLEjp4), [9](https://testnet.nearblocks.io/txns/3n57wKThD4JkyESSXSGcikkspTfksDzncrfNG2nyZi4S), [10](https://testnet.nearblocks.io/txns/GxrWzxnF68g84bBpmecCD7amt3nB67MJxNPwnJgG8Cy9), [11](https://testnet.nearblocks.io/txns/84jLGiMuSRg4trxYWYUTDM5zSsKpEWw8RogujodXa6fV), [12](https://testnet.nearblocks.io/txns/DhbeoSWqEuXtYQTnTbuTYSAdjKK41BFNitNNWhDpVUKp), [13](https://testnet.nearblocks.io/txns/7wGej81R7zWunzr6uv5T9c3M18hnyU7M7J34KPiDBp8h), [14](https://testnet.nearblocks.io/txns/5KPmrKPma1XguF7wb3wpR41CD2iSwTkpbxVDSgFrvDD8), [15](https://testnet.nearblocks.io/txns/8N3qzuqeeCjqPVhSKxpZwHh7iDUwkw3im6T6PeBZwcAW), [16](https://testnet.nearblocks.io/txns/5vyDBpqwybzt5LmgKbN4JAPdQ5CRDw7GnNAKsbsUfEBg), [17](https://testnet.nearblocks.io/txns/GqjV8wFPtUgvB5jbbeju14Zvgt8SB8E5UYWZ2bypA8Jm), [18](https://testnet.nearblocks.io/txns/6dBYfM6jxzSteXLmzCFYNb4DntCXAdAdMngHHB5QuhuW), [19](https://testnet.nearblocks.io/txns/AX41JhypxqEH9sYyVEu3HK9DAw4EDBrT1LBfsEEwMdE7), [20](https://testnet.nearblocks.io/txns/4YCMVFV7BKniL4euEXu5Cmoexqb7eb7ewqDkRMbhAuxw), [21](https://testnet.nearblocks.io/txns/9Fec6TWX2NTn9DwQRHfQvPYP73a7HtMRQENaeBV3vrdd), [22](https://testnet.nearblocks.io/txns/5rcL5UQvcCYjybGKmMWMHwFnp5pqtohmmGiG4mGq1EWo)
