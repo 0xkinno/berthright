@@ -62,7 +62,7 @@ export default function Home() {
           <Link href="/judge" className="btn btn-lemon">Run the 4-minute voyage <ArrowRight size={18} aria-hidden /></Link>
           <Link href="/crew" className="btn btn-outline">See a berth</Link>
         </div>
-        <p className="corner-label mt-6">Drag a plate · click to open</p>
+        <Link href="/proof#mainnet-title" className="stitch-link mt-6 inline-flex min-h-11 items-center gap-2 font-mono text-[13px] uppercase tracking-[0.14em] text-[color:var(--lamp)]">Also on mainnet: a real voyage in USDC <ArrowRight size={14} aria-hidden /></Link>
         <div className="mt-4 xl:hidden"><HeroLive tone="night" /></div>
       </HeroDeck>
 

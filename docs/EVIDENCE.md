@@ -161,3 +161,24 @@ the crank's function-call keys. Both runs below were started with workflow_dispa
 - Run 2, https://github.com/0xkinno/berthright/actions/runs/43455049785 : two allotments sent, and seven
   guarantees released to the crew members' own accounts, five of them MV Kestrel's, for example
   [ab2-kestrel](https://testnet.nearblocks.io/txns/88uwJ8oaQwCZMxiW1yZrXz4HaaBg6MrEoL5yUaiHMphC).
+
+
+## Mainnet voyage in real USDC (13 Nov 2026)
+
+`NEAR_NETWORK=mainnet npx tsx scripts/mainnet-voyage.ts`, funded from Base through NEAR Intents (1Click). Accounts under `berthright.near`; the berth is `berthright.seafarer`, rented from House of Stake's `registry.hos` in the Open `seafarer` namespace.
+
+| Step | Call | Transaction |
+|---|---|---|
+| Funded from Base through NEAR Intents: 3 + 30 USDC to native NEAR | 1Click, Base to NEAR | [4y788AYa](https://nearblocks.io/txns/4y788AYacunMRPGPNvxoMHxPc5TARZptM36tYATEw4HB), [3rQ97Cka](https://nearblocks.io/txns/3rQ97Cka9PLCQbtjEWVovQJFqTT5maqn4qmxW8Ls2Hq6) |
+| Wage chest deployed, same build as testnet, wired to `registry.hos` / `seafarer` | deploy, `new` | [deploy](https://nearblocks.io/txns/8pLiho8zgsCJcaFzbJmxUoQFtDLSaAPfhLwzatqjCXud), [new](https://nearblocks.io/txns/HA3pLQxKiPwQAr4t8N3uiU2idV358U1dSyreBKy6SDww) |
+| Chest sealed before any money moved: its only key deleted | DeleteKey | [sealed](https://nearblocks.io/txns/G24fvocRP3zPkPYqyd5BJRX1ujuHLiW9sGdHadjb2Jhi) |
+| Berth rented by the crew member: `berthright.seafarer`, a real House of Stake leased name | `registry.hos.rent_sub_account` | [rented](https://nearblocks.io/txns/5HoXEQAWZKdbfgMpbaV5doAqRUuGWWmCno7XMBMUXmWj) |
+| Shipowner buys USDC with NEAR through NEAR Intents | 1Click, NEAR to USDC | [deposit](https://nearblocks.io/txns/GLz84ppoxf4MvvK4eGHSbWkyTxd9i9dgybfieySPMmYF) |
+| Sign-on refused: four months not on board | `sign_on` | [refused](https://nearblocks.io/txns/CirKSZyaF8jNTyZnTwuM2PaUJBvfhSSmAcMBkn6H1xt2) |
+| Four months plus the fare home locked, 1.30 USDC | `ft_transfer_call` | [locked](https://nearblocks.io/txns/GWu78aFqBsYqPk2USz8w9JuCHfNs6r3WVo3BrWNHUxc7) |
+| Crew member signs on | `sign_on` | [signed on](https://nearblocks.io/txns/DmcGc9rXtLNYwJCaEpGsu2mSd4bPd4FEPTvtBr9VToc5) |
+| Early abandonment refused | `declare_abandonment` | [refused](https://nearblocks.io/txns/4iy4LBvqkZRadWBqrk1MFuaSnAFpMrsrTFChgVpNzWxs) |
+| Abandonment declared after 14 ship days unpaid | `declare_abandonment` | [declared](https://nearblocks.io/txns/3HFc5pcZT28gMgPYzRwWWQ1gHStrbs6KVRUcGhkQsfa1) |
+| Guarantee released: 1.30 USDC to `crew.berthright.near` | `release_guarantee` | [released](https://nearblocks.io/txns/2N6agBQbjHGd8pMErN8Nqjc2KDXezMVVxP9G8utRDhq5) |
+
+Leftovers returned to the funder on Base through 1Click: 1.946322 USDC to 1.943693 USDC (Base tx `0x92bb37a778d9e1925dcdbd8a683e0b26ed74af748828292e94bcd4017a427406`), and 3.2525 NEAR to 11.490548 USDC (Base tx `0x51df5b813d30a251236f6960c42769bbcc7183bbb2f116f83a358871a12a036f`). Net cost of the run: the berth rent for a year and the chest's permanent storage, plus swap fees and gas.

@@ -1,0 +1,128 @@
+{
+  "network": "mainnet",
+  "tx": {
+    "create_root": "96TVWWQefEPCiRJg2zQaQRfHaePC7L38e6FqsP8yFqvs",
+    "create_chest": "9LqGaqNMEczgbhAZxSCcY5cKEJYa2zUqitZzWqrr4a9S",
+    "create_crew": "4ZKfW9HxkcVobvGzr1sbTYkkZ6ebMQFC5rBasCMB3m8W",
+    "create_owner": "2gUwRufVUhK1mFF2wMUugYhPL18tpX3XgPSDc6Dewmcg",
+    "deploy_chest": "8pLiho8zgsCJcaFzbJmxUoQFtDLSaAPfhLwzatqjCXud",
+    "chest_new": "HA3pLQxKiPwQAr4t8N3uiU2idV358U1dSyreBKy6SDww",
+    "seal_chest_delete_key": "G24fvocRP3zPkPYqyd5BJRX1ujuHLiW9sGdHadjb2Jhi",
+    "rent_berth": "5HoXEQAWZKdbfgMpbaV5doAqRUuGWWmCno7XMBMUXmWj",
+    "usdc_register_owner": "CWvTqYGdSD4hKWYQsVhcir6kzYMEa6fPhMyzDz2kYf3a",
+    "usdc_register_crew": "Fkjt5DjiL9NA4rYXN2N28s1usnXB9pbr73fkFWee6D5b",
+    "usdc_register_chest": "8H1mvzxsobJ1n77D5QTS2sSKnewfCe6oWGvaTeAK6KHn",
+    "usdc_register_berthright": "Hb5oWs9Hr4hdcZnRCS8rWjb1dYrMUmPCFjh4mVxebdNH",
+    "wnear_register_owner": "44TovENXiY1dRESf9V2Kf3ot5S4R1WMZEELa6AXL5yHW",
+    "wnear_register_deposit": "BJLpeR3nLUrj3MmXyUyXZSCZxf5aXCVG2spYMjcaxVDE",
+    "wrap_near": "E9BsTe8zezw98LhmZbLLyQsrCxBGoBiCv9t2cqM8HNcL",
+    "intents_deposit_wnear": "GLz84ppoxf4MvvK4eGHSbWkyTxd9i9dgybfieySPMmYF",
+    "create_ship": "F3kaGbMBRNBQg9NQAA7AdA7riR4nFP7o54ddBEn1jJWG",
+    "open_berth": "HygB9nqsSKL4ZL8tsUSxmFDWexD5kNz8uZREWjkhRL7k",
+    "sign_on_refused": "CirKSZyaF8jNTyZnTwuM2PaUJBvfhSSmAcMBkn6H1xt2",
+    "fund_reserve_usdc": "GWu78aFqBsYqPk2USz8w9JuCHfNs6r3WVo3BrWNHUxc7",
+    "sign_on": "DmcGc9rXtLNYwJCaEpGsu2mSd4bPd4FEPTvtBr9VToc5",
+    "settle_arrears": "3wFvtjABH5ga2TwkjE5R4BwjftXzVRuuArMqkzDzrSZn",
+    "declare_refused_early": "4iy4LBvqkZRadWBqrk1MFuaSnAFpMrsrTFChgVpNzWxs",
+    "declare_abandonment": "3HFc5pcZT28gMgPYzRwWWQ1gHStrbs6KVRUcGhkQsfa1",
+    "release_guarantee_usdc": "2N6agBQbjHGd8pMErN8Nqjc2KDXezMVVxP9G8utRDhq5"
+  },
+  "notes": {
+    "funding": [
+      {
+        "via": "NEAR Intents 1Click",
+        "from": "USDC on Base",
+        "amount_in": "3.0",
+        "near_out": "0.846687934437421477079795",
+        "base_tx": "0x5b0571139b1b8ec10747934e2380c466836d03921b96765845f9fce108e48122",
+        "near_tx": "4y788AYacunMRPGPNvxoMHxPc5TARZptM36tYATEw4HB"
+      },
+      {
+        "via": "NEAR Intents 1Click",
+        "from": "USDC on Base",
+        "amount_in": "30.0",
+        "near_out": "8.458536748675821778971",
+        "base_tx": "0x3c5d0b3129eeccb0afd1c62cb909675fe5a97344415c1498299abf581e32b4d7",
+        "near_tx": "3rQ97Cka9PLCQbtjEWVovQJFqTT5maqn4qmxW8Ls2Hq6"
+      }
+    ],
+    "chest_wasm_sha256": "c9772cc3d3c613651d59c0d8f47b7df73cf10daafa23a0604e2c86e6e3548c41",
+    "rent_quote_yocto": "2243983207649848402394465",
+    "berth_item": {
+      "owner": "crew.berthright.near",
+      "collection": "registry.hos",
+      "rotation_seq": "0",
+      "registry_owner": "crew.berthright.near"
+    },
+    "owner_swap_quote": {
+      "depositAddress": "3f9f4fff48d32742106916afb118fb10f6f4f0ac2b057c3cadb39c78d49f7d9e",
+      "amountOut": "1.946871"
+    },
+    "owner_swap": {
+      "status": "SUCCESS",
+      "out": "1.946322",
+      "nearTxHashes": [
+        "9uLFX4bxSXiCnQvxqjJqXWcLEv6rZunDQcnfEHGdEmdS",
+        "8G97KBg5r1acqQ2Z1MHZDrBtmouyNxhLCQXrq6DagBAW",
+        "HKzJA43ekqe6LqjchFWqv83KwzdrSR7shq2jnGybTFBB",
+        "Fhpa84By7L6uj1vtiUZXLMxwed9k3VcCUweXas75ArdR"
+      ]
+    },
+    "owner_swap_done": true,
+    "ship_id": "0",
+    "sign_on_refused_code": "E_RESERVE_NOT_ON_BOARD",
+    "signed_on_at": "2026-11-13T20:12:28.873Z",
+    "declare_refused_code": "E_NOT_YET_ABANDONED",
+    "release": {
+      "ship_id": "0",
+      "berth": "berthright.seafarer",
+      "holder": "crew.berthright.near",
+      "amount": "1300000",
+      "covered_wages": "1200000",
+      "allowance": "100000",
+      "uncovered": "1499999",
+      "returned_to_ship": "0"
+    },
+    "crew_usdc": "1300000",
+    "finished_at": "2026-11-13T20:15:06.080Z"
+  },
+  "refund": {
+    "to": "0x5988dC80F022F053FcEd865F8123d4CBf8d0F254",
+    "tx": {
+      "crew_usdc_to_owner": "ELTs4gFsU12fEdSEmtHJdakhM62BTz65d59tpT1WzGNZ",
+      "usdc_register_deposit": "N17sCKS3cMMmkAAbH2rfdJHsthVFfTtUkxh6WjiJG3M",
+      "usdc_to_intents": "24HpKPh3Ee2RfKtejjF5V7stpifTUkqghheeqsbP5ySw",
+      "gather_crew.": "9Berkm1wmrXVgf24M86QTjg6nSA8M9oCAt1PqEQisQ29",
+      "gather_owner": "AmUEFq4P6qQxvEbmzk8k1p8jrACwXAdhRoh4V9LcPdGz",
+      "gather_60619": "6cqcvftNUMCXACT3GnyibED2LV54u9UGYZRpbPvoJoM7",
+      "wnear_register_root": "J8ynCwdD6a8jJpFFzk1KWWKuqnt6rhFEnUvgwfCPnnVZ",
+      "wnear_register_deposit": "FwVEGjQqi57PsLzncfVTKwGDXuu2m1t2tEwaev5jVepf",
+      "wrap_near": "CkguKQZ8rwRKfghpZwtxoxn5ZLz2zMV6yF2L3oR11SV8",
+      "wnear_to_intents": "23gFaihxLhqqpEyKu5UapKWrMJaexy5tCkJ9GXq39Yfy"
+    },
+    "usdc": {
+      "status": "SUCCESS",
+      "in": "1.946322",
+      "out": "1.943693",
+      "base_tx": [
+        {
+          "hash": "0x92bb37a778d9e1925dcdbd8a683e0b26ed74af748828292e94bcd4017a427406",
+          "explorerUrl": ""
+        }
+      ]
+    },
+    "usdc_done": true,
+    "near": {
+      "status": "SUCCESS",
+      "in": "3.252475881512643785608437",
+      "out": "11.490548",
+      "base_tx": [
+        {
+          "hash": "0x51df5b813d30a251236f6960c42769bbcc7183bbb2f116f83a358871a12a036f",
+          "explorerUrl": ""
+        }
+      ]
+    },
+    "near_done": true
+  }
+}

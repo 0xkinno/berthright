@@ -20,7 +20,7 @@
 
 <p align="center">
   <a href="https://github.com/0xkinno/berthright/actions/workflows/ci.yml"><img src="https://github.com/0xkinno/berthright/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/NEAR-testnet%20live-0f2a3a" alt="NEAR testnet live">
+  <img src="https://img.shields.io/badge/NEAR-testnet%20%2B%20mainnet-0f2a3a" alt="NEAR testnet and mainnet">
   <img src="https://img.shields.io/badge/licence-MIT-c23d17" alt="MIT">
 </p>
 
@@ -34,7 +34,7 @@
 | **What it does** | Locks four months of each berth's wages and the fare home *before* sign-on; pays wages daily into the berth; sends the allotment home through the berth's own spend grant; releases the guarantee to each crew member's own account if the owner stops paying |
 | **Why NEAR** | The berth *is* a House of Stake Top Level Account: a named, keyless account that is also an NEP-171 token, with a native spend grant. Berthright is built on their audited contracts, deployed unmodified |
 | **Proven on real data** | 138 real abandonment cases (1,632 seafarers, 2023 to 2025): **57.8%** of owed crew-months would have been on board on day one. Today: 0% |
-| **Proven on chain** | A full voyage through the UI on testnet, 8 of 8 checks, 22 transactions; 10 refusals recorded as real transactions; `verify.ts` rebuilds every ship from events (22 of 22 checks, 13 Nov) and fails on tampering; one real ITF case (SELIN) run end to end on testnet |
+| **Proven on chain** | A full voyage through the UI on testnet, 8 of 8 checks, 22 transactions; 10 refusals recorded as real transactions; `verify.ts` rebuilds every ship from events (22 of 22 checks, 13 Nov) and fails on tampering; one real ITF case (SELIN) run end to end on testnet; **one voyage on mainnet in real USDC**, funded from Base through NEAR Intents |
 | **Tracks** | NFTs That Do Something (`nfts`) · Real-World Money (`realworld`) · Open Innovation (`open`) |
 | **Built with** | House of Stake TLA (`hos-wallet`, `tla-registry`, `registrar`, `hos-extension`, `mpc-recovery`) · NEP-171/141/145/148/297/413/366 · NEAR Intents 1Click · NEAR AI Cloud (TEE) |
 
@@ -50,6 +50,27 @@
 | Four months and the fare home released to the crew member's own account | `portage.release_guarantee` | [released](https://testnet.nearblocks.io/txns/5rcL5UQvcCYjybGKmMWMHwFnp5pqtohmmGiG4mGq1EWo) |
 
 All six come from one unattended browser run of `/judge` (`e2e/judge.mjs`); the full list of 22 is in [EVIDENCE.md](docs/EVIDENCE.md).
+
+
+### On mainnet, in real USDC
+
+The same chest also ran one voyage on NEAR mainnet at demo scale (0.01 USDC a ship day, a ten-second ship day), funded from Base through NEAR Intents and paying a real House of Stake berth. `/proof` rechecks it live: the chest holds zero keys, its code hash equals the reproducible build, `berthright.seafarer` agrees with `registry.hos`, and the berth reads Released.
+
+| What happens | Call | Transaction |
+|---|---|---|
+| Funded from Base through NEAR Intents: 3 + 30 USDC to native NEAR | 1Click, Base to NEAR | [4y788AYa](https://nearblocks.io/txns/4y788AYacunMRPGPNvxoMHxPc5TARZptM36tYATEw4HB), [3rQ97Cka](https://nearblocks.io/txns/3rQ97Cka9PLCQbtjEWVovQJFqTT5maqn4qmxW8Ls2Hq6) |
+| Wage chest deployed, same build as testnet, wired to `registry.hos` / `seafarer` | deploy, `new` | [deploy](https://nearblocks.io/txns/8pLiho8zgsCJcaFzbJmxUoQFtDLSaAPfhLwzatqjCXud), [new](https://nearblocks.io/txns/HA3pLQxKiPwQAr4t8N3uiU2idV358U1dSyreBKy6SDww) |
+| Chest sealed before any money moved: its only key deleted | DeleteKey | [sealed](https://nearblocks.io/txns/G24fvocRP3zPkPYqyd5BJRX1ujuHLiW9sGdHadjb2Jhi) |
+| Berth rented by the crew member: `berthright.seafarer`, a real House of Stake leased name | `registry.hos.rent_sub_account` | [rented](https://nearblocks.io/txns/5HoXEQAWZKdbfgMpbaV5doAqRUuGWWmCno7XMBMUXmWj) |
+| Shipowner buys USDC with NEAR through NEAR Intents | 1Click, NEAR to USDC | [deposit](https://nearblocks.io/txns/GLz84ppoxf4MvvK4eGHSbWkyTxd9i9dgybfieySPMmYF) |
+| Sign-on refused: four months not on board | `sign_on` | [refused](https://nearblocks.io/txns/CirKSZyaF8jNTyZnTwuM2PaUJBvfhSSmAcMBkn6H1xt2) |
+| Four months plus the fare home locked, 1.30 USDC | `ft_transfer_call` | [locked](https://nearblocks.io/txns/GWu78aFqBsYqPk2USz8w9JuCHfNs6r3WVo3BrWNHUxc7) |
+| Crew member signs on | `sign_on` | [signed on](https://nearblocks.io/txns/DmcGc9rXtLNYwJCaEpGsu2mSd4bPd4FEPTvtBr9VToc5) |
+| Early abandonment refused | `declare_abandonment` | [refused](https://nearblocks.io/txns/4iy4LBvqkZRadWBqrk1MFuaSnAFpMrsrTFChgVpNzWxs) |
+| Abandonment declared after 14 ship days unpaid | `declare_abandonment` | [declared](https://nearblocks.io/txns/3HFc5pcZT28gMgPYzRwWWQ1gHStrbs6KVRUcGhkQsfa1) |
+| Guarantee released: 1.30 USDC to `crew.berthright.near` | `release_guarantee` | [released](https://nearblocks.io/txns/2N6agBQbjHGd8pMErN8Nqjc2KDXezMVVxP9G8utRDhq5) |
+
+Leftovers went back to the funder's Base wallet through NEAR Intents: 1.943693 and 11.490548 USDC. Every hash is in [data/mainnet.json](data/mainnet.json).
 
 ---
 
@@ -246,7 +267,7 @@ npx tsx scripts/verify.ts --tamper
 
 | Account | Keys | Can | Cannot |
 |---|---|---|---|
-| `portage.berthright.testnet` (wage chest) | **none** (deleted after init) | run its own rules | be upgraded or drained by anyone, including us |
+| `portage.berthright.testnet` and `chest.berthright.near` (wage chest) | **none** (deleted after init) | run its own rules | be upgraded or drained by anyone, including us |
 | `allotment.berthright.testnet` | **none** | ask a berth to pay inside its grant | pay anyone the crew member did not name, or more than they allowed |
 | `tusd.berthright.testnet` | **none** | mint 5,000 test dollars a day per account | anything else |
 | each berth (`*.crew.berthright.testnet`) | **none** (HoS wallet) | act only when its holder calls it | be driven by the shipowner, the trust or us |
@@ -272,11 +293,12 @@ Judge keys are created in the browser and never leave it.
 
 | Piece | State |
 |---|---|
-| Wage chest, allotment, tUSD | **live** on testnet, keyless; code hashes equal the reproducible build |
+| Wage chest | **live** on testnet and on **mainnet** (`chest.berthright.near`), keyless; code hash equals the reproducible build on both |
+| Allotment, tUSD | **live** on testnet, keyless |
 | House of Stake TLA fleet | **live** on testnet: their six contracts, unmodified from commit `d85860a`, deployed by us under `berthright.testnet` (HoS&apos;s mainnet fleet does not issue our crew namespace) |
-| House of Stake on mainnet | **live read**: `/proof` pins a real leased name (`gun.club`, collection `registry.hos`) to one block |
+| House of Stake on mainnet | **live**: our mainnet berth `berthright.seafarer` is a real leased name rented from `registry.hos`; `/proof` also pins `gun.club` |
 | NEAR AI contract reader | **live**: Qwen3-VL in a TEE; reply signatures verified against the attested signer |
-| NEAR Intents | **live** 1Click quotes on mainnet, partner key, `dry: true`; no swap executed |
+| NEAR Intents | **live on mainnet**: five 1Click swaps executed (Base USDC in twice, NEAR to USDC for the reserve, and both leftovers back to Base); live quotes in `/family` |
 | Test dollars | `tUSD` stands in for a stablecoin; ships accept any NEP-141 token |
 | Relayer (NEP-366) | built and allowlisted; off unless a relayer key is configured |
 
@@ -293,7 +315,7 @@ Judge keys are created in the browser and never leave it.
 
 ## Limits
 
-- The money loop runs on testnet. No real wages have moved.
+- The full app runs on testnet. The mainnet voyage is demo scale (0.01 USDC a ship day on a fast clock), one berth, real USDC.
 - A cross-contract read can be one or two blocks stale; a settle racing a hand-over could pay one settlement into a berth the relief now holds. The app signs off before every hand-over.
 - The deployed allotment records "sent" when the berth wallet accepts the request, even if the inner token transfer then fails (House of Stake runs it detached; FRICTION #12). The crank only runs an allotment when the berth holds the amount; v1.1 adds a joint balance read and is ready to deploy.
 - The guarantee is four months. Some real cases ran 18 months or more: those are the partial misses above.

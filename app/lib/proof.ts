@@ -1,6 +1,10 @@
 // The checks /proof runs in the browser and /proof.json runs on the server. Same code, both places.
 import { IDS, DEPLOYED, DEPLOYMENT, HOS_COMMIT } from "./config";
 import { accessKeys, viewAccount, view, finalBlock, pinnedBerth } from "./near";
+import mainnetRun from "./generated/mainnet.json";
+
+// The mainnet voyage: a keyless chest on mainnet paying a real House of Stake berth in USDC.
+export const MAINNET = { chest: "chest.berthright.near", berth: "berthright.seafarer", registry: "registry.hos", crew: "crew.berthright.near", usdc: "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1", run: mainnetRun as any };
 
 export interface Check { id: string; claim: string; ok: boolean | null; detail: string }
 
@@ -48,6 +52,19 @@ export async function runChecks(onUpdate?: (checks: Check[]) => void): Promise<{
     });
   }
   add("hos_commit", "House of Stake code deployed unmodified from a pinned commit", async () => [true, `houseofstake/tla-contracts@${HOS_COMMIT.slice(0, 10)}; wasm hashes in fleet/hos-wasm.sha256`]);
+  add("mainnet_chest_keys", "Mainnet: the wage chest holds zero access keys", async () => { const k = await accessKeys(MAINNET.chest, "mainnet"); return [k.length === 0, `${k.length} keys on ${MAINNET.chest}`]; });
+  add("mainnet_chest_hash", "Mainnet: the chest runs the same reproducible build as testnet", async () => {
+    const a = await viewAccount(MAINNET.chest, "mainnet"); const expected = DEPLOYMENT?.code_hashes?.portage?.wasm_sha256_b58;
+    return [!!expected && a.code_hash === expected, `mainnet ${a.code_hash}, build ${expected ?? "unknown"}`];
+  });
+  add("mainnet_berth", "Mainnet: the berth is a real House of Stake leased name, and both sides agree", async () => {
+    const p = await pinnedBerth(MAINNET.berth, MAINNET.registry, "mainnet");
+    return [p.agree && p.item.owner_id === MAINNET.crew, `${MAINNET.berth} at mainnet block ${p.block.height}: item owner ${p.item.owner_id}, ${MAINNET.registry} says ${p.token?.owner_id}`];
+  });
+  add("mainnet_release", "Mainnet: the guarantee was released in real USDC to the crew member", async () => {
+    const b = await view<any>(MAINNET.chest, "get_berth", { berth: MAINNET.berth }, { net: "mainnet" });
+    return [b.status === "Released" && BigInt(b.paid_to_holder) > 0n, `${MAINNET.berth}: ${b.status}, ${(Number(b.paid_to_holder) / 1e6).toFixed(2)} USDC paid to ${b.holder}`];
+  });
   const mainnetName = process.env.NEXT_PUBLIC_MAINNET_SAMPLE_LEASED_NAME;
   if (mainnetName) {
     add("mainnet_tla", "The same reader works on a real House of Stake leased name on mainnet", async () => {

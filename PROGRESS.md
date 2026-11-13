@@ -56,3 +56,8 @@ Done:
 - `TASK.md` committed with every tick backed by evidence.
 
 Waiting on Kinnoski: crank secrets, one manual wallet pass, agent skills install, video, X post, form.
+
+## 13 Nov 2026, evening: mainnet
+
+- One voyage on NEAR mainnet in real USDC: keyless chest `chest.berthright.near` (same build as testnet), berth `berthright.seafarer` rented from House of Stake's `registry.hos`, sign-on refused, reserve locked, signed on, early declaration refused, abandonment declared, 1.30 USDC released to the crew member. Every hash in `data/mainnet.json`; `/proof` rechecks it live.
+- Funded from Base through NEAR Intents (1Click); the shipowner bought USDC through 1Click; leftovers returned to the funder on Base through 1Click. Five executed swaps.

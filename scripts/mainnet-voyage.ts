@@ -70,9 +70,9 @@ async function main() {
     await mustOk("create_root", call(op, "near", "create_account", { new_account_id: ROOT, new_public_key: kp.getPublicKey().toString() }, { deposit: amt, gasT: 100 }));
   }
   const root = account(ROOT);
-  const chest = await subAccount(root, CHEST, 3.0);
-  const crew = await subAccount(root, CREW, 2.75);
-  const owner = await subAccount(root, OWNER, 0.95);
+  const chest = await subAccount(root, CHEST, 2.8);
+  const crew = await subAccount(root, CREW, 2.6);
+  const owner = await subAccount(root, OWNER, 0.9);
 
   // 2. the wage chest: same reproducible build as testnet, wired to House of Stake's mainnet registry.
   const cfg = await view<any>(CHEST, "config").catch(() => null);

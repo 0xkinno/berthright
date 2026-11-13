@@ -32,4 +32,6 @@ Replayed against 138 real 2023 to 2025 cases from the ITF abandonment list, 57.8
 crew-months would have been on board on day one, against 0% today; 84 partial misses are named.
 Contracts are keyless, tested with property tests and in a sandbox against House of Stake's real
 wasm, and we document what actually moves when a leased name changes hands. Judges can run the
-whole voyage on testnet in four minutes without a wallet at /judge.
+whole voyage on testnet in four minutes without a wallet at /judge. The same chest also ran on
+mainnet in real USDC: funded from Base through NEAR Intents, paying a real House of Stake berth,
+berthright.seafarer, and releasing the guarantee to the crew member; /proof rechecks it live.
