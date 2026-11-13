@@ -10,3 +10,6 @@ node_modules/
 .DS_Store
 e2e/test-results/
 e2e/playwright-report/
+fleet/wasm/
+fleet/.tla-contracts/
+fleet/shim/*.so

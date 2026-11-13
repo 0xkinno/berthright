@@ -1,0 +1,82 @@
+{
+  "retrieved": "2026-11-13",
+  "facts": [
+    {
+      "id": "itf_2025_seafarers_abandoned",
+      "value": 6223,
+      "unit": "seafarers",
+      "quote": "with 6,223 seafarers abandoned across 410 ships",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_ships",
+      "value": 410,
+      "unit": "ships",
+      "quote": "with 6,223 seafarers abandoned across 410 ships",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_owed_usd",
+      "value": 25800000,
+      "unit": "USD",
+      "quote": "seafarers were owed a total of USD25.8 million in 2025 as a consequence of the abandonments",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_recovered_usd",
+      "value": 16500000,
+      "unit": "USD",
+      "quote": "the ITF has recovered and returned USD16.5 million to seafarers",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_indian_seafarers",
+      "value": 1125,
+      "unit": "seafarers",
+      "quote": "Indian seafarers were the worst affected national group in 2025, as in 2024, with 1,125 seafarers abandoned",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_uae_vessels",
+      "value": 54,
+      "unit": "vessels",
+      "quote": "were Turkiye (61) and the United Arab Emirates (54)",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "itf_2025_foc_share_pct",
+      "value": 82,
+      "unit": "percent",
+      "quote": "337 vessels abandoned in 2025, 82% of the total, were flying FOC flags",
+      "source": "https://www.itfseafarers.org/en/news/seafarer-abandonment-crisis-thousands-left-behind-shippings-worst-year-record"
+    },
+    {
+      "id": "insurer_eight_months",
+      "value": 8,
+      "unit": "months",
+      "quote": "it took eight months for the insurer to accept liability and pay the seafarers",
+      "source": "https://www.itfglobal.org/sites/default/files/node/resources/files/2018%20LEG%20105-4-3%20-%20Implementation%20of%20the%20financial%20security%20requirement%20under%20MLC%2C%202006%2C%20as%20amended%2C%20for%20the...%20%28ITF%29.pdf"
+    },
+    {
+      "id": "imo_longest_case_months",
+      "value": 32,
+      "unit": "months",
+      "quote": "some of these abandonment cases lasted as long as 32 months",
+      "source": "https://www.imo.org/en/OurWork/Legal/Pages/Seafarer-abandonment.aspx"
+    },
+    {
+      "id": "mlc_abandonment_trigger_months",
+      "value": 2,
+      "unit": "months",
+      "quote": "failed to pay the seafarer contractual wages for a period of at least two months",
+      "source": "https://www.ilo.org/resource/other/maritime-labour-convention-2006-amended (Standard A2.5.2, para 2(c))"
+    },
+    {
+      "id": "mlc_security_wage_months",
+      "value": 4,
+      "unit": "months",
+      "quote": "outstanding wages and other entitlements ... limited to four months",
+      "source": "https://www.ilo.org/resource/other/maritime-labour-convention-2006-amended (Standard A2.5.2, para 9)"
+    }
+  ]
+}
