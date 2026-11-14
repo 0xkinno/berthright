@@ -1,5 +1,7 @@
 # For judges
 
+Demo video (3 min, subtitled): https://x.com/0xkiddok/status/2121550428831621201
+
 ## Four minutes, no wallet
 
 1. Open `/judge` and press **Start the 4-minute run**. See: three accounts created and a berth

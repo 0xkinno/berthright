@@ -1,16 +1,23 @@
-# Submission payload (draft; Kinnoski confirms every field before anything is sent)
+# Submission payload (Kinnoski confirms every field, then submits the form himself)
+
+Form: https://nearhackathon.com/#apply · deadline 14 Nov 2026, 23:59 UTC (15 Nov, 00:59 WAT)
 
 | Field | Value |
 |---|---|
 | projectName | Berthright |
-| leadName | Kinnoski (Kinnoski to confirm the name to use) |
-| email | Kinnoski to provide |
+| leadName | Kinnoski |
+| email | provided by Kinnoski in the form (kept out of this public repo) |
 | size | 1 |
 | tracks | nfts, realworld, open |
-| nearAddress | Kinnoski's mainnet payout account (Kinnoski creates it; never invented) |
+| nearAddress | kinnoski.near |
 | projectUrl | https://github.com/0xkinno/berthright |
-| demoUrl | the X post Kinnoski publishes |
-| consent | true, only after Kinnoski agrees to: "I agree that the organizers may use these details to review our submission and contact us about this hackathon." |
+| demoUrl | https://x.com/0xkiddok/status/2121550428831621201 |
+| idea | the text below (1,738 characters) |
+| website | leave empty (spam-trap field; must not be sent) |
+| consent | true: "I agree that the organizers may use these details to review our submission and contact us about this hackathon." |
+
+Before submitting: the repo is public, the X post is live with the video, and the README names the other
+project (Keytell) in Disclosures.
 
 ## idea (under 2,000 characters)
 

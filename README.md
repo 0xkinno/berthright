@@ -15,7 +15,7 @@
   <a href="https://berthright-app.vercel.app/berths"><b>Berth register (NFTs)</b></a> &nbsp;·&nbsp;
   <a href="https://berthright-app.vercel.app/proof"><b>Proof from chain</b></a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md"><b>Evidence</b></a> &nbsp;·&nbsp;
-  Video: linked at submission
+  <a href="https://x.com/0xkiddok/status/2121550428831621201"><b>Demo video (3 min)</b></a>
 </p>
 
 <p align="center">
