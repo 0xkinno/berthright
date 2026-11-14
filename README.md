@@ -323,7 +323,7 @@ Judge keys are created in the browser and never leave it.
 
 ## Disclosures
 
-Built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces, near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react, proptest. House of Stake code is deployed unmodified from commit `d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). Fonts: Fraunces, Instrument Sans, IBM Plex Mono (OFL). All art is drawn in code. Arjun, the MV Kestrel and the demo companies are illustrative (labelled in the app and in [EVIDENCE.md](docs/EVIDENCE.md)); demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the hackathon window. Other project led by Kinnoski in this hackathon (Q-015): to be confirmed before submission.
+Built with Claude Code. Libraries: near-sdk, near-contract-standards, near-workspaces, near-api-js, @hot-labs/near-connect, Next.js, React, Tailwind, motion, lenis, lucide-react, proptest. House of Stake code is deployed unmodified from commit `d85860a8cc2bfcb8b617b28cab558da5d39333fc` (MIT OR Apache-2.0). Fonts: Fraunces, Instrument Sans, IBM Plex Mono (OFL). All art is drawn in code. Arjun, the MV Kestrel and the demo companies are illustrative (labelled in the app and in [EVIDENCE.md](docs/EVIDENCE.md)); demo ships run on a fast clock. All code was written from 13 Nov 2026, inside the hackathon window. Other project by the same builder in this hackathon: Keytell (Investment Thesis), github.com/0xkinno/keytell. The two are independent.
 
 ## Run it
 
